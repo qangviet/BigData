@@ -1,0 +1,1 @@
+- Docker Streaming Data: docker-compose -f stream-docker-compose.yml up -d --build

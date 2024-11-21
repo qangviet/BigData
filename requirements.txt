@@ -1,0 +1,5 @@
+kafka
+kafka-python
+kafka-python-ng
+psycopg2
+python-dotenv

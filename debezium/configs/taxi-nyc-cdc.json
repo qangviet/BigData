@@ -1,0 +1,22 @@
+{
+	"name": "taxi-nyc-cdc",
+	"config": {
+		"connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+		"database.hostname": "host.docker.internal",
+		"database.port": "5432",
+		"database.user": "postgres",
+		"database.password": "12345",
+		"database.dbname": "streaming_db",
+		"plugin.name": "pgoutput",
+		"topic.prefix": "streaming",
+		"database.server.name": "source",
+		"key.converter.schemas.enable": "false",
+		"value.converter.schemas.enable": "false",
+		"transforms": "unwrap",
+		"transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+		"value.converter": "org.apache.kafka.connect.json.JsonConverter",
+		"key.converter": "org.apache.kafka.connect.json.JsonConverter",
+		"slot.name": "taxi_nyc_time_series",
+		"table.include.list": "iot.taxi_nyc_time_series"
+	}
+}

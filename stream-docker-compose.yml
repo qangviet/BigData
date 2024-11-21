@@ -1,0 +1,170 @@
+services:
+    zookeeper:
+        image: confluentinc/cp-zookeeper:7.7.1
+        container_name: streaming-zookeeper
+        healthcheck:
+            test: echo srvr | nc zookeeper 2181 || exit 1
+            start_period: 10s
+            retries: 20
+            interval: 10s
+        restart: "on-failure"
+        ports:
+            - 2181:2181
+        environment:
+            ZOOKEEPER_CLIENT_PORT: 2181
+            ZOOKEEPER_TICK_TIME: 2000
+
+    kafka-1:
+        image: confluentinc/cp-kafka:7.7.1
+        container_name: streaming-broker-1
+        depends_on:
+            - zookeeper
+        ports:
+            - 9092:9092
+        healthcheck:
+            test: nc -z localhost 9092 || exit -1
+            start_period: 15s
+            interval: 5s
+            timeout: 10s
+            retries: 10
+        restart: "on-failure"
+        environment:
+            KAFKA_BROKER_ID: 1
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092
+            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+            KAFKA_MIN_INSYNC_REPLICAS: 2
+
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+
+    kafka-2:
+        image: confluentinc/cp-kafka:7.7.1
+        container_name: streaming-broker-2
+        depends_on:
+            - zookeeper
+        ports:
+            - 9093:9093
+        healthcheck:
+            test: nc -z localhost 9093 || exit -1
+            start_period: 15s
+            interval: 5s
+            timeout: 10s
+            retries: 10
+        restart: "on-failure"
+        environment:
+            KAFKA_BROKER_ID: 2
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:9093
+            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9093
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+            KAFKA_MIN_INSYNC_REPLICAS: 2
+
+    kafka-3:
+        image: confluentinc/cp-kafka:7.7.1
+        container_name: streaming-broker-3
+        depends_on:
+            - zookeeper
+        ports:
+            - 9094:9094
+        restart: "on-failure"
+        healthcheck:
+            test: nc -z localhost 9094 || exit -1
+            start_period: 15s
+            interval: 5s
+            timeout: 10s
+            retries: 10
+        environment:
+            KAFKA_BROKER_ID: 3
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:9094
+            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9094
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+            KAFKA_MIN_INSYNC_REPLICAS: 2
+
+    schema-registry:
+        image: confluentinc/cp-schema-registry:7.7.1
+        container_name: streaming-schema-registry
+        depends_on:
+            - kafka-1
+            - kafka-2
+            - kafka-3
+        ports:
+            - "8081:8081"
+        healthcheck:
+            start_period: 10s
+            interval: 10s
+            retries: 20
+            test: curl --user superUser:superUser --fail --silent --insecure http://localhost:8081/subjects --output /dev/null || exit 1
+        environment:
+            SCHEMA_REGISTRY_HOST_NAME: schema-registry
+            SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9093,kafka-3:9094"
+            SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
+    debezium:
+        image: debezium/connect:2.7.3.Final
+        container_name: streaming-debezium
+        depends_on:
+            kafka-1:
+                condition: service_healthy
+            kafka-2:
+                condition: service_healthy
+            kafka-3:
+                condition: service_healthy
+            schema-registry:
+                condition: service_healthy
+            zookeeper:
+                condition: service_healthy
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "curl",
+                    "--silent",
+                    "--fail",
+                    "-X",
+                    "GET",
+                    "http://localhost:8083/connectors",
+                ]
+            start_period: 10s
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        ports:
+            - "8083:8083"
+        environment:
+            BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9093,kafka-3:9094"
+            GROUP_ID: 1
+            CONFIG_STORAGE_TOPIC: connect_configs
+            OFFSET_STORAGE_TOPIC: connect_offsets
+            STATUS_STORAGE_TOPIC: connect_status
+            KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+            VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+            CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+            CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+            CONNECT_TOPIC_CREATION_ENABLE: true
+            CONFIG_STORAGE_REPLICATION_FACTOR: 3
+            OFFSET_STORAGE_REPLICATION_FACTOR: 3
+            STATUS_STORAGE_REPLICATION_FACTOR: 3
+
+    # Debezium UI
+    debezium-ui:
+        image: debezium/debezium-ui:1.9
+        container_name: debezium-ui
+        hostname: debezium-ui
+        depends_on:
+            debezium:
+                condition: service_healthy
+        ports:
+            - "8085:8080"
+        environment:
+            KAFKA_CONNECT_URIS: http://debezium:8083
+
