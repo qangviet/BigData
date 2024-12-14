@@ -3,3 +3,10 @@ kafka-python
 kafka-python-ng
 psycopg2
 python-dotenv
+pandas
+pyarrow
+bson
+pyspark
+minio
+PyYAML
+s3fs

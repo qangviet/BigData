@@ -1,0 +1,13 @@
+- Docker Streaming Data: 
+    docker-compose -p streaming_project -f stream-docker-compose-3.yml up -d --build
+    docker-compose -p test_project -f docker-compose.yml up -d --build
+
+- Debezium config:
+    + cd debezim
+    + bash run.sh register_connector configs/taxi-nyc-cdc.json
+
+- Upload file:
+    py ./src/batch_processing/upload_from_local.py
+
+- Set package - Rất quan trọng trước khi chạy:
+    set PYTHONPATH=Đường/dẫn/tới/file/src;%PYTHONPATH% 

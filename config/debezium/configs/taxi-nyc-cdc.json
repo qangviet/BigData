@@ -1,0 +1,15 @@
+{
+	"name": "taxi-nyc-cdc",
+	"config": {
+		"connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+		"database.hostname": "host.docker.internal",
+		"database.port": "5432",
+		"database.user": "postgres",
+		"database.password": "12345",
+		"database.dbname": "streaming_db",
+		"plugin.name": "pgoutput",
+		"topic.prefix": "streaming",
+		"database.server.name": "source",
+		"table.include.list": "public.yellow_trip_raw,public.green_trip_raw,public."
+	}
+}

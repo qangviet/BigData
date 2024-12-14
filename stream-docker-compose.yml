@@ -31,13 +31,12 @@ services:
         environment:
             KAFKA_BROKER_ID: 1
             KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092
-            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092,EXTERNAL://localhost:9092
+            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,EXTERNAL://0.0.0.0:19092
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
             KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_DEFAULT_REPLICATION_FACTOR: 3
             KAFKA_MIN_INSYNC_REPLICAS: 2
-
-            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
             KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
 
     kafka-2:
@@ -57,13 +56,13 @@ services:
         environment:
             KAFKA_BROKER_ID: 2
             KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:9093
-            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9093
-            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9093,EXTERNAL://localhost:9093
+            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9093,EXTERNAL://0.0.0.0:19093
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
             KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_DEFAULT_REPLICATION_FACTOR: 3
             KAFKA_MIN_INSYNC_REPLICAS: 2
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
 
     kafka-3:
         image: confluentinc/cp-kafka:7.7.1
@@ -82,13 +81,13 @@ services:
         environment:
             KAFKA_BROKER_ID: 3
             KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:9094
-            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9094
-            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9094,EXTERNAL://localhost:9094
+            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9094,EXTERNAL://0.0.0.0:19094
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
             KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
             KAFKA_DEFAULT_REPLICATION_FACTOR: 3
             KAFKA_MIN_INSYNC_REPLICAS: 2
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
 
     schema-registry:
         image: confluentinc/cp-schema-registry:7.7.1
@@ -157,7 +156,8 @@ services:
 
     # Debezium UI
     debezium-ui:
-        image: debezium/debezium-ui:1.9
+        image: debezium/debezium-ui:1.9 
+        restart: "always"
         container_name: debezium-ui
         hostname: debezium-ui
         depends_on:
@@ -167,4 +167,5 @@ services:
             - "8085:8080"
         environment:
             KAFKA_CONNECT_URIS: http://debezium:8083
+        
 
