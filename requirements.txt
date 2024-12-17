@@ -10,3 +10,4 @@ pyspark
 minio
 PyYAML
 s3fs
+delta-spark
