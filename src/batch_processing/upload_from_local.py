@@ -8,6 +8,7 @@ from glob import glob
 
 
 from utils.minio_utils import MinIOClient
+from utils.helpers import load_cfg
 
 project_root = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,6 +16,8 @@ project_root = os.path.dirname(
 CFG_FILE = os.path.join(project_root, "config", "datalake.yaml")
 
 YEARS = ["2020", "2021", "2022", "2023", "2024"]
+
+NYC_DATA_DIR = os.path.join(project_root, "data")
 
 
 def extract_load(cfg):
@@ -34,7 +37,8 @@ def extract_load(cfg):
     # ...
     # Upload files
     for year in YEARS:
-        all_fps = glob(os.path.join(nyc_data_cfg["folder_path"], year, "*.parquet"))
+        all_fps = glob(os.path.join(NYC_DATA_DIR, year, "*.parquet"))
+        print(os.path.join(nyc_data_cfg["folder_path"], year, "*.parquet"))
         for fp in all_fps:
             print(f"Uploading {fp} to MinIO...")
             client_minio = client.create_conn()

@@ -11,3 +11,4 @@ minio
 PyYAML
 s3fs
 delta-spark
+google-cloud-bigquery
