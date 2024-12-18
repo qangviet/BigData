@@ -4,8 +4,6 @@
 - Docker Batch Data:
     docker-compose -p batch_project -f docker-compose.yml up -d --build
 
-
-
 - Debezium config:
     + cd debezim
     + bash run.sh register_connector configs/taxi-nyc-cdc.json

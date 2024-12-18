@@ -12,7 +12,7 @@ from utils.minio_utils import MinIOClient
 project_root = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 )
-YEARS = ["2024"]
+YEARS = ["2023", "2024"]
 TAXI_LOOKUP_PATH = os.path.join(project_root, "data", "taxi_lookup.csv")
 CFG_FILE = os.path.join(project_root, "config", "datalake.yaml")
 DATA_PATH = os.path.join(project_root, "data")
@@ -39,7 +39,7 @@ def merge_taxi_zone(df, file):
 
     def merge_and_rename(df, location_id, lat_col, long_col):
         df = df.merge(df_lookup, left_on=location_id, right_on="LocationID")
-        df = df.drop(columns=["LocationID", "Borough", "Zone", "service_zone"])
+        df = df.drop(columns=["LocationID", "Borough", "zone", "service_zone"])
         df = df.rename(columns={"latitude": lat_col, "longitude": long_col})
         return df
 
@@ -143,6 +143,7 @@ def transform_data():
 
     for year in YEARS:
         all_fps = glob(os.path.join(DATA_PATH, year, "*.parquet"))
+        print(all_fps)
         for file in all_fps:
 
             file_name = os.path.basename(file)
