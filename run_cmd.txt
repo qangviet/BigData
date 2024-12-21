@@ -1,11 +1,18 @@
+
+- Airflow:
+    cd to-project
+    docker-compose -p airflow_project -f airflow-docker-compose.yml up -d --build
+
 - Docker Streaming Data: 
+    cd to-project
     3 broker: docker-compose -p streaming_project -f stream-docker-compose-3.yml up -d --build
     1 broker: docker-compose -p streaming_project -f stream-docker-compose-1.yml up -d --build
 - Docker Batch Data:
+    cd to-project
     docker-compose -p batch_project -f docker-compose.yml up -d --build
 
 - Debezium config:
-    + cd debezim
+    + cd debezium
     + bash run.sh register_connector configs/taxi-nyc-cdc.json
 
 - Upload file:

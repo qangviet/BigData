@@ -1,0 +1,4 @@
+bigquery:
+    project_id: bigdata-445102
+    dataset_id: data_warehouse
+    table_id_1: taxi_trips_from_dl

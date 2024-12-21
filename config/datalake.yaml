@@ -1,5 +1,6 @@
 nyc_data:
-    folder_path: ../data
+    folder_path: /data
+    taxi_lookup_file: /data/taxi_lookup.parquet
 datalake:
     endpoint: localhost:9000
     bucket_name_1: raw
