@@ -160,6 +160,5 @@ def transform_data():
             print("Finished transforming data in file: " + path)
             print("=" * 100)
 
-
 if __name__ == "__main__":
     transform_data()
