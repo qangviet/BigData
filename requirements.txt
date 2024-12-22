@@ -6,9 +6,10 @@ python-dotenv
 pandas
 pyarrow
 bson
-pyspark
 minio
 PyYAML
-s3fs
-delta-spark
+s3fs==0.4.2
+delta-spark==3.2.1
 google-cloud-bigquery
+deltalake
+pyspark==3.5.3
