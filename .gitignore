@@ -1,1 +1,4 @@
 jars
+authentication
+.venv
+.vscode

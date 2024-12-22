@@ -7,5 +7,5 @@ datalake:
     bucket_name_2: processed
     bucket_name_3: sandbox
     folder_name: batch
-    access_key: Xs27nx9M4HgPQ5PXZiUE
-    secret_key: 8iifKZlUZh1NRbepsISUMdg1CxlaIC6OSPQk5X59
+    access_key: minio_access_key
+    secret_key: minio_secret_key
