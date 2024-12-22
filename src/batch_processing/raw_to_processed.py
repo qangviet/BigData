@@ -13,9 +13,10 @@ project_root = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 )
 YEARS = ["2023", "2024"]
+MONTH = "01"
 TAXI_LOOKUP_PATH = os.path.join(project_root, "data", "taxi_lookup.csv")
 CFG_FILE = os.path.join(project_root, "config", "datalake.yaml")
-DATA_PATH = os.path.join(project_root, "data")
+DATA_PATH = os.path.join(project_root, "data/new")
 
 
 def drop_column(df, file):
@@ -62,7 +63,7 @@ def merge_taxi_zone(df, file):
 def process(df, file):
     """
     Green:
-        Rename column: lpep_pickup_datetime, lpep_dropoff_datetime, ehail_fee
+        Rename column: lpep_pickup_datetime, lpep_dropoff_datetime
         Drop: trip_type
     Yellow:
         Rename column: tpep_pickup_datetime, tpep_dropoff_datetime, airport_fee
@@ -74,7 +75,6 @@ def process(df, file):
             columns={
                 "lpep_pickup_datetime": "pickup_datetime",
                 "lpep_dropoff_datetime": "dropoff_datetime",
-                "ehail_fee": "fee,",
             },
             inplace=True,
         )
@@ -152,9 +152,11 @@ def transform_data():
             df = pd.read_parquet(file, engine="pyarrow")
 
             df.columns = df.columns.str.lower()
+            print("Ori:", len(df))
             df = drop_column(df, file_name)
             df = merge_taxi_zone(df, file_name)
             df = process(df, file_name)
+            print("After:", len(df))
             path = f"s3://{datalake_cfg['bucket_name_2']}/{year}/{file_name}"
             df.to_parquet(path, index=False, filesystem=s3_fs, engine="pyarrow")
             print("Finished transforming data in file: " + path)
@@ -162,3 +164,5 @@ def transform_data():
 
 if __name__ == "__main__":
     transform_data()
+
+# py -m src.batch_processing.raw_to_processed
