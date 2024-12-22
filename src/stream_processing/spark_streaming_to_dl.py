@@ -37,12 +37,10 @@ MINIO_ENDPOINT = datalake_cfg["endpoint"]
 MINIO_ACCESS_KEY = datalake_cfg["access_key"]
 MINIO_SECRET_KEY = datalake_cfg["secret_key"]
 
-BUCKET_NAME = "raw"
-
-
+BUCKET_NAME = datalake_cfg["bucket_name_1"]
+YEAR = os.getenv("YEAR_TEST")
+MONTH = os.getenv("MONTH_TEST")
 JARS_DIR = os.path.join(PROJECT_ROOT, "jars")
-
-# BUCKET_NAME_3 = datalake_cfg['bucket_name_3']
 
 BOOTSTRAP_SERVERS = ["localhost:9092"]
 
@@ -70,38 +68,48 @@ def create_spark_session():
 
     spark_jars = [
         JARS_DIR + "/hadoop-aws-3.3.4.jar",
-        JARS_DIR + "/spark-sql-kafka-0-10_2.12-3.5.3.jar",
-        JARS_DIR + "/kafka-clients-3.4.0.jar",
+        # JARS_DIR + "/spark-sql-kafka-0-10_2.12-3.5.3.jar",
+        # JARS_DIR + "/kafka-clients-3.4.0.jar",
         JARS_DIR + "/aws-java-sdk-bundle-1.12.262.jar",
-        JARS_DIR + "/spark-streaming-kafka-0-10_2.12-3.5.3.jar",
+        # JARS_DIR + "/spark-streaming-kafka-0-10_2.12-3.5.3.jar",
     ]
     print("Checking JAR files...: ", check_jars(spark_jars))
     spark = None
     try:
-        spark = (
+        from delta import configure_spark_with_delta_pip
+
+        builder = (
             SparkSession.builder.config("spark.executor.memory", "4g")
             .config("spark.jars", ",".join(spark_jars))
+            .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
             .config(
-                "spark.jars.packages",
-                "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1",
+                "spark.sql.catalog.spark_catalog",
+                "org.apache.spark.sql.delta.catalog.DeltaCatalog",
             )
-            .config("spark.streaming.kafka.maxRatePerPartition", "100")
-            .config("spark.streaming.backpressure.enabled", "true")
+            # .config("spark.streaming.kafka.maxRatePerPartition", "100")
+            # .config("spark.streaming.backpressure.enabled", "true")
             .config("spark.streaming.kafka.consumer.cache.enabled", "false")
             .config("spark.sql.execution.arrow.pyspark.enabled", "true")
-            .config("spark.master", "local[*]")
-            .config("spark.hadoop.io.native.lib.available", "false")
-            .config("spark.sql.adaptive.enabled", "false")
+            # .config("spark.master", "local[*]")
+            # .config("spark.hadoop.io.native.lib.available", "false")
+            # .config("spark.sql.adaptive.enabled", "false")
             .config("spark.sql.parquet.writeLegacyFormat", "true")
             .appName("Streaming Processing Application")
-            .getOrCreate()
         )
+        spark = configure_spark_with_delta_pip(
+            builder,
+            extra_packages=[
+                "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1",
+                "org.apache.hadoop:hadoop-aws:3.3.4",
+            ],
+        ).getOrCreate()
 
         logging.info("Spark session successfully created!")
 
     except Exception as e:
         traceback.print_exc(file=sys.stderr)
         logging.error(f"Couldn't create the spark session due to exception: {e}")
+
     return spark
 
 
@@ -144,7 +152,7 @@ def create_initial_dataframe(spark_session):
             spark_session.readStream.format("kafka")
             .option("kafka.bootstrap.servers", ",".join(BOOTSTRAP_SERVERS))
             .option("subscribe", topic_cdc_db)
-            .option("startingOffsets", "earliest")
+            .option("startingOffsets", "latest")
             .option("failOnDataLoss", "false")
             .load()
         )
@@ -215,10 +223,13 @@ def start_steaming(df):
     """
     logging.info("Streaming is being started...")
     stream_query = (
-        df.writeStream.format("parquet")
+        df.writeStream.format("delta")
         .outputMode("append")
-        .option("path", f"s3a://{BUCKET_NAME}/stream/")
-        .option("checkpointLocation", f"s3a://{BUCKET_NAME}/stream/checkpoint")
+        .option("path", f"s3a://{BUCKET_NAME}/cdc_db/data/{YEAR}/{MONTH}")
+        .option(
+            "checkpointLocation",
+            f"s3a://{BUCKET_NAME}/cdc_db/checkpoint/{YEAR}/{MONTH}",
+        )
         .start()
     )
     return stream_query.awaitTermination()
