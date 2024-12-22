@@ -13,6 +13,7 @@ import zipfile
 import json
 from kafka.errors import KafkaError
 import io
+from dataclasses import dataclass
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -222,42 +223,55 @@ def send_mp3_file(file_path, producer, id, topic="raw_speech"):
         )
 
 
-def simulate_data_with_image(conn, table_name, time_sleep=2):
-    df = pd.read_parquet(FILE_TEST, engine="pyarrow")
-    create_table(conn, table_name, df.dtypes)
+@dataclass
+class Args:
+    table_name: str = TABLE_GREEN
+    time_sleep: int = 5
+    file_path: str = FILE_TEST
+    bootstrap_servers: str = ".".join(BOOTSTRAP_SERVERS)
+    topic_image: str = KAFKA_TOPIC_IMAGE
+    topic_speech: str = KAFKA_TOPIC_SPEECH
+    max_message_size: int = MAX_MESSAGE_SIZE
+    signal_file: str = None
+
+
+def simulate_data_with_image(conn, args: Args):
+    df = pd.read_parquet(args.file_path, engine="pyarrow")
+    create_table(conn, args.table_name, df.dtypes)
     producer = None
     admin = None
     for _ in range(10):
         try:
             producer = KafkaProducer(
-                bootstrap_servers=BOOTSTRAP_SERVERS,
-                max_request_size=MAX_MESSAGE_SIZE,  # 5MB
+                bootstrap_servers=args.bootstrap_servers,
+                max_request_size=args.max_message_size,  # 5MB
             )
-            admin = KafkaAdminClient(bootstrap_servers=BOOTSTRAP_SERVERS)
+            admin = KafkaAdminClient(bootstrap_servers=args.bootstrap_servers)
             print("Connected to Kafka")
             break
         except Exception as e:
             logging.info(
-                f"Trying to instantiate admin and producer with bosootstrap server {BOOTSTRAP_SERVERS} with error {e}"
+                f"Trying to instantiate admin and producer with bosootstrap server {args.bootstrap_servers} with error {e}"
             )
             countdown_sleep(10)
             pass
-    create_topic(admin, KAFKA_TOPIC_IMAGE)
-    create_topic(admin, KAFKA_TOPIC_SPEECH)
+    create_topic(admin, args.topic_image)
+    create_topic(admin, args.topic_speech)
 
     # try:
     for i in range(0, len(df)):
         row = df.iloc[i : i + 1]
         _id = row["id"]
 
-        insert_to_db(conn, table_name, row)
+        insert_to_db(conn, args.table_name, row)
         send_image_file(IMAGE_TEST, producer, _id.iloc[0], topic=KAFKA_TOPIC_IMAGE)
         send_mp3_file(SPEECH_TEST, producer, _id.iloc[0], topic=KAFKA_TOPIC_SPEECH)
-        print(f"Insert 1 rows to {table_name}\n")
+        print(f"Insert 1 rows to {args.table_name}\n")
         producer.flush()
-        countdown_sleep(time_sleep)
+        countdown_sleep(args.time_sleep)
     # except Exception as e:
     #     print("Error: ", e)
+    conn.close()
 
 
 if __name__ == "__main__":
@@ -268,9 +282,20 @@ if __name__ == "__main__":
         host=os.getenv("DB_STREAM_HOST"),
         port=os.getenv("DB_STREAM_PORT"),
     )
+
     clear_all_tables(conn)
     # simulate_data(conn, TABLE_GREEN)
-    simulate_data_with_image(conn, TABLE_GREEN, time_sleep=5)
-    conn.close()
+
+    args = Args(
+        table_name=TABLE_GREEN,
+        time_sleep=5,
+        file_path=FILE_TEST,
+        bootstrap_servers=".".join(BOOTSTRAP_SERVERS),
+        topic_image=KAFKA_TOPIC_IMAGE,
+        topic_speech=KAFKA_TOPIC_SPEECH,
+        max_message_size=MAX_MESSAGE_SIZE,
+    )
+    simulate_data_with_image(conn, args)
+
 
 # py ./src/stream_processing/insert_data_to_db.py

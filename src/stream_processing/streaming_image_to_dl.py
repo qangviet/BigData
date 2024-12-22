@@ -6,6 +6,7 @@ import json
 from io import BytesIO
 from utils.minio_utils import MinIOClient
 from utils.helpers import load_cfg
+from dataclasses import dataclass
 
 load_dotenv()
 # Kafka configuration
@@ -25,13 +26,31 @@ MINIO_SECRET_KEY = datalake_cfg["secret_key"]
 
 BUCKET_NAME = datalake_cfg["bucket_name_1"]
 PREFIX = "image"
-if __name__ == "__main__":
-    minio_client = MinIOClient(MINIO_ENDPOINT, MINIO_ACCESS_KEY, MINIO_SECRET_KEY)
-    minio_client.create_bucket(BUCKET_NAME)
+
+
+@dataclass
+class Args:
+    minio_endpoint: str = MINIO_ENDPOINT
+    minio_access_key: str = MINIO_ACCESS_KEY
+    minio_secret_key: str = MINIO_SECRET_KEY
+    bucket_name: str = BUCKET_NAME
+    prefix: str = "image"
+    kafka_topic: str = KAFKA_TOPIC
+    bootstrap_servers: str = "localhost:9092"
+
+
+def image_to_dl(args: Args):
+    """
+    Lấy dữ liệu từ Kafka và lưu vào MinIO
+    """
+    minio_client = MinIOClient(
+        args.minio_endpoint, args.minio_access_key, args.minio_secret_key
+    )
+    minio_client.create_bucket(args.bucket_name)
 
     consumer = KafkaConsumer(
         KAFKA_TOPIC,
-        bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
+        bootstrap_servers=args.bootstrap_servers,
         auto_offset_reset="latest",
         enable_auto_commit=True,
         value_deserializer=lambda x: json.loads(x.decode("utf-8")),
@@ -47,16 +66,15 @@ if __name__ == "__main__":
 
         # Generate a unique filename
         image_filename = os.path.join(
-            f"{PREFIX}/{year}/{month}/", f"{metadata["id"]}.jpg"
+            f"{args.prefix}/{year}/{month}/", f"{metadata["id"]}.jpg"
         )
-
         try:
             # Upload dữ liệu từ nhị phân
             image_data_io = BytesIO(image_data)
 
             conn = minio_client.create_conn()
             conn.put_object(
-                bucket_name=BUCKET_NAME,
+                bucket_name=args.bucket_name,
                 object_name=image_filename,
                 data=image_data_io,
                 length=len(image_data),
@@ -65,5 +83,10 @@ if __name__ == "__main__":
             print(f"File đã được lưu thành công vào MinIO: {image_filename}")
         except Exception as err:
             print(f"Lỗi khi lưu file lên MinIO: {err}")
+
+
+if __name__ == "__main__":
+    args = Args()
+    image_to_dl(args)
 
 # python ./src/stream_processing/streaming_image_to_dl.py

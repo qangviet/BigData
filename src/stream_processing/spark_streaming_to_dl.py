@@ -17,6 +17,7 @@ from pyspark.sql.types import (
     FloatType,
     DoubleType,
 )
+from dataclasses import dataclass
 
 load_dotenv()
 
@@ -57,20 +58,31 @@ def check_jars(jars):
     return True
 
 
+@dataclass
+class Args:
+    jars_dir: str = JARS_DIR
+    topic_cdc_db: str = "streaming.public.green_trip_raw"
+    bootstrap_servers: str = ".".join(BOOTSTRAP_SERVERS)
+    bucket_name: str = BUCKET_NAME
+    year: str = YEAR
+    month: str = MONTH
+    topic_cdc_db: str = "streaming.public.green_trip_raw"
+
+
 ###############################################
 # PySpark
 ###############################################
-def create_spark_session():
+def create_spark_session(jars_dir):
     """
     Create the Spark Session with suitable configs
     """
     from pyspark.sql import SparkSession
 
     spark_jars = [
-        JARS_DIR + "/hadoop-aws-3.3.4.jar",
+        jars_dir + "/hadoop-aws-3.3.4.jar",
         # JARS_DIR + "/spark-sql-kafka-0-10_2.12-3.5.3.jar",
         # JARS_DIR + "/kafka-clients-3.4.0.jar",
-        JARS_DIR + "/aws-java-sdk-bundle-1.12.262.jar",
+        jars_dir + "/aws-java-sdk-bundle-1.12.262.jar",
         # JARS_DIR + "/spark-streaming-kafka-0-10_2.12-3.5.3.jar",
     ]
     print("Checking JAR files...: ", check_jars(spark_jars))
@@ -86,6 +98,7 @@ def create_spark_session():
                 "spark.sql.catalog.spark_catalog",
                 "org.apache.spark.sql.delta.catalog.DeltaCatalog",
             )
+            .config("spark.sql.debug.maxToStringFields", 1000)
             # .config("spark.streaming.kafka.maxRatePerPartition", "100")
             # .config("spark.streaming.backpressure.enabled", "true")
             .config("spark.streaming.kafka.consumer.cache.enabled", "false")
@@ -142,16 +155,15 @@ def load_minio_config(spark_context: SparkContext):
         logging.error(f"Couldn't create the MinIO configuration due to exception: {e}")
 
 
-def create_initial_dataframe(spark_session):
+def create_initial_dataframe(spark_session, topic_cdc, bootstrap_servers):
     """
     Reads the streaming data and creates the initial dataframe accordingly
     """
-    topic_cdc_db = "streaming.public.green_trip_raw"
     try:
         df = (
             spark_session.readStream.format("kafka")
-            .option("kafka.bootstrap.servers", ",".join(BOOTSTRAP_SERVERS))
-            .option("subscribe", topic_cdc_db)
+            .option("kafka.bootstrap.servers", bootstrap_servers)
+            .option("subscribe", topic_cdc)
             .option("startingOffsets", "latest")
             .option("failOnDataLoss", "false")
             .load()
@@ -205,19 +217,19 @@ def create_final_dataframe(kafka_df, spark_session):
     )
     parsed_df.createOrReplaceTempView("nyc_taxi_view")
 
-    df_final = spark.sql(
-        """
-        SELECT
-            * 
-        FROM nyc_taxi_view
-    """
-    )
+    # df_final = spark.sql(
+    #     """
+    #     SELECT
+    #         *
+    #     FROM nyc_taxi_view
+    # """
+    # )
 
     logging.info("Final dataframe created successfully!")
-    return df_final
+    return parsed_df
 
 
-def start_steaming(df):
+def start_steaming(df, bucket_name, year, month):
     """
     Store data into Datalake (MinIO) with parquet format
     """
@@ -225,21 +237,28 @@ def start_steaming(df):
     stream_query = (
         df.writeStream.format("delta")
         .outputMode("append")
-        .option("path", f"s3a://{BUCKET_NAME}/cdc_db/data/{YEAR}/{MONTH}")
+        .option("path", f"s3a://{bucket_name}/cdc_db/data/{year}/{month}")
         .option(
             "checkpointLocation",
-            f"s3a://{BUCKET_NAME}/cdc_db/checkpoint/{YEAR}/{MONTH}",
+            f"s3a://{bucket_name}/cdc_db/checkpoint/{year}/{month}",
         )
         .start()
     )
     return stream_query.awaitTermination()
 
 
-if __name__ == "__main__":
-    spark = create_spark_session()
+def run_all(args: Args):
+    spark = create_spark_session(args.jars_dir)
     load_minio_config(spark.sparkContext)
-    kafka_df = create_initial_dataframe(spark)
-
+    kafka_df = create_initial_dataframe(
+        spark, args.topic_cdc_db, args.bootstrap_servers
+    )
     df_final = create_final_dataframe(kafka_df, spark)
-    start_steaming(df_final)
+    start_steaming(df_final, args.bucket_name, args.year, args.month)
+
+
+if __name__ == "__main__":
+    args = Args()
+    run_all(args)
+
 # py ./src/stream_processing/spark_streaming_to_dl.py

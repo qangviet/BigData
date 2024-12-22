@@ -13,3 +13,4 @@ delta-spark==3.2.1
 google-cloud-bigquery
 deltalake
 pyspark==3.5.3
+apache-airflow
