@@ -6,24 +6,30 @@ from airflow.sensors.filesystem import FileSensor
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.dummy import DummyOperator
-
-load_dotenv()
-from stream_processing.insert_data_to_db import (
-    simulate_data_with_image,
-    Args as simulate_args,
-)
-from stream_processing.spark_streaming_to_dl import (
-    run_all,
-    Args as spark_streaming_args,
-)
-from stream_processing.streaming_image_to_dl import image_to_dl, Args as image_args
-from stream_processing.streaming_speech_to_dl import speech_to_dl, Args as speech_args
-
-BOOTSTRAP_SERVERS = ["localhost:9092"]
+import sys
 
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..", "..")
 )
+load_dotenv()
+from modules.insert_data_to_db import (
+    simulate_data_with_image,
+    Args as simulate_args,
+)
+from modules.spark_streaming_to_dl import (
+    run_all,
+    Args as spark_streaming_args,
+)
+from modules.streaming_image_to_dl import (
+    image_to_dl,
+    Args as image_args,
+)
+from modules.streaming_speech_to_dl import (
+    speech_to_dl,
+    Args as speech_args,
+)
+
+BOOTSTRAP_SERVERS = ["localhost:9092"]
 
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
