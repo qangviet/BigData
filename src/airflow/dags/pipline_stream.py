@@ -11,21 +11,20 @@ import sys
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..", "..")
 )
-sys.path.append("../../airflow")
 load_dotenv()
-from stream_processing.insert_data_to_db import (
+from modules.insert_data_to_db import (
     simulate_data_with_image,
     Args as simulate_args,
 )
-from stream_processing.spark_streaming_to_dl import (
+from modules.spark_streaming_to_dl import (
     run_all,
     Args as spark_streaming_args,
 )
-from stream_processing.streaming_image_to_dl import (
+from modules.streaming_image_to_dl import (
     image_to_dl,
     Args as image_args,
 )
-from stream_processing.streaming_speech_to_dl import (
+from modules.streaming_speech_to_dl import (
     speech_to_dl,
     Args as speech_args,
 )

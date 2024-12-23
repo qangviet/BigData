@@ -57,18 +57,27 @@ x-airflow-common: &airflow-common
         AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
         AIRFLOW__CORE__FERNET_KEY: ""
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
-        AIRFLOW__CORE__LOAD_EXAMPLES: "true"
+        AIRFLOW__CORE__LOAD_EXAMPLES: "false"
         AIRFLOW__API__AUTH_BACKENDS: "airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session"
         AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: "true"
         _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+        # _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-minio==7.1.16 s3fs==0.4.2 pyarrow==16.1.0 pyspark==3.5.3}
+
         # The following line can be used to set a custom config file, stored in the local config folder
         # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
         # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
     volumes:
         - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/dags:/opt/airflow/dags
         - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/logs:/opt/airflow/logs
-        - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/config:/opt/airflow/config
         - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/plugins:/opt/airflow/plugins
+        - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/include:/opt/airflow/include
+        - ./config:/opt/airflow/config
+        - ./data:/opt/airflow/data
+        - ./jars:/opt/airflow/jars
+        - ./src/batch_processing:/opt/airflow/dags/batch_processing
+        - ./src/utils:/opt/airflow/dags/utils
+        - ./src/stream_processing:/opt/airflow/dags/stream_processing
+
     user: "${AIRFLOW_UID:-50000}:0"
     depends_on: &airflow-common-depends-on
         redis:
@@ -79,6 +88,7 @@ x-airflow-common: &airflow-common
 services:
     postgres:
         image: postgres:13
+        container_name: airflow-postgres
         environment:
             POSTGRES_USER: airflow
             POSTGRES_PASSWORD: airflow
@@ -96,6 +106,7 @@ services:
         # Redis is limited to 7.2-bookworm due to licencing change
         # https://redis.io/blog/redis-adopts-dual-source-available-licensing/
         image: redis:7.2
+        container_name: airflow-redis
         expose:
             - 6379
         healthcheck:
@@ -108,6 +119,7 @@ services:
 
     airflow-webserver:
         <<: *airflow-common
+        container_name: airflow-webserver
         command: webserver
         ports:
             - "8080:8080"
@@ -125,6 +137,7 @@ services:
 
     airflow-scheduler:
         <<: *airflow-common
+        container_name: airflow-scheduler
         command: scheduler
         healthcheck:
             test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
@@ -140,6 +153,9 @@ services:
 
     airflow-worker:
         <<: *airflow-common
+        tmpfs:
+            - "/opt/airflow/"
+        container_name: airflow-worker
         command: celery worker
         healthcheck:
             # yamllint disable rule:line-length
@@ -164,6 +180,7 @@ services:
     airflow-triggerer:
         <<: *airflow-common
         command: triggerer
+        container_name: airflow-triggerer
         healthcheck:
             test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
             interval: 30s
@@ -179,6 +196,7 @@ services:
     airflow-init:
         <<: *airflow-common
         entrypoint: /bin/bash
+        container_name: airflow-init
         # yamllint disable rule:line-length
         command:
             - -c
@@ -225,8 +243,8 @@ services:
                   echo "   https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#before-you-begin"
                   echo
                 fi
-                mkdir -p /sources/src/airflow/logs /sources/src/airflow/dags /sources/src/airflow/plugins /sources/src/airflow/config   
-                chown -R "${AIRFLOW_UID}:0" /sources/src/airflow/{logs,dags,plugins,config}
+                mkdir -p /sources/src/airflow/logs /sources/src/airflow/dags /sources/src/airflow/plugins   
+                chown -R "${AIRFLOW_UID}:0" /sources/src/airflow/{logs,dags,plugins}
                 exec /entrypoint airflow version
         # yamllint enable rule:line-length
         environment:
@@ -238,7 +256,7 @@ services:
             _PIP_ADDITIONAL_REQUIREMENTS: ""
         user: "0:0"
         volumes:
-            - ${AIRFLOW_PROJ_DIR:-.}/src/airflow:/sources/src/airflow
+            - ${AIRFLOW_PROJ_DIR:-.}:/sources
 
     airflow-cli:
         <<: *airflow-common

@@ -12,11 +12,11 @@ from utils.minio_utils import MinIOClient
 project_root = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 )
-YEARS = ["2023", "2024"]
-MONTH = "01"
 TAXI_LOOKUP_PATH = os.path.join(project_root, "data", "taxi_lookup.csv")
 CFG_FILE = os.path.join(project_root, "config", "datalake.yaml")
-DATA_PATH = os.path.join(project_root, "data/new")
+DATA_PATH = os.path.join(project_root, "data/new/2024")
+
+FILES = os.listdir(DATA_PATH)
 
 
 def drop_column(df, file):
@@ -141,26 +141,23 @@ def transform_data():
 
     client.create_bucket(datalake_cfg["bucket_name_2"])
 
-    for year in YEARS:
-        all_fps = glob(os.path.join(DATA_PATH, year, "*.parquet"))
-        print(all_fps)
-        for file in all_fps:
+    for file_name in FILES:
+        file_path = os.path.join(DATA_PATH, file_name)
+        print(f"Reading parquet file: {file_name}")
+        year = file_name.split("_")[2].split("-")[0]
+        month = file_name.split("-")[1].split(".")[0]
+        df = pd.read_parquet(file_path, engine="pyarrow")
 
-            file_name = os.path.basename(file)
-            print(f"Reading parquet file: {file_name}")
-
-            df = pd.read_parquet(file, engine="pyarrow")
-
-            df.columns = df.columns.str.lower()
-            print("Ori:", len(df))
-            df = drop_column(df, file_name)
-            df = merge_taxi_zone(df, file_name)
-            df = process(df, file_name)
-            print("After:", len(df))
-            path = f"s3://{datalake_cfg['bucket_name_2']}/{year}/{file_name}"
-            df.to_parquet(path, index=False, filesystem=s3_fs, engine="pyarrow")
-            print("Finished transforming data in file: " + path)
-            print("=" * 100)
+        df.columns = df.columns.str.lower()
+        print("Ori:", len(df))
+        df = drop_column(df, file_name)
+        df = merge_taxi_zone(df, file_name)
+        df = process(df, file_name)
+        print("After:", len(df))
+        path = f"s3://{datalake_cfg['bucket_name_2']}/{year}/{month}/{file_name}"
+        df.to_parquet(path, index=False, filesystem=s3_fs, engine="pyarrow")
+        print("Finished transforming data in file: " + path)
+        print("=" * 100)
 
 
 if __name__ == "__main__":
