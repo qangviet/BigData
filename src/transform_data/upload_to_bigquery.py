@@ -19,6 +19,8 @@ from pyspark.sql.types import (
     DateType,
     TimestampNTZType
 )
+
+
 from minio import Minio
 from pyspark.sql import functions as F
 
@@ -285,26 +287,19 @@ def load_data_from_minio(spark, BUCKET_NAME, DATE, TAXI_TYPE):
     params:
     BUCKET_NAME: tên bucket
     YEAR: năm
-    TAXI_TYPE: loại xe 0: green, 1: yellow
+    TAXI_TYPE: loại xe  Green, Yellow
     return:
     df_data: dữ liệu
     """
-    client = MinIOClient(
-        endpoint_url=MINIO_ENDPOINT,
-        access_key=MINIO_ACCESS_KEY,
-        secret_key=MINIO_SECRET_KEY
-    )
+
 
     YEAR = DATE.split('-')[0]
+    MONTH = DATE.split('-')[1]
+    DAY = DATE.split('-')[2]
 
-    files = client.list_parquet_files(BUCKET_NAME, prefix=YEAR)
-    print(files)
-
-    path = f"s3a://{BUCKET_NAME}/{files[TAXI_TYPE]}"
+    path = f"s3a://{BUCKET_NAME}/{YEAR}/{TAXI_TYPE}/{MONTH}/{DAY}.parquet"
     df = spark.read.parquet(path)
 
-    df= df.dropna()
-    df = df.withColumn("pickup_date", F.to_date("pickup_datetime"))
     return df
 
 
@@ -313,7 +308,7 @@ if __name__ == "__main__":
     spark = create_spark_session()
     load_minio_config(spark.sparkContext)
  
-    df_final = load_data_from_minio(spark, BUCKET_NAME_2, "2023-01-12", 1)
+    df_final = load_data_from_minio(spark, BUCKET_NAME_2, "2024-01-12", 'Green')
     df_final.show(10)
 
     # TEST_TABLE = 'TEST_TABLE4'

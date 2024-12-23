@@ -9,8 +9,8 @@ services:
     volumes:
       - minio_storage:/mnt/data
     environment:
-      MINIO_ACCESS_KEY: minio_access_key
-      MINIO_SECRET_KEY: minio_secret_key
+      MINIO_ACCESS_KEY: Xs27nx9M4HgPQ5PXZiUE
+      MINIO_SECRET_KEY: 8iifKZlUZh1NRbepsISUMdg1CxlaIC6OSPQk5X59
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
     command: server --console-address ":9090" /mnt/data

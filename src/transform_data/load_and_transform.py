@@ -11,7 +11,7 @@ from pyspark.sql.functions import isnan, when, count, col
 from pyspark.sql import functions as F
 from pyspark.sql import functions as F
 from pyspark.sql.types import DateType
-
+from pyspark.sql.functions import col, row_number, max as spark_max, when
 
 
 def calculate_per_day(df_data, DAY):
@@ -320,6 +320,11 @@ def analyze_customer_info(df, customer_id, df_taxi_lookup, num_customer):
     return result
 
 
+
+
+
+
+
 from .upload_to_bigquery import load_data_from_minio
 from .upload_to_bigquery import create_table_bg
 from .upload_to_bigquery import create_spark_session
@@ -343,49 +348,38 @@ bg_cfg = load_cfg(CFG_FILE_BQ)["bigquery"]
 BG_PROJECT_ID = bg_cfg["project_id"]
 BG_DATASET_ID = bg_cfg["dataset_id"]
 
-def load_transform_save(DATE, TAXI_TYPE):
+def load_transform_save(DATE):
     spark = create_spark_session()
     load_minio_config(spark.sparkContext)
     
     df_taxi_lookup = spark.read.csv("s3a://processed/taxi_lookup.csv", header=True, inferSchema=True)
 
-    df_raw = load_data_from_minio(spark, BUCKET_NAME_2, DATE, TAXI_TYPE)
-    df_day = calculate_per_day(df_raw, DATE)
+    df_raw_yellow = load_data_from_minio(spark, BUCKET_NAME_2, DATE, 1)
+    df_day_yellow = calculate_per_day(df_raw_yellow, DATE)
 
-    create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'DAY_TABLE' , df_day)
+    create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'YELLOW_DAILY_TABLE' , df_day_yellow)
 
-    df_day_location = calculate_per_day_for_location(df_raw, df_taxi_lookup,  DATE)
-    create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'DAY_LOCATION_TABLE' , df_day_location)
+    df_day_location_yellow = calculate_per_day_for_location(df_raw_yellow, df_taxi_lookup,  DATE)
+    create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'YELLOW_DAILY_TABLE_2' , df_day_location_yellow)
+
+
+    df_raw_green = load_data_from_minio(spark, BUCKET_NAME_2, DATE, 0)
+    df_day_green = calculate_per_day(df_raw_green, DATE)
+
+    create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'GREEN_DAILY_TABLE' , df_day_green)
+
+    df_day_location_green = calculate_per_day_for_location(df_raw_green, df_taxi_lookup,  DATE)
+    create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'GREEN_DAILY_TABLE_2' , df_day_location_green)
 
     print("Quá trình xử lý hoàn tất!")
 
+
+
 if __name__ == "__main__":
 
-    from datetime import datetime, timedelta
-
-    def run_for_multiple_days(start_date, end_date):
-        # Chuyển đổi chuỗi ngày sang đối tượng datetime
-        current_date = datetime.strptime(start_date, "%Y-%m-%d")
-        end_date = datetime.strptime(end_date, "%Y-%m-%d")
-        
-        # Lặp qua từng ngày
-        while current_date <= end_date:
-            # Định dạng lại ngày thành chuỗi
-            DATE = current_date.strftime("%Y-%m-%d")
-            
-            # Gọi hàm load_transform_save
-            load_transform_save(DATE, 1)
-            
-            # Tăng ngày lên 1
-            current_date += timedelta(days=1)
-
-    # Gọi hàm với khoảng thời gian từ ngày 1 đến ngày 5
-    run_for_multiple_days("2024-01-01", "2024-01-05")
-
- 
-
-
-
+    DATE=   "2024-02-05"
+    load_transform_save(DATE)
 
     
 
+    
