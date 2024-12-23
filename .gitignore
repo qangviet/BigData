@@ -2,3 +2,4 @@ jars
 authentication
 .venv
 .vscode
+data/
