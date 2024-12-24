@@ -1,0 +1,301 @@
+[2024-12-23T06:14:51.162+0000] {processor.py:161} INFO - Started process (PID=61) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:14:51.165+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:14:51.172+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:14:51.170+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:14:57.930+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:14:57.920+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:14:57.932+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:14:57.957+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 6.814 seconds
+[2024-12-23T06:15:28.832+0000] {processor.py:161} INFO - Started process (PID=76) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:15:28.833+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:15:28.838+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:15:28.837+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:15:30.080+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:15:30.070+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:15:30.081+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:15:30.102+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 1.283 seconds
+[2024-12-23T06:16:00.213+0000] {processor.py:161} INFO - Started process (PID=85) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:16:00.215+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:16:00.217+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:16:00.217+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:16:01.181+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:16:01.170+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:16:01.182+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:16:01.203+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 0.995 seconds
+[2024-12-23T06:16:31.504+0000] {processor.py:161} INFO - Started process (PID=94) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:16:31.506+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:16:31.508+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:16:31.507+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:16:32.530+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:16:32.519+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:16:32.531+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:16:32.551+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 1.054 seconds
+[2024-12-23T06:17:02.905+0000] {processor.py:161} INFO - Started process (PID=104) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:17:02.906+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:17:02.908+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:17:02.908+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:17:04.152+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:17:04.139+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:17:04.153+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:17:04.179+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 1.280 seconds
+[2024-12-23T06:17:34.520+0000] {processor.py:161} INFO - Started process (PID=114) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:17:34.522+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:17:34.524+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:17:34.523+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:17:35.467+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:17:35.456+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:17:35.468+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:17:35.493+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 0.979 seconds
+[2024-12-23T06:18:05.827+0000] {processor.py:161} INFO - Started process (PID=124) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:18:05.828+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:18:05.830+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:18:05.830+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:18:05.864+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:18:05.860+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+ModuleNotFoundError: No module named 'stream_processing'
+[2024-12-23T06:18:05.867+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:18:05.891+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 0.069 seconds
+[2024-12-23T06:18:36.203+0000] {processor.py:161} INFO - Started process (PID=132) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:18:36.204+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:18:36.207+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:18:36.206+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:18:36.241+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:18:36.236+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+ModuleNotFoundError: No module named 'stream_processing'
+[2024-12-23T06:18:36.243+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:18:36.267+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 0.069 seconds
+[2024-12-23T06:19:06.566+0000] {processor.py:161} INFO - Started process (PID=140) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:19:06.567+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:19:06.569+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:19:06.568+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:19:06.605+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:19:06.598+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+ModuleNotFoundError: No module named 'stream_processing'
+[2024-12-23T06:19:06.606+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:19:06.634+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 0.074 seconds
+[2024-12-23T06:19:36.922+0000] {processor.py:161} INFO - Started process (PID=148) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:19:36.923+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:19:36.925+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:19:36.925+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:19:36.962+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:19:36.957+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+ModuleNotFoundError: No module named 'stream_processing'
+[2024-12-23T06:19:36.965+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:19:36.989+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 0.072 seconds
+[2024-12-23T06:21:53.001+0000] {processor.py:161} INFO - Started process (PID=60) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:21:53.003+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:21:53.006+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:21:53.005+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:21:55.665+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:21:55.653+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:21:55.666+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:21:55.715+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 2.721 seconds
+[2024-12-23T06:22:26.020+0000] {processor.py:161} INFO - Started process (PID=76) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:22:26.021+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:22:26.023+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:22:26.023+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:22:27.183+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:22:27.173+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:22:27.184+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:22:27.205+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 1.190 seconds
+[2024-12-23T06:22:57.504+0000] {processor.py:161} INFO - Started process (PID=86) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:22:57.505+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:22:57.507+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:22:57.507+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:22:58.457+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:22:58.447+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:22:58.458+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:22:58.476+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 0.979 seconds
+[2024-12-23T06:23:28.781+0000] {processor.py:161} INFO - Started process (PID=96) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:23:28.782+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:23:28.785+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:23:28.784+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:23:29.871+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:23:29.859+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:23:29.872+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:23:29.900+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 1.126 seconds
+[2024-12-23T06:24:00.193+0000] {processor.py:161} INFO - Started process (PID=106) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:24:00.194+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:24:00.198+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:24:00.197+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:24:01.145+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:24:01.136+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:24:01.146+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:24:01.169+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 0.982 seconds
+[2024-12-23T06:24:31.596+0000] {processor.py:161} INFO - Started process (PID=117) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:24:31.597+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:24:31.600+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:24:31.600+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:24:32.752+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:24:32.739+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+    from stream_processing.insert_data_to_db import (
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:24:32.753+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:24:32.774+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/batch_processing/pipline_stream.py took 1.186 seconds
+[2024-12-23T06:25:03.069+0000] {processor.py:161} INFO - Started process (PID=127) to work on /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:25:03.071+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/batch_processing/pipline_stream.py for tasks to queue
+[2024-12-23T06:25:03.073+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:25:03.073+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/batch_processing/pipline_stream.py
+[2024-12-23T06:25:04.050+0000] {logging_mixin.py:188} INFO - [2024-12-23T06:25:04.043+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/batch_processing/pipline_stream.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/batch_processing/pipline_stream.py", line 11, in <module>
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 28, in <module>
+    FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 90, in join
+  File "<frozen genericpath>", line 164, in _check_arg_types
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+[2024-12-23T06:25:04.051+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/batch_processing/pipline_stream.py

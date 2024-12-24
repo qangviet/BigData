@@ -10,8 +10,6 @@ from dataclasses import dataclass
 
 load_dotenv()
 # Kafka configuration
-KAFKA_TOPIC = os.getenv("KAFKA_TOPIC_IMAGE")
-KAFKA_BOOTSTRAP_SERVERS = ["localhost:9092"]
 
 PROJECT_ROOT = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,6 +17,14 @@ PROJECT_ROOT = os.path.dirname(
 
 CFG_DL_PATH = os.path.join(PROJECT_ROOT, "config", "datalake.yaml")
 datalake_cfg = load_cfg(CFG_DL_PATH)["datalake"]
+
+KAFKA_BOOTSTRAP_SERVERS = ["localhost:9092"]
+
+YEAR = os.getenv("YEAR_TEST")
+MONTH = os.getenv("MONTH_TEST")
+DAY = os.getenv("DAY_TEST")
+
+KAFKA_TOPIC = os.getenv("KAFKA_TOPIC_IMAGE") + f"_{YEAR}_{MONTH}_{DAY}"
 
 MINIO_ENDPOINT = datalake_cfg["endpoint"]
 MINIO_ACCESS_KEY = datalake_cfg["access_key"]
@@ -49,9 +55,9 @@ def image_to_dl(args: Args):
     minio_client.create_bucket(args.bucket_name)
 
     consumer = KafkaConsumer(
-        KAFKA_TOPIC,
+        args.kafka_topic,
         bootstrap_servers=args.bootstrap_servers,
-        auto_offset_reset="latest",
+        auto_offset_reset="earliest",
         enable_auto_commit=True,
         value_deserializer=lambda x: json.loads(x.decode("utf-8")),
     )
@@ -62,11 +68,12 @@ def image_to_dl(args: Args):
         metadata = message.value["metadata"]
         year = metadata["year"]
         month = metadata["month"]
+        day = metadata["day"]
         image_data = base64.b64decode(message.value["image_data"])
 
         # Generate a unique filename
         image_filename = os.path.join(
-            f"{args.prefix}/{year}/{month}/", f"{metadata["id"]}.jpg"
+            f"{args.prefix}/{year}/{month}/{day}/", f"{metadata["id"]}.jpg"
         )
         try:
             # Upload dữ liệu từ nhị phân
@@ -90,3 +97,4 @@ if __name__ == "__main__":
     image_to_dl(args)
 
 # python ./src/stream_processing/streaming_image_to_dl.py
+#Cho 

@@ -1,0 +1,571 @@
+[2024-12-23T11:12:58.009+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T11:12:58.040+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T11:12:53.548733+00:00 [queued]>
+[2024-12-23T11:12:58.051+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T11:12:53.548733+00:00 [queued]>
+[2024-12-23T11:12:58.052+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T11:12:58.072+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): speech_to_datalake> on 2024-12-23 11:12:53.548733+00:00
+[2024-12-23T11:12:58.080+0000] {standard_task_runner.py:63} INFO - Started process 4987 to run task
+[2024-12-23T11:12:58.083+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'speech_to_datalake', 'manual__2024-12-23T11:12:53.548733+00:00', '--job-id', '118', '--raw', '--subdir', 'DAGS_FOLDER/pipline_stream.py', '--cfg-path', '/tmp/tmpfjrzslae']
+[2024-12-23T11:12:58.085+0000] {standard_task_runner.py:91} INFO - Job 118: Subtask speech_to_datalake
+[2024-12-23T11:12:58.142+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T11:12:53.548733+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T11:12:58.237+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='speech_to_datalake' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T11:12:53.548733+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T11:12:53.548733+00:00'
+[2024-12-23T11:12:58.239+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T11:12:58.270+0000] {logging_mixin.py:188} INFO - Bucket raw already exists, skip creating!
+[2024-12-23T11:12:58.274+0000] {conn.py:362} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: connecting to broker:29092 [('172.19.0.9', 29092) IPv4]
+[2024-12-23T11:12:58.276+0000] {conn.py:957} INFO - Probing node bootstrap-0 broker version
+[2024-12-23T11:12:58.278+0000] {conn.py:393} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: Connection complete.
+[2024-12-23T11:12:58.388+0000] {conn.py:1019} INFO - Broker version identified as 2.6.0
+[2024-12-23T11:12:58.389+0000] {conn.py:1020} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2024-12-23T11:12:58.391+0000] {consumer.py:122} WARNING - group_id is None: disabling auto-commit.
+[2024-12-23T11:12:58.392+0000] {subscription_state.py:167} INFO - Updating subscribed topics to: ('raw_speech_2024_2',)
+[2024-12-23T11:12:58.393+0000] {logging_mixin.py:188} INFO - Start consuming messages...
+[2024-12-23T11:12:58.520+0000] {subscription_state.py:253} INFO - Updated partition assignment: [('raw_speech_2024_2', 0)]
+[2024-12-23T11:12:58.522+0000] {conn.py:362} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: connecting to broker:29092 [('172.19.0.9', 29092) IPv4]
+[2024-12-23T11:12:58.523+0000] {conn.py:393} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: Connection complete.
+[2024-12-23T11:12:58.524+0000] {conn.py:673} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connected> [IPv4 ('172.19.0.9', 29092)]>: Closing connection. 
+[2024-12-23T11:12:59.330+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000001.mp3
+[2024-12-23T11:13:01.709+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000002.mp3
+[2024-12-23T11:13:04.186+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000003.mp3
+[2024-12-23T11:13:06.561+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000004.mp3
+[2024-12-23T11:13:08.832+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000005.mp3
+[2024-12-23T11:13:11.089+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000006.mp3
+[2024-12-23T11:13:13.386+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000007.mp3
+[2024-12-23T11:13:15.705+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000008.mp3
+[2024-12-23T11:13:18.002+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000009.mp3
+[2024-12-23T11:13:20.278+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000010.mp3
+[2024-12-23T11:13:22.561+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000011.mp3
+[2024-12-23T11:13:25.029+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000012.mp3
+[2024-12-23T11:13:27.331+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000013.mp3
+[2024-12-23T11:13:29.645+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000014.mp3
+[2024-12-23T11:13:31.939+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000015.mp3
+[2024-12-23T11:13:34.486+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000016.mp3
+[2024-12-23T11:13:36.906+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000017.mp3
+[2024-12-23T11:13:39.197+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000018.mp3
+[2024-12-23T11:13:41.560+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000019.mp3
+[2024-12-23T11:13:44.049+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000020.mp3
+[2024-12-23T11:13:46.352+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000021.mp3
+[2024-12-23T11:13:48.678+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000022.mp3
+[2024-12-23T11:13:51.035+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000023.mp3
+[2024-12-23T11:13:53.473+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000024.mp3
+[2024-12-23T11:13:55.780+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000025.mp3
+[2024-12-23T11:13:58.767+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000026.mp3
+[2024-12-23T11:14:01.222+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000027.mp3
+[2024-12-23T11:14:03.809+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000028.mp3
+[2024-12-23T11:14:06.131+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000029.mp3
+[2024-12-23T11:14:08.385+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000030.mp3
+[2024-12-23T11:14:10.761+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000031.mp3
+[2024-12-23T11:14:13.195+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000032.mp3
+[2024-12-23T11:14:15.803+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000033.mp3
+[2024-12-23T11:14:18.162+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000034.mp3
+[2024-12-23T11:14:20.439+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000035.mp3
+[2024-12-23T11:14:22.711+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000036.mp3
+[2024-12-23T11:14:25.214+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000037.mp3
+[2024-12-23T11:14:27.693+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000038.mp3
+[2024-12-23T11:14:29.953+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000039.mp3
+[2024-12-23T11:14:32.250+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000040.mp3
+[2024-12-23T11:14:34.591+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000041.mp3
+[2024-12-23T11:14:36.954+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000042.mp3
+[2024-12-23T11:14:39.254+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000043.mp3
+[2024-12-23T11:14:41.522+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000044.mp3
+[2024-12-23T11:14:43.775+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000045.mp3
+[2024-12-23T11:14:46.090+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000046.mp3
+[2024-12-23T11:14:48.351+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000047.mp3
+[2024-12-23T11:14:50.641+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000048.mp3
+[2024-12-23T11:14:53.049+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000049.mp3
+[2024-12-23T11:14:55.489+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000050.mp3
+[2024-12-23T11:14:57.811+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000051.mp3
+[2024-12-23T11:15:00.090+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000052.mp3
+[2024-12-23T11:15:02.398+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000053.mp3
+[2024-12-23T11:15:04.707+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000054.mp3
+[2024-12-23T11:15:07.005+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000055.mp3
+[2024-12-23T11:15:09.339+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000056.mp3
+[2024-12-23T11:15:11.625+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000057.mp3
+[2024-12-23T11:15:13.955+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000058.mp3
+[2024-12-23T11:15:16.339+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000059.mp3
+[2024-12-23T11:15:18.611+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000060.mp3
+[2024-12-23T11:15:20.930+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000061.mp3
+[2024-12-23T11:15:23.216+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000062.mp3
+[2024-12-23T11:15:25.503+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000063.mp3
+[2024-12-23T11:15:27.787+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000064.mp3
+[2024-12-23T11:15:30.039+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000065.mp3
+[2024-12-23T11:15:32.300+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000066.mp3
+[2024-12-23T11:15:34.602+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000067.mp3
+[2024-12-23T11:15:36.925+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000068.mp3
+[2024-12-23T11:15:39.241+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000069.mp3
+[2024-12-23T11:15:41.511+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000070.mp3
+[2024-12-23T11:15:43.778+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000071.mp3
+[2024-12-23T11:15:46.043+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000072.mp3
+[2024-12-23T11:15:48.321+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000073.mp3
+[2024-12-23T11:15:50.607+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000074.mp3
+[2024-12-23T11:15:52.927+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000075.mp3
+[2024-12-23T11:15:55.239+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000076.mp3
+[2024-12-23T11:15:57.565+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000077.mp3
+[2024-12-23T11:15:59.898+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000078.mp3
+[2024-12-23T11:16:02.312+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000079.mp3
+[2024-12-23T11:16:04.586+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000080.mp3
+[2024-12-23T11:16:06.922+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000081.mp3
+[2024-12-23T11:16:09.188+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000082.mp3
+[2024-12-23T11:16:11.458+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000083.mp3
+[2024-12-23T11:16:13.771+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000084.mp3
+[2024-12-23T11:16:16.042+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000085.mp3
+[2024-12-23T11:16:18.353+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000086.mp3
+[2024-12-23T11:16:20.632+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000087.mp3
+[2024-12-23T11:16:22.925+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000088.mp3
+[2024-12-23T11:16:25.192+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000089.mp3
+[2024-12-23T11:16:27.469+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000090.mp3
+[2024-12-23T11:16:29.736+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000091.mp3
+[2024-12-23T11:16:32.008+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000092.mp3
+[2024-12-23T11:16:34.306+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000093.mp3
+[2024-12-23T11:16:36.561+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000094.mp3
+[2024-12-23T11:16:38.832+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000095.mp3
+[2024-12-23T11:16:41.097+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000096.mp3
+[2024-12-23T11:16:43.475+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000097.mp3
+[2024-12-23T11:16:45.773+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000098.mp3
+[2024-12-23T11:16:48.071+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000099.mp3
+[2024-12-23T11:16:50.365+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000100.mp3
+[2024-12-23T11:16:52.653+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000101.mp3
+[2024-12-23T11:16:54.953+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000102.mp3
+[2024-12-23T11:16:57.239+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000103.mp3
+[2024-12-23T11:16:59.524+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000104.mp3
+[2024-12-23T11:17:01.844+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000105.mp3
+[2024-12-23T11:17:04.111+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000106.mp3
+[2024-12-23T11:17:06.465+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000107.mp3
+[2024-12-23T11:17:08.760+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000108.mp3
+[2024-12-23T11:17:11.261+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000109.mp3
+[2024-12-23T11:17:13.537+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000110.mp3
+[2024-12-23T11:17:15.842+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000111.mp3
+[2024-12-23T11:17:18.156+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000112.mp3
+[2024-12-23T11:17:20.464+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000113.mp3
+[2024-12-23T11:17:22.732+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000114.mp3
+[2024-12-23T11:17:25.046+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000115.mp3
+[2024-12-23T11:17:27.538+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000116.mp3
+[2024-12-23T11:17:29.853+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000117.mp3
+[2024-12-23T11:17:32.210+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000118.mp3
+[2024-12-23T11:17:34.412+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000119.mp3
+[2024-12-23T11:17:36.708+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000120.mp3
+[2024-12-23T11:17:38.970+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000121.mp3
+[2024-12-23T11:17:41.229+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000122.mp3
+[2024-12-23T11:17:43.505+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000123.mp3
+[2024-12-23T11:17:45.789+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000124.mp3
+[2024-12-23T11:17:48.064+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000125.mp3
+[2024-12-23T11:17:50.356+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000126.mp3
+[2024-12-23T11:17:52.723+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000127.mp3
+[2024-12-23T11:17:55.265+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000128.mp3
+[2024-12-23T11:17:57.796+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000129.mp3
+[2024-12-23T11:18:00.213+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000130.mp3
+[2024-12-23T11:18:02.518+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000131.mp3
+[2024-12-23T11:18:05.025+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000132.mp3
+[2024-12-23T11:18:07.335+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000133.mp3
+[2024-12-23T11:18:09.608+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000134.mp3
+[2024-12-23T11:18:11.898+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000135.mp3
+[2024-12-23T11:18:14.210+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000136.mp3
+[2024-12-23T11:18:16.504+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000137.mp3
+[2024-12-23T11:18:18.964+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000138.mp3
+[2024-12-23T11:18:21.222+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000139.mp3
+[2024-12-23T11:18:23.508+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000140.mp3
+[2024-12-23T11:18:25.772+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000141.mp3
+[2024-12-23T11:18:28.048+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000142.mp3
+[2024-12-23T11:18:30.387+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000143.mp3
+[2024-12-23T11:18:32.698+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000144.mp3
+[2024-12-23T11:18:35.068+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000145.mp3
+[2024-12-23T11:18:37.309+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000146.mp3
+[2024-12-23T11:18:39.586+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000147.mp3
+[2024-12-23T11:18:41.900+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000148.mp3
+[2024-12-23T11:18:44.184+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000149.mp3
+[2024-12-23T11:18:46.514+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000150.mp3
+[2024-12-23T11:18:48.770+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000151.mp3
+[2024-12-23T11:18:51.032+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000152.mp3
+[2024-12-23T11:18:53.300+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000153.mp3
+[2024-12-23T11:18:55.567+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000154.mp3
+[2024-12-23T11:18:57.930+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000155.mp3
+[2024-12-23T11:19:00.346+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000156.mp3
+[2024-12-23T11:19:02.560+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000157.mp3
+[2024-12-23T11:19:04.841+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000158.mp3
+[2024-12-23T11:19:07.259+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000159.mp3
+[2024-12-23T11:19:09.522+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000160.mp3
+[2024-12-23T11:19:11.821+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000161.mp3
+[2024-12-23T11:19:14.098+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000162.mp3
+[2024-12-23T11:19:16.369+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000163.mp3
+[2024-12-23T11:19:18.646+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000164.mp3
+[2024-12-23T11:19:20.921+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000165.mp3
+[2024-12-23T11:19:23.232+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000166.mp3
+[2024-12-23T11:19:25.500+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000167.mp3
+[2024-12-23T11:19:27.813+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000168.mp3
+[2024-12-23T11:19:30.101+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000169.mp3
+[2024-12-23T11:19:32.432+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000170.mp3
+[2024-12-23T11:19:34.684+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000171.mp3
+[2024-12-23T11:19:36.996+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000172.mp3
+[2024-12-23T11:19:39.271+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000173.mp3
+[2024-12-23T11:19:41.521+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000174.mp3
+[2024-12-23T11:19:43.800+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000175.mp3
+[2024-12-23T11:19:46.085+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000176.mp3
+[2024-12-23T11:19:48.358+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000177.mp3
+[2024-12-23T11:19:50.659+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000178.mp3
+[2024-12-23T11:19:52.928+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000179.mp3
+[2024-12-23T11:19:55.202+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000180.mp3
+[2024-12-23T11:19:57.498+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000181.mp3
+[2024-12-23T11:19:59.777+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000182.mp3
+[2024-12-23T11:20:02.038+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000183.mp3
+[2024-12-23T11:20:04.368+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000184.mp3
+[2024-12-23T11:20:06.649+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000185.mp3
+[2024-12-23T11:20:08.959+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000186.mp3
+[2024-12-23T11:20:11.327+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000187.mp3
+[2024-12-23T11:20:13.607+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000188.mp3
+[2024-12-23T11:20:15.862+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000189.mp3
+[2024-12-23T11:20:18.131+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000190.mp3
+[2024-12-23T11:20:20.408+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000191.mp3
+[2024-12-23T11:20:22.690+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000192.mp3
+[2024-12-23T11:20:24.992+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000193.mp3
+[2024-12-23T11:20:27.250+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000194.mp3
+[2024-12-23T11:20:29.512+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000195.mp3
+[2024-12-23T11:20:31.759+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000196.mp3
+[2024-12-23T11:20:34.012+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000197.mp3
+[2024-12-23T11:20:36.370+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000198.mp3
+[2024-12-23T11:20:38.736+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000199.mp3
+[2024-12-23T11:20:41.017+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000200.mp3
+[2024-12-23T11:20:43.322+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000201.mp3
+[2024-12-23T11:20:45.605+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000202.mp3
+[2024-12-23T11:20:47.895+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000203.mp3
+[2024-12-23T11:20:50.191+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000204.mp3
+[2024-12-23T11:20:52.446+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000205.mp3
+[2024-12-23T11:20:54.736+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000206.mp3
+[2024-12-23T11:20:57.039+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000207.mp3
+[2024-12-23T11:20:59.367+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000208.mp3
+[2024-12-23T11:21:01.690+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000209.mp3
+[2024-12-23T11:21:03.936+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000210.mp3
+[2024-12-23T11:21:06.202+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000211.mp3
+[2024-12-23T11:21:08.529+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000212.mp3
+[2024-12-23T11:21:10.847+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000213.mp3
+[2024-12-23T11:21:13.133+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000214.mp3
+[2024-12-23T11:21:15.420+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000215.mp3
+[2024-12-23T11:21:17.688+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000216.mp3
+[2024-12-23T11:21:19.959+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000217.mp3
+[2024-12-23T11:21:22.234+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000218.mp3
+[2024-12-23T11:21:24.617+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000219.mp3
+[2024-12-23T11:21:26.898+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000220.mp3
+[2024-12-23T11:21:29.173+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000221.mp3
+[2024-12-23T11:21:31.451+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000222.mp3
+[2024-12-23T11:21:33.736+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000223.mp3
+[2024-12-23T11:21:36.037+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000224.mp3
+[2024-12-23T11:21:38.355+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000225.mp3
+[2024-12-23T11:21:40.620+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000226.mp3
+[2024-12-23T11:21:42.887+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000227.mp3
+[2024-12-23T11:21:45.249+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000228.mp3
+[2024-12-23T11:21:47.479+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000229.mp3
+[2024-12-23T11:21:49.756+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000230.mp3
+[2024-12-23T11:21:52.039+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000231.mp3
+[2024-12-23T11:21:54.308+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000232.mp3
+[2024-12-23T11:21:56.609+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000233.mp3
+[2024-12-23T11:21:58.878+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000234.mp3
+[2024-12-23T11:22:01.158+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000235.mp3
+[2024-12-23T11:22:03.423+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000236.mp3
+[2024-12-23T11:22:05.693+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000237.mp3
+[2024-12-23T11:22:07.985+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000238.mp3
+[2024-12-23T11:22:10.254+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000239.mp3
+[2024-12-23T11:22:12.538+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000240.mp3
+[2024-12-23T11:22:14.805+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000241.mp3
+[2024-12-23T11:22:17.074+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000242.mp3
+[2024-12-23T11:22:19.341+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000243.mp3
+[2024-12-23T11:22:21.662+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000244.mp3
+[2024-12-23T11:22:23.970+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000245.mp3
+[2024-12-23T11:22:26.228+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000246.mp3
+[2024-12-23T11:22:28.503+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000247.mp3
+[2024-12-23T11:22:30.793+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000248.mp3
+[2024-12-23T11:22:33.033+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000249.mp3
+[2024-12-23T11:22:35.336+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000250.mp3
+[2024-12-23T11:22:37.610+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000251.mp3
+[2024-12-23T11:22:39.881+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000252.mp3
+[2024-12-23T11:22:42.168+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000253.mp3
+[2024-12-23T11:22:44.427+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000254.mp3
+[2024-12-23T11:22:46.745+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000255.mp3
+[2024-12-23T11:22:49.002+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000256.mp3
+[2024-12-23T11:22:51.281+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000257.mp3
+[2024-12-23T11:22:53.595+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000258.mp3
+[2024-12-23T11:22:55.843+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000259.mp3
+[2024-12-23T11:22:58.105+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000260.mp3
+[2024-12-23T11:23:00.389+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000261.mp3
+[2024-12-23T11:23:02.699+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000262.mp3
+[2024-12-23T11:23:04.970+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000263.mp3
+[2024-12-23T11:23:07.377+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000264.mp3
+[2024-12-23T11:23:09.646+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000265.mp3
+[2024-12-23T11:23:11.929+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000266.mp3
+[2024-12-23T11:23:14.211+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000267.mp3
+[2024-12-23T11:23:16.637+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000268.mp3
+[2024-12-23T11:23:18.981+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000269.mp3
+[2024-12-23T11:23:21.176+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000270.mp3
+[2024-12-23T11:23:23.440+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000271.mp3
+[2024-12-23T11:23:25.729+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000272.mp3
+[2024-12-23T11:23:27.984+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000273.mp3
+[2024-12-23T11:23:30.262+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000274.mp3
+[2024-12-23T11:23:32.535+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000275.mp3
+[2024-12-23T11:23:34.804+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000276.mp3
+[2024-12-23T11:23:37.119+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000277.mp3
+[2024-12-23T11:23:39.393+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000278.mp3
+[2024-12-23T11:23:41.850+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000279.mp3
+[2024-12-23T11:23:44.140+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000280.mp3
+[2024-12-23T11:23:46.410+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000281.mp3
+[2024-12-23T11:23:48.698+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000282.mp3
+[2024-12-23T11:23:50.964+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000283.mp3
+[2024-12-23T11:23:53.225+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000284.mp3
+[2024-12-23T11:23:55.511+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000285.mp3
+[2024-12-23T11:23:57.847+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000286.mp3
+[2024-12-23T11:24:00.105+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000287.mp3
+[2024-12-23T11:24:02.422+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000288.mp3
+[2024-12-23T11:24:04.654+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000289.mp3
+[2024-12-23T11:24:06.972+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000290.mp3
+[2024-12-23T11:24:09.247+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000291.mp3
+[2024-12-23T11:24:11.568+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000292.mp3
+[2024-12-23T11:24:13.835+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000293.mp3
+[2024-12-23T11:24:16.096+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000294.mp3
+[2024-12-23T11:24:18.376+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000295.mp3
+[2024-12-23T11:24:20.657+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000296.mp3
+[2024-12-23T11:24:22.926+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000297.mp3
+[2024-12-23T11:24:25.210+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000298.mp3
+[2024-12-23T11:24:27.483+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000299.mp3
+[2024-12-23T11:24:29.764+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000300.mp3
+[2024-12-23T11:24:32.040+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000301.mp3
+[2024-12-23T11:24:34.354+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000302.mp3
+[2024-12-23T11:24:36.598+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000303.mp3
+[2024-12-23T11:24:38.901+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000304.mp3
+[2024-12-23T11:24:41.153+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000305.mp3
+[2024-12-23T11:24:43.455+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000306.mp3
+[2024-12-23T11:24:45.725+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000307.mp3
+[2024-12-23T11:24:48.084+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000308.mp3
+[2024-12-23T11:24:50.337+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000309.mp3
+[2024-12-23T11:24:52.629+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000310.mp3
+[2024-12-23T11:24:54.970+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000311.mp3
+[2024-12-23T11:24:57.263+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000312.mp3
+[2024-12-23T11:24:59.630+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000313.mp3
+[2024-12-23T11:25:01.837+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000314.mp3
+[2024-12-23T11:25:04.104+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000315.mp3
+[2024-12-23T11:25:06.346+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000316.mp3
+[2024-12-23T11:25:08.610+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000317.mp3
+[2024-12-23T11:25:10.992+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000318.mp3
+[2024-12-23T11:25:13.258+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000319.mp3
+[2024-12-23T11:25:15.566+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000320.mp3
+[2024-12-23T11:25:17.854+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000321.mp3
+[2024-12-23T11:25:20.114+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000322.mp3
+[2024-12-23T11:25:22.398+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000323.mp3
+[2024-12-23T11:25:24.674+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000324.mp3
+[2024-12-23T11:25:27.002+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000325.mp3
+[2024-12-23T11:25:29.277+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000326.mp3
+[2024-12-23T11:25:31.545+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000327.mp3
+[2024-12-23T11:25:33.991+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000328.mp3
+[2024-12-23T11:25:36.260+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000329.mp3
+[2024-12-23T11:25:38.538+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000330.mp3
+[2024-12-23T11:25:40.810+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000331.mp3
+[2024-12-23T11:25:43.089+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000332.mp3
+[2024-12-23T11:25:45.341+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000333.mp3
+[2024-12-23T11:25:47.625+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000334.mp3
+[2024-12-23T11:25:49.920+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000335.mp3
+[2024-12-23T11:25:52.167+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000336.mp3
+[2024-12-23T11:25:54.449+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000337.mp3
+[2024-12-23T11:25:56.733+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000338.mp3
+[2024-12-23T11:25:59.173+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000339.mp3
+[2024-12-23T11:26:01.438+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000340.mp3
+[2024-12-23T11:26:03.744+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000341.mp3
+[2024-12-23T11:26:06.018+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000342.mp3
+[2024-12-23T11:26:08.302+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000343.mp3
+[2024-12-23T11:26:10.640+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000344.mp3
+[2024-12-23T11:26:12.882+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000345.mp3
+[2024-12-23T11:26:15.156+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000346.mp3
+[2024-12-23T11:26:17.482+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000347.mp3
+[2024-12-23T11:26:19.878+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000348.mp3
+[2024-12-23T11:26:22.090+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000349.mp3
+[2024-12-23T11:26:24.365+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000350.mp3
+[2024-12-23T11:26:26.644+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000351.mp3
+[2024-12-23T11:26:28.905+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000352.mp3
+[2024-12-23T11:26:31.228+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000353.mp3
+[2024-12-23T11:26:33.484+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000354.mp3
+[2024-12-23T11:26:35.748+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000355.mp3
+[2024-12-23T11:26:38.052+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000356.mp3
+[2024-12-23T11:26:40.326+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000357.mp3
+[2024-12-23T11:26:42.657+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000358.mp3
+[2024-12-23T11:26:44.995+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000359.mp3
+[2024-12-23T11:26:47.277+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000360.mp3
+[2024-12-23T11:26:49.547+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000361.mp3
+[2024-12-23T11:26:51.814+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000362.mp3
+[2024-12-23T11:26:54.118+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000363.mp3
+[2024-12-23T11:26:56.382+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000364.mp3
+[2024-12-23T11:26:58.658+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000365.mp3
+[2024-12-23T11:27:00.934+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000366.mp3
+[2024-12-23T11:27:03.268+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000367.mp3
+[2024-12-23T11:27:05.724+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000368.mp3
+[2024-12-23T11:27:07.971+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000369.mp3
+[2024-12-23T11:27:10.256+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000370.mp3
+[2024-12-23T11:27:12.531+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000371.mp3
+[2024-12-23T11:27:14.811+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000372.mp3
+[2024-12-23T11:27:17.074+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000373.mp3
+[2024-12-23T11:27:19.363+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000374.mp3
+[2024-12-23T11:27:21.605+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000375.mp3
+[2024-12-23T11:27:23.872+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000376.mp3
+[2024-12-23T11:27:26.200+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000377.mp3
+[2024-12-23T11:27:28.495+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000378.mp3
+[2024-12-23T11:27:30.803+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000379.mp3
+[2024-12-23T11:27:33.091+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000380.mp3
+[2024-12-23T11:27:35.381+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000381.mp3
+[2024-12-23T11:27:37.663+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000382.mp3
+[2024-12-23T11:27:39.926+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000383.mp3
+[2024-12-23T11:27:42.213+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000384.mp3
+[2024-12-23T11:27:44.461+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000385.mp3
+[2024-12-23T11:27:46.799+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000386.mp3
+[2024-12-23T11:27:49.053+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000387.mp3
+[2024-12-23T11:27:51.356+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000388.mp3
+[2024-12-23T11:27:53.592+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000389.mp3
+[2024-12-23T11:27:55.868+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000390.mp3
+[2024-12-23T11:27:58.180+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000391.mp3
+[2024-12-23T11:28:00.459+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000392.mp3
+[2024-12-23T11:28:02.718+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000393.mp3
+[2024-12-23T11:28:05.026+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000394.mp3
+[2024-12-23T11:28:07.291+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000395.mp3
+[2024-12-23T11:28:09.599+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000396.mp3
+[2024-12-23T11:28:11.894+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000397.mp3
+[2024-12-23T11:28:14.171+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000398.mp3
+[2024-12-23T11:28:16.455+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000399.mp3
+[2024-12-23T11:28:18.746+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000400.mp3
+[2024-12-23T11:28:20.987+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000401.mp3
+[2024-12-23T11:28:23.265+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000402.mp3
+[2024-12-23T11:28:25.531+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000403.mp3
+[2024-12-23T11:28:27.820+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000404.mp3
+[2024-12-23T11:28:30.087+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000405.mp3
+[2024-12-23T11:28:32.368+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000406.mp3
+[2024-12-23T11:28:34.645+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000407.mp3
+[2024-12-23T11:28:36.964+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000408.mp3
+[2024-12-23T11:28:39.223+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000409.mp3
+[2024-12-23T11:28:41.545+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000410.mp3
+[2024-12-23T11:28:43.809+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000411.mp3
+[2024-12-23T11:28:46.065+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000412.mp3
+[2024-12-23T11:28:48.345+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000413.mp3
+[2024-12-23T11:28:50.689+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000414.mp3
+[2024-12-23T11:28:52.937+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000415.mp3
+[2024-12-23T11:28:55.227+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000416.mp3
+[2024-12-23T11:28:57.486+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000417.mp3
+[2024-12-23T11:28:59.804+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000418.mp3
+[2024-12-23T11:29:02.116+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000419.mp3
+[2024-12-23T11:29:04.408+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000420.mp3
+[2024-12-23T11:29:06.678+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000421.mp3
+[2024-12-23T11:29:08.970+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000422.mp3
+[2024-12-23T11:29:11.285+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000423.mp3
+[2024-12-23T11:29:13.564+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000424.mp3
+[2024-12-23T11:29:15.836+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000425.mp3
+[2024-12-23T11:29:18.086+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000426.mp3
+[2024-12-23T11:29:20.364+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000427.mp3
+[2024-12-23T11:29:22.786+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000428.mp3
+[2024-12-23T11:29:25.019+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000429.mp3
+[2024-12-23T11:29:27.321+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000430.mp3
+[2024-12-23T11:29:29.590+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000431.mp3
+[2024-12-23T11:29:31.846+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000432.mp3
+[2024-12-23T11:29:34.171+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000433.mp3
+[2024-12-23T11:29:36.422+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000434.mp3
+[2024-12-23T11:29:38.699+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000435.mp3
+[2024-12-23T11:29:40.963+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000436.mp3
+[2024-12-23T11:29:43.236+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000437.mp3
+[2024-12-23T11:29:45.559+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000438.mp3
+[2024-12-23T11:29:47.838+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000439.mp3
+[2024-12-23T11:29:50.135+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000440.mp3
+[2024-12-23T11:29:52.410+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000441.mp3
+[2024-12-23T11:29:54.686+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000442.mp3
+[2024-12-23T11:29:56.979+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000443.mp3
+[2024-12-23T11:29:59.278+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000444.mp3
+[2024-12-23T11:30:01.576+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000445.mp3
+[2024-12-23T11:30:03.860+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000446.mp3
+[2024-12-23T11:30:06.142+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000447.mp3
+[2024-12-23T11:30:08.423+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000448.mp3
+[2024-12-23T11:30:10.769+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000449.mp3
+[2024-12-23T11:30:13.031+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000450.mp3
+[2024-12-23T11:30:15.307+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000451.mp3
+[2024-12-23T11:30:17.596+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000452.mp3
+[2024-12-23T11:30:19.851+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000453.mp3
+[2024-12-23T11:30:22.118+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000454.mp3
+[2024-12-23T11:30:24.387+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000455.mp3
+[2024-12-23T11:30:26.655+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000456.mp3
+[2024-12-23T11:30:29.005+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000457.mp3
+[2024-12-23T11:30:31.269+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000458.mp3
+[2024-12-23T11:30:33.702+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000459.mp3
+[2024-12-23T11:30:35.953+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000460.mp3
+[2024-12-23T11:30:38.267+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000461.mp3
+[2024-12-23T11:30:40.657+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000462.mp3
+[2024-12-23T11:30:42.971+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000463.mp3
+[2024-12-23T11:30:45.229+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000464.mp3
+[2024-12-23T11:30:47.490+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000465.mp3
+[2024-12-23T11:30:49.782+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000466.mp3
+[2024-12-23T11:30:52.141+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000467.mp3
+[2024-12-23T11:30:54.528+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000468.mp3
+[2024-12-23T11:30:56.951+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000469.mp3
+[2024-12-23T11:30:59.235+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000470.mp3
+[2024-12-23T11:31:01.494+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000471.mp3
+[2024-12-23T11:31:03.764+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000472.mp3
+[2024-12-23T11:31:06.104+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000473.mp3
+[2024-12-23T11:31:08.441+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000474.mp3
+[2024-12-23T11:31:10.765+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000475.mp3
+[2024-12-23T11:31:13.044+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000476.mp3
+[2024-12-23T11:31:15.313+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000477.mp3
+[2024-12-23T11:31:17.576+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000478.mp3
+[2024-12-23T11:31:20.087+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000479.mp3
+[2024-12-23T11:31:22.432+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000480.mp3
+[2024-12-23T11:31:24.759+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000481.mp3
+[2024-12-23T11:31:27.009+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000482.mp3
+[2024-12-23T11:31:29.323+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000483.mp3
+[2024-12-23T11:31:31.597+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000484.mp3
+[2024-12-23T11:31:33.914+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000485.mp3
+[2024-12-23T11:31:36.185+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000486.mp3
+[2024-12-23T11:31:38.493+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000487.mp3
+[2024-12-23T11:31:40.817+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000488.mp3
+[2024-12-23T11:31:43.118+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000489.mp3
+[2024-12-23T11:31:45.422+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000490.mp3
+[2024-12-23T11:31:47.967+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000491.mp3
+[2024-12-23T11:31:50.409+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000492.mp3
+[2024-12-23T11:31:52.702+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/2/20240200000493.mp3
+[2024-12-23T11:31:52.772+0000] {local_task_job_runner.py:124} ERROR - Received SIGTERM. Terminating subprocesses
+[2024-12-23T11:31:52.809+0000] {process_utils.py:132} INFO - Sending 15 to group 4987. PIDs of all processes in the group: [4987]
+[2024-12-23T11:31:52.813+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 4987
+[2024-12-23T11:31:52.815+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-12-23T11:31:52.819+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T11:31:52.859+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/streaming_speech_to_dl.py", line 61, in speech_to_dl
+    for message in consumer:
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1203, in __next__
+    return self.next_v2()
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1211, in next_v2
+    return next(self._iterator)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1126, in _message_generator_v2
+    record_map = self.poll(timeout_ms=timeout_ms, update_offsets=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 663, in poll
+    records = self._poll_once(remaining, max_records, update_offsets=update_offsets)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 712, in _poll_once
+    self._client.poll(timeout_ms=timeout_ms)
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/client_async.py", line 601, in poll
+    self._poll(timeout / 1000)
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/client_async.py", line 633, in _poll
+    ready = self._selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2024-12-23T11:31:52.910+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=speech_to_datalake, run_id=manual__2024-12-23T11:12:53.548733+00:00, execution_date=20241223T111253, start_date=20241223T111258, end_date=20241223T113152
+[2024-12-23T11:31:52.996+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=4987, status='terminated', exitcode=2, started='11:12:57') (4987) terminated with exit code 2
+[2024-12-23T11:31:53.001+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 143
+[2024-12-23T11:31:53.052+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T11:31:54.301+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

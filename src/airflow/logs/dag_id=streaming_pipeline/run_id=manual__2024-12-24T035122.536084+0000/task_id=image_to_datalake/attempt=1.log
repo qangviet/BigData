@@ -1,0 +1,195 @@
+[2024-12-24T03:51:26.668+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-24T03:51:26.708+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.image_to_datalake manual__2024-12-24T03:51:22.536084+00:00 [queued]>
+[2024-12-24T03:51:26.720+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.image_to_datalake manual__2024-12-24T03:51:22.536084+00:00 [queued]>
+[2024-12-24T03:51:26.721+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-24T03:51:26.741+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): image_to_datalake> on 2024-12-24 03:51:22.536084+00:00
+[2024-12-24T03:51:26.750+0000] {standard_task_runner.py:63} INFO - Started process 5900 to run task
+[2024-12-24T03:51:26.753+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'image_to_datalake', 'manual__2024-12-24T03:51:22.536084+00:00', '--job-id', '182', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_stream.py', '--cfg-path', '/tmp/tmpqx3af466']
+[2024-12-24T03:51:26.756+0000] {standard_task_runner.py:91} INFO - Job 182: Subtask image_to_datalake
+[2024-12-24T03:51:26.845+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.image_to_datalake manual__2024-12-24T03:51:22.536084+00:00 [running]> on host 0b4a5bf62610
+[2024-12-24T03:51:26.970+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='image_to_datalake' AIRFLOW_CTX_EXECUTION_DATE='2024-12-24T03:51:22.536084+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-24T03:51:22.536084+00:00'
+[2024-12-24T03:51:26.972+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-24T03:51:27.009+0000] {logging_mixin.py:188} INFO - Bucket raw already exists, skip creating!
+[2024-12-24T03:51:27.014+0000] {conn.py:362} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: connecting to broker:29092 [('172.19.0.9', 29092) IPv4]
+[2024-12-24T03:51:27.015+0000] {conn.py:957} INFO - Probing node bootstrap-0 broker version
+[2024-12-24T03:51:27.017+0000] {conn.py:393} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: Connection complete.
+[2024-12-24T03:51:27.126+0000] {conn.py:1019} INFO - Broker version identified as 2.6.0
+[2024-12-24T03:51:27.127+0000] {conn.py:1020} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2024-12-24T03:51:27.129+0000] {consumer.py:122} WARNING - group_id is None: disabling auto-commit.
+[2024-12-24T03:51:27.131+0000] {subscription_state.py:167} INFO - Updating subscribed topics to: ('raw_image_2024_01_03',)
+[2024-12-24T03:51:27.132+0000] {logging_mixin.py:188} INFO - Start consuming messages...
+[2024-12-24T03:51:27.262+0000] {subscription_state.py:253} INFO - Updated partition assignment: [('raw_image_2024_01_03', 0)]
+[2024-12-24T03:51:27.264+0000] {conn.py:362} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: connecting to broker:29092 [('172.19.0.9', 29092) IPv4]
+[2024-12-24T03:51:27.265+0000] {conn.py:393} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: Connection complete.
+[2024-12-24T03:51:27.266+0000] {conn.py:673} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connected> [IPv4 ('172.19.0.9', 29092)]>: Closing connection. 
+[2024-12-24T03:51:28.069+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002658.jpg
+[2024-12-24T03:51:30.086+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002661.jpg
+[2024-12-24T03:51:32.382+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002662.jpg
+[2024-12-24T03:51:34.667+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002663.jpg
+[2024-12-24T03:51:36.933+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002664.jpg
+[2024-12-24T03:51:39.225+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002665.jpg
+[2024-12-24T03:51:41.501+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002666.jpg
+[2024-12-24T03:51:43.790+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002667.jpg
+[2024-12-24T03:51:46.178+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002668.jpg
+[2024-12-24T03:51:48.482+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002669.jpg
+[2024-12-24T03:51:50.795+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002670.jpg
+[2024-12-24T03:51:53.133+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002671.jpg
+[2024-12-24T03:51:55.452+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002672.jpg
+[2024-12-24T03:51:57.759+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002673.jpg
+[2024-12-24T03:52:00.070+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002674.jpg
+[2024-12-24T03:52:02.397+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002675.jpg
+[2024-12-24T03:52:04.725+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002676.jpg
+[2024-12-24T03:52:07.023+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002677.jpg
+[2024-12-24T03:52:09.413+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002678.jpg
+[2024-12-24T03:52:11.751+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002679.jpg
+[2024-12-24T03:52:14.057+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002680.jpg
+[2024-12-24T03:52:16.443+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002681.jpg
+[2024-12-24T03:52:18.727+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002682.jpg
+[2024-12-24T03:52:20.987+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002683.jpg
+[2024-12-24T03:52:23.305+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002684.jpg
+[2024-12-24T03:52:25.624+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002685.jpg
+[2024-12-24T03:52:27.929+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002686.jpg
+[2024-12-24T03:52:30.263+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002687.jpg
+[2024-12-24T03:52:32.690+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002688.jpg
+[2024-12-24T03:52:35.013+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002689.jpg
+[2024-12-24T03:52:37.291+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002690.jpg
+[2024-12-24T03:52:39.644+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002691.jpg
+[2024-12-24T03:52:41.989+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002692.jpg
+[2024-12-24T03:52:44.301+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002693.jpg
+[2024-12-24T03:52:46.680+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002694.jpg
+[2024-12-24T03:52:48.955+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002696.jpg
+[2024-12-24T03:52:51.249+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002697.jpg
+[2024-12-24T03:52:53.516+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002698.jpg
+[2024-12-24T03:52:55.919+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002699.jpg
+[2024-12-24T03:52:58.230+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002700.jpg
+[2024-12-24T03:53:00.558+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002701.jpg
+[2024-12-24T03:53:02.968+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002702.jpg
+[2024-12-24T03:53:05.235+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002703.jpg
+[2024-12-24T03:53:07.568+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002704.jpg
+[2024-12-24T03:53:11.830+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002705.jpg
+[2024-12-24T03:53:12.619+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002706.jpg
+[2024-12-24T03:53:14.874+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002707.jpg
+[2024-12-24T03:53:17.202+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002708.jpg
+[2024-12-24T03:53:19.455+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002709.jpg
+[2024-12-24T03:53:21.716+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002710.jpg
+[2024-12-24T03:53:24.017+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002711.jpg
+[2024-12-24T03:53:26.397+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002712.jpg
+[2024-12-24T03:53:28.918+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002713.jpg
+[2024-12-24T03:53:31.191+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002714.jpg
+[2024-12-24T03:53:33.511+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002715.jpg
+[2024-12-24T03:53:35.805+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002716.jpg
+[2024-12-24T03:53:38.062+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002717.jpg
+[2024-12-24T03:53:40.332+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002718.jpg
+[2024-12-24T03:53:42.637+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002719.jpg
+[2024-12-24T03:53:44.945+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002720.jpg
+[2024-12-24T03:53:47.391+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002721.jpg
+[2024-12-24T03:53:50.010+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002722.jpg
+[2024-12-24T03:53:52.254+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002723.jpg
+[2024-12-24T03:53:54.605+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002724.jpg
+[2024-12-24T03:53:56.880+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002725.jpg
+[2024-12-24T03:53:59.150+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002726.jpg
+[2024-12-24T03:54:01.501+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002727.jpg
+[2024-12-24T03:54:03.719+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002728.jpg
+[2024-12-24T03:54:06.050+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002729.jpg
+[2024-12-24T03:54:08.322+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002730.jpg
+[2024-12-24T03:54:10.678+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002731.jpg
+[2024-12-24T03:54:13.225+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002732.jpg
+[2024-12-24T03:54:15.718+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002733.jpg
+[2024-12-24T03:54:18.084+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002734.jpg
+[2024-12-24T03:54:20.369+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002735.jpg
+[2024-12-24T03:54:22.644+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002736.jpg
+[2024-12-24T03:54:24.923+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002737.jpg
+[2024-12-24T03:54:27.210+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002738.jpg
+[2024-12-24T03:54:29.498+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002739.jpg
+[2024-12-24T03:54:31.812+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002740.jpg
+[2024-12-24T03:54:34.490+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002741.jpg
+[2024-12-24T03:54:36.655+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002742.jpg
+[2024-12-24T03:54:39.203+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002743.jpg
+[2024-12-24T03:54:41.486+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002744.jpg
+[2024-12-24T03:54:43.807+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002745.jpg
+[2024-12-24T03:54:46.107+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002746.jpg
+[2024-12-24T03:54:48.511+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002747.jpg
+[2024-12-24T03:54:50.912+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002748.jpg
+[2024-12-24T03:54:53.171+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002749.jpg
+[2024-12-24T03:54:55.455+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002750.jpg
+[2024-12-24T03:54:57.733+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002751.jpg
+[2024-12-24T03:55:00.351+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002752.jpg
+[2024-12-24T03:55:03.312+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002753.jpg
+[2024-12-24T03:55:05.080+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002754.jpg
+[2024-12-24T03:55:07.894+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002755.jpg
+[2024-12-24T03:55:10.032+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002756.jpg
+[2024-12-24T03:55:12.303+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002757.jpg
+[2024-12-24T03:55:14.585+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002758.jpg
+[2024-12-24T03:55:16.857+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002759.jpg
+[2024-12-24T03:55:19.142+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002760.jpg
+[2024-12-24T03:55:21.431+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002761.jpg
+[2024-12-24T03:55:23.687+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002762.jpg
+[2024-12-24T03:55:25.962+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002763.jpg
+[2024-12-24T03:55:28.224+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002764.jpg
+[2024-12-24T03:55:30.481+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002765.jpg
+[2024-12-24T03:55:32.746+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002766.jpg
+[2024-12-24T03:55:35.013+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002767.jpg
+[2024-12-24T03:55:37.289+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002768.jpg
+[2024-12-24T03:55:39.552+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002769.jpg
+[2024-12-24T03:55:41.851+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002770.jpg
+[2024-12-24T03:55:44.202+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002771.jpg
+[2024-12-24T03:55:46.516+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002772.jpg
+[2024-12-24T03:55:48.797+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: image/2024/01/03/20240100002773.jpg
+[2024-12-24T03:55:49.074+0000] {local_task_job_runner.py:310} WARNING - State of this instance has been externally set to None. Terminating instance.
+[2024-12-24T03:55:49.076+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2024-12-24T03:55:49.079+0000] {process_utils.py:132} INFO - Sending 15 to group 5900. PIDs of all processes in the group: [5900]
+[2024-12-24T03:55:49.080+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 5900
+[2024-12-24T03:55:49.081+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-12-24T03:55:49.082+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-24T03:55:49.099+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/streaming_image_to_dl.py", line 65, in image_to_dl
+    for message in consumer:
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1203, in __next__
+    return self.next_v2()
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1211, in next_v2
+    return next(self._iterator)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1126, in _message_generator_v2
+    record_map = self.poll(timeout_ms=timeout_ms, update_offsets=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 663, in poll
+    records = self._poll_once(remaining, max_records, update_offsets=update_offsets)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 712, in _poll_once
+    self._client.poll(timeout_ms=timeout_ms)
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/client_async.py", line 601, in poll
+    self._poll(timeout / 1000)
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/client_async.py", line 633, in _poll
+    ready = self._selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2024-12-24T03:55:49.112+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=image_to_datalake, run_id=manual__2024-12-24T03:51:22.536084+00:00, execution_date=20241224T035122, start_date=20241224T035126, end_date=20241224T035549
+[2024-12-24T03:55:49.138+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 182 for task image_to_datalake ((psycopg2.errors.ForeignKeyViolation) insert or update on table "task_fail" violates foreign key constraint "task_fail_ti_fkey"
+DETAIL:  Key (dag_id, task_id, run_id, map_index)=(streaming_pipeline, image_to_datalake, manual__2024-12-24T03:51:22.536084+00:00, -1) is not present in table "task_instance".
+
+[SQL: INSERT INTO task_fail (task_id, dag_id, run_id, map_index, start_date, end_date, duration) VALUES (%(task_id)s, %(dag_id)s, %(run_id)s, %(map_index)s, %(start_date)s, %(end_date)s, %(duration)s) RETURNING task_fail.id]
+[parameters: {'task_id': 'image_to_datalake', 'dag_id': 'streaming_pipeline', 'run_id': 'manual__2024-12-24T03:51:22.536084+00:00', 'map_index': -1, 'start_date': datetime.datetime(2024, 12, 24, 3, 51, 26, 709559, tzinfo=Timezone('UTC')), 'end_date': datetime.datetime(2024, 12, 24, 3, 55, 49, 111189, tzinfo=Timezone('UTC')), 'duration': 262}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 5900)
+[2024-12-24T03:55:49.174+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=5900, status='terminated', exitcode=1, started='03:51:25') (5900) terminated with exit code 1

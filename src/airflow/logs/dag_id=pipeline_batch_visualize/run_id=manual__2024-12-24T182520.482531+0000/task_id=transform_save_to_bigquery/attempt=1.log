@@ -1,0 +1,38 @@
+[2024-12-24T18:25:58.016+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-24T18:25:58.048+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_batch_visualize.transform_save_to_bigquery manual__2024-12-24T18:25:20.482531+00:00 [queued]>
+[2024-12-24T18:25:58.060+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_batch_visualize.transform_save_to_bigquery manual__2024-12-24T18:25:20.482531+00:00 [queued]>
+[2024-12-24T18:25:58.061+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-24T18:25:58.080+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform_save_to_bigquery> on 2024-12-24 18:25:20.482531+00:00
+[2024-12-24T18:25:58.088+0000] {standard_task_runner.py:63} INFO - Started process 6164 to run task
+[2024-12-24T18:25:58.091+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'pipeline_batch_visualize', 'transform_save_to_bigquery', 'manual__2024-12-24T18:25:20.482531+00:00', '--job-id', '334', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_batch_visualize.py', '--cfg-path', '/tmp/tmpi2omz8mm']
+[2024-12-24T18:25:58.093+0000] {standard_task_runner.py:91} INFO - Job 334: Subtask transform_save_to_bigquery
+[2024-12-24T18:25:58.147+0000] {task_command.py:426} INFO - Running <TaskInstance: pipeline_batch_visualize.transform_save_to_bigquery manual__2024-12-24T18:25:20.482531+00:00 [running]> on host 0b4a5bf62610
+[2024-12-24T18:25:58.251+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='pipeline_batch_visualize' AIRFLOW_CTX_TASK_ID='transform_save_to_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2024-12-24T18:25:20.482531+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-24T18:25:20.482531+00:00'
+[2024-12-24T18:25:58.253+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-24T18:26:09.136+0000] {upload_to_bigquery.py:157} INFO - Spark session successfully created!
+[2024-12-24T18:26:09.144+0000] {upload_to_bigquery.py:211} INFO - Google BigQuery configuration is created successfully
+[2024-12-24T18:26:09.151+0000] {upload_to_bigquery.py:188} INFO - MinIO configuration is created successfully
+[2024-12-24T18:26:16.939+0000] {load_and_transform.py:385} INFO - Done load taxi lookup
+[2024-12-24T18:26:19.783+0000] {logging_mixin.py:188} INFO - Bảng 'YELLOW_DAILY_TABLE_2024_01_02' không tồn tại. Đang tạo bảng mới...
+[2024-12-24T18:26:20.205+0000] {logging_mixin.py:188} INFO - Đã tạo bảng 'YELLOW_DAILY_TABLE_2024_01_02' thành công trong dataset 'data_warehouse'.
+[2024-12-24T18:26:55.394+0000] {logging_mixin.py:188} INFO - Đã ghi dữ liệu thành công vào YELLOW_DAILY_TABLE_2024_01_02
+[2024-12-24T18:26:55.395+0000] {load_and_transform.py:394} INFO - Done yellow daily table
+[2024-12-24T18:26:56.494+0000] {logging_mixin.py:188} INFO - Bảng 'YELLOW_DAILY_TABLE_2_2024_01_02' không tồn tại. Đang tạo bảng mới...
+[2024-12-24T18:26:56.879+0000] {logging_mixin.py:188} INFO - Đã tạo bảng 'YELLOW_DAILY_TABLE_2_2024_01_02' thành công trong dataset 'data_warehouse'.
+[2024-12-24T18:27:21.337+0000] {logging_mixin.py:188} INFO - Đã ghi dữ liệu thành công vào YELLOW_DAILY_TABLE_2_2024_01_02
+[2024-12-24T18:27:21.338+0000] {load_and_transform.py:404} INFO - Done yellow daily table 2
+[2024-12-24T18:27:22.845+0000] {logging_mixin.py:188} INFO - Bảng 'GREEN_DAILY_TABLE_2024_01_02' không tồn tại. Đang tạo bảng mới...
+[2024-12-24T18:27:23.253+0000] {logging_mixin.py:188} INFO - Đã tạo bảng 'GREEN_DAILY_TABLE_2024_01_02' thành công trong dataset 'data_warehouse'.
+[2024-12-24T18:27:49.317+0000] {logging_mixin.py:188} INFO - Đã ghi dữ liệu thành công vào GREEN_DAILY_TABLE_2024_01_02
+[2024-12-24T18:27:49.318+0000] {load_and_transform.py:414} INFO - Done green daily table
+[2024-12-24T18:27:50.502+0000] {logging_mixin.py:188} INFO - Bảng 'GREEN_DAILY_TABLE_2_2024_01_02' không tồn tại. Đang tạo bảng mới...
+[2024-12-24T18:27:50.916+0000] {logging_mixin.py:188} INFO - Đã tạo bảng 'GREEN_DAILY_TABLE_2_2024_01_02' thành công trong dataset 'data_warehouse'.
+[2024-12-24T18:28:15.117+0000] {logging_mixin.py:188} INFO - Đã ghi dữ liệu thành công vào GREEN_DAILY_TABLE_2_2024_01_02
+[2024-12-24T18:28:15.118+0000] {load_and_transform.py:424} INFO - Done green daily table 2
+[2024-12-24T18:28:15.119+0000] {logging_mixin.py:188} INFO - Quá trình xử lý hoàn tất!
+[2024-12-24T18:28:15.119+0000] {python.py:237} INFO - Done. Returned value was: None
+[2024-12-24T18:28:15.124+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-24T18:28:15.136+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=pipeline_batch_visualize, task_id=transform_save_to_bigquery, run_id=manual__2024-12-24T18:25:20.482531+00:00, execution_date=20241224T182520, start_date=20241224T182558, end_date=20241224T182815
+[2024-12-24T18:28:15.165+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2024-12-24T18:28:15.187+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-24T18:28:15.191+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

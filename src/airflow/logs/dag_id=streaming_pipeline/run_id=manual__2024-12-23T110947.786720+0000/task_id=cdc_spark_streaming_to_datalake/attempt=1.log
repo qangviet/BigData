@@ -1,0 +1,54 @@
+[2024-12-23T11:09:52.102+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T11:09:52.136+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T11:09:47.786720+00:00 [queued]>
+[2024-12-23T11:09:52.146+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T11:09:47.786720+00:00 [queued]>
+[2024-12-23T11:09:52.147+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T11:09:52.163+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): cdc_spark_streaming_to_datalake> on 2024-12-23 11:09:47.786720+00:00
+[2024-12-23T11:09:52.171+0000] {standard_task_runner.py:63} INFO - Started process 4615 to run task
+[2024-12-23T11:09:52.173+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'cdc_spark_streaming_to_datalake', 'manual__2024-12-23T11:09:47.786720+00:00', '--job-id', '111', '--raw', '--subdir', 'DAGS_FOLDER/pipline_stream.py', '--cfg-path', '/tmp/tmp6cmzf35d']
+[2024-12-23T11:09:52.176+0000] {standard_task_runner.py:91} INFO - Job 111: Subtask cdc_spark_streaming_to_datalake
+[2024-12-23T11:09:52.237+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T11:09:47.786720+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T11:09:52.333+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='cdc_spark_streaming_to_datalake' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T11:09:47.786720+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T11:09:47.786720+00:00'
+[2024-12-23T11:09:52.335+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T11:09:52.354+0000] {logging_mixin.py:188} INFO - Checking JAR files...:  True
+[2024-12-23T11:10:03.304+0000] {spark_streaming_to_dl.py:123} INFO - Spark session successfully created!
+[2024-12-23T11:10:03.314+0000] {spark_streaming_to_dl.py:157} INFO - MinIO configuration is created successfully
+[2024-12-23T11:10:04.738+0000] {spark_streaming_to_dl.py:176} INFO - Initial dataframe created successfully!
+[2024-12-23T11:10:05.576+0000] {spark_streaming_to_dl.py:234} INFO - Final dataframe created successfully!
+[2024-12-23T11:10:05.577+0000] {spark_streaming_to_dl.py:242} INFO - Streaming is being started...
+[2024-12-23T11:10:14.554+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T11:10:14.556+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/spark_streaming_to_dl.py", line 269, in run_all
+    start_steaming(df_final, args.bucket_name, args.year, args.month)
+  File "/opt/airflow/dags/stream_processing/spark_streaming_to_dl.py", line 253, in start_steaming
+    return stream_query.awaitTermination()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/sql/streaming/query.py", line 221, in awaitTermination
+    return self._jsq.awaitTermination()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/errors/exceptions/captured.py", line 185, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.StreamingQueryException: [STREAM_FAILED] Query [id = cb1df39d-f4da-4330-983d-e050b7c84ff9, runId = 08253d97-d3ad-4513-9f28-32e3e9f62c3d] terminated with exception: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.
+[2024-12-23T11:10:14.582+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=cdc_spark_streaming_to_datalake, run_id=manual__2024-12-23T11:09:47.786720+00:00, execution_date=20241223T110947, start_date=20241223T110952, end_date=20241223T111014
+[2024-12-23T11:10:14.597+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 111 for task cdc_spark_streaming_to_datalake ([STREAM_FAILED] Query [id = cb1df39d-f4da-4330-983d-e050b7c84ff9, runId = 08253d97-d3ad-4513-9f28-32e3e9f62c3d] terminated with exception: org.apache.kafka.common.errors.UnknownTopicOrPartitionException: This server does not host this topic-partition.; 4615)
+[2024-12-23T11:10:14.625+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-23T11:10:14.641+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T11:10:14.644+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

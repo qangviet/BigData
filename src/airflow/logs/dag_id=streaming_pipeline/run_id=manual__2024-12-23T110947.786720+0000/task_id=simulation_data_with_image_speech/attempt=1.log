@@ -1,0 +1,41 @@
+[2024-12-23T11:09:52.101+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T11:09:52.134+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T11:09:47.786720+00:00 [queued]>
+[2024-12-23T11:09:52.146+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T11:09:47.786720+00:00 [queued]>
+[2024-12-23T11:09:52.147+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T11:09:52.170+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): simulation_data_with_image_speech> on 2024-12-23 11:09:47.786720+00:00
+[2024-12-23T11:09:52.178+0000] {standard_task_runner.py:63} INFO - Started process 4616 to run task
+[2024-12-23T11:09:52.181+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'simulation_data_with_image_speech', 'manual__2024-12-23T11:09:47.786720+00:00', '--job-id', '110', '--raw', '--subdir', 'DAGS_FOLDER/pipline_stream.py', '--cfg-path', '/tmp/tmpr0am573l']
+[2024-12-23T11:09:52.184+0000] {standard_task_runner.py:91} INFO - Job 110: Subtask simulation_data_with_image_speech
+[2024-12-23T11:09:52.247+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T11:09:47.786720+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T11:09:52.349+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='simulation_data_with_image_speech' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T11:09:47.786720+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T11:09:47.786720+00:00'
+[2024-12-23T11:09:52.351+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T11:09:52.543+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T11:09:52.544+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 254, in simulate_data_with_image
+    delete_table(conn, args.table_name)
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 84, in delete_table
+    cur.execute(f"DROP TABLE {table_name} CASCADE")
+psycopg2.errors.UndefinedTable: table "green_trip_raw_2024_2" does not exist
+
+[2024-12-23T11:09:52.560+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=simulation_data_with_image_speech, run_id=manual__2024-12-23T11:09:47.786720+00:00, execution_date=20241223T110947, start_date=20241223T110952, end_date=20241223T110952
+[2024-12-23T11:09:52.575+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 110 for task simulation_data_with_image_speech (table "green_trip_raw_2024_2" does not exist
+; 4616)
+[2024-12-23T11:09:52.594+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-23T11:09:52.613+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T11:09:52.616+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

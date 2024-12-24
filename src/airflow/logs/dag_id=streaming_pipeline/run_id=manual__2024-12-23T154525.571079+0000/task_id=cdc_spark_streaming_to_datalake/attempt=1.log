@@ -1,0 +1,68 @@
+[2024-12-23T15:45:30.140+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T15:45:30.179+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T15:45:25.571079+00:00 [queued]>
+[2024-12-23T15:45:30.192+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T15:45:25.571079+00:00 [queued]>
+[2024-12-23T15:45:30.193+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T15:45:30.212+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): cdc_spark_streaming_to_datalake> on 2024-12-23 15:45:25.571079+00:00
+[2024-12-23T15:45:30.221+0000] {standard_task_runner.py:63} INFO - Started process 540 to run task
+[2024-12-23T15:45:30.223+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'cdc_spark_streaming_to_datalake', 'manual__2024-12-23T15:45:25.571079+00:00', '--job-id', '129', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_stream.py', '--cfg-path', '/tmp/tmpkvtmstze']
+[2024-12-23T15:45:30.225+0000] {standard_task_runner.py:91} INFO - Job 129: Subtask cdc_spark_streaming_to_datalake
+[2024-12-23T15:45:30.292+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T15:45:25.571079+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T15:45:30.412+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='cdc_spark_streaming_to_datalake' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T15:45:25.571079+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T15:45:25.571079+00:00'
+[2024-12-23T15:45:30.414+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T15:45:30.435+0000] {logging_mixin.py:188} INFO - Checking JAR files...:  True
+[2024-12-23T15:45:43.540+0000] {spark_streaming_to_dl.py:123} INFO - Spark session successfully created!
+[2024-12-23T15:45:43.554+0000] {spark_streaming_to_dl.py:157} INFO - MinIO configuration is created successfully
+[2024-12-23T15:45:45.843+0000] {spark_streaming_to_dl.py:176} INFO - Initial dataframe created successfully!
+[2024-12-23T15:45:46.955+0000] {spark_streaming_to_dl.py:234} INFO - Final dataframe created successfully!
+[2024-12-23T15:45:46.956+0000] {spark_streaming_to_dl.py:242} INFO - Streaming is being started...
+[2024-12-23T15:48:26.823+0000] {local_task_job_runner.py:124} ERROR - Received SIGTERM. Terminating subprocesses
+[2024-12-23T15:48:26.834+0000] {process_utils.py:132} INFO - Sending 15 to group 540. PIDs of all processes in the group: [543, 540]
+[2024-12-23T15:48:26.836+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 540
+[2024-12-23T15:48:26.838+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-12-23T15:48:26.839+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T15:48:26.867+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/spark_streaming_to_dl.py", line 269, in run_all
+    start_steaming(df_final, args.bucket_name, args.year, args.month)
+  File "/opt/airflow/dags/stream_processing/spark_streaming_to_dl.py", line 253, in start_steaming
+    return stream_query.awaitTermination()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/sql/streaming/query.py", line 221, in awaitTermination
+    return self._jsq.awaitTermination()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/py4j/java_gateway.py", line 1321, in __call__
+    answer = self.gateway_client.send_command(command)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/py4j/clientserver.py", line 511, in send_command
+    answer = smart_decode(self.stream.readline()[:-1])
+                          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/socket.py", line 708, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2024-12-23T15:48:26.904+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=cdc_spark_streaming_to_datalake, run_id=manual__2024-12-23T15:45:25.571079+00:00, execution_date=20241223T154525, start_date=20241223T154530, end_date=20241223T154826
+[2024-12-23T15:48:26.986+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=540, status='terminated', exitcode=2, started='15:45:29') (540) terminated with exit code 2
+[2024-12-23T15:48:28.069+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=543, status='terminated', started='15:45:29') (543) terminated with exit code None
+[2024-12-23T15:48:28.070+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 143
+[2024-12-23T15:48:28.100+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T15:48:28.122+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

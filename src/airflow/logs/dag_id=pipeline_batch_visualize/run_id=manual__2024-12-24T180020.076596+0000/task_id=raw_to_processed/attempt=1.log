@@ -1,0 +1,28 @@
+[2024-12-24T18:00:22.864+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-24T18:00:22.898+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_batch_visualize.raw_to_processed manual__2024-12-24T18:00:20.076596+00:00 [queued]>
+[2024-12-24T18:00:22.910+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_batch_visualize.raw_to_processed manual__2024-12-24T18:00:20.076596+00:00 [queued]>
+[2024-12-24T18:00:22.911+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-24T18:00:22.931+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): raw_to_processed> on 2024-12-24 18:00:20.076596+00:00
+[2024-12-24T18:00:22.943+0000] {standard_task_runner.py:63} INFO - Started process 243 to run task
+[2024-12-24T18:00:22.951+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'pipeline_batch_visualize', 'raw_to_processed', 'manual__2024-12-24T18:00:20.076596+00:00', '--job-id', '316', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_batch_visualize.py', '--cfg-path', '/tmp/tmpqiqz40zu']
+[2024-12-24T18:00:22.955+0000] {standard_task_runner.py:91} INFO - Job 316: Subtask raw_to_processed
+[2024-12-24T18:00:23.011+0000] {task_command.py:426} INFO - Running <TaskInstance: pipeline_batch_visualize.raw_to_processed manual__2024-12-24T18:00:20.076596+00:00 [running]> on host 0b4a5bf62610
+[2024-12-24T18:00:23.108+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='pipeline_batch_visualize' AIRFLOW_CTX_TASK_ID='raw_to_processed' AIRFLOW_CTX_EXECUTION_DATE='2024-12-24T18:00:20.076596+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-24T18:00:20.076596+00:00'
+[2024-12-24T18:00:23.109+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-24T18:00:33.002+0000] {raw_to_processed_2.py:98} INFO - Spark session successfully created!
+[2024-12-24T18:00:40.700+0000] {raw_to_processed_2.py:212} INFO - Taxi lookup data loaded!
+[2024-12-24T18:00:40.701+0000] {raw_to_processed_2.py:213} INFO - Loadi    ng green data... s3a://raw/cdc_db/2024/01/10/data
+[2024-12-24T18:00:53.159+0000] {logging_mixin.py:188} INFO - Records in green before saving:  2015
+[2024-12-24T18:00:57.244+0000] {logging_mixin.py:188} INFO - Records in green after transform:  1282
+[2024-12-24T18:01:01.411+0000] {raw_to_processed_2.py:225} INFO - Green data saved!
+[2024-12-24T18:01:01.412+0000] {raw_to_processed_2.py:227} INFO - Loading yellow data... s3a://raw/yellow/2024/01/10.parquet
+[2024-12-24T18:01:01.811+0000] {logging_mixin.py:188} INFO - Records in yellow before saving:  95000
+[2024-12-24T18:01:03.799+0000] {logging_mixin.py:188} INFO - Records in yellow after transform:  84180
+[2024-12-24T18:01:07.054+0000] {raw_to_processed_2.py:241} INFO - Yellow data saved!
+[2024-12-24T18:01:07.056+0000] {logging_mixin.py:188} INFO - ==============================================
+[2024-12-24T18:01:07.057+0000] {python.py:237} INFO - Done. Returned value was: None
+[2024-12-24T18:01:07.059+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-24T18:01:07.081+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=pipeline_batch_visualize, task_id=raw_to_processed, run_id=manual__2024-12-24T18:00:20.076596+00:00, execution_date=20241224T180020, start_date=20241224T180022, end_date=20241224T180107
+[2024-12-24T18:01:07.139+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2024-12-24T18:01:07.166+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-12-24T18:01:07.170+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

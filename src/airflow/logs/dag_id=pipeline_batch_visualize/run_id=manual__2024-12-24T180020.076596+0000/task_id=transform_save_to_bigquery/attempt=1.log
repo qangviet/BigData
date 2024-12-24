@@ -1,0 +1,56 @@
+[2024-12-24T18:01:09.316+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-24T18:01:09.347+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_batch_visualize.transform_save_to_bigquery manual__2024-12-24T18:00:20.076596+00:00 [queued]>
+[2024-12-24T18:01:09.359+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_batch_visualize.transform_save_to_bigquery manual__2024-12-24T18:00:20.076596+00:00 [queued]>
+[2024-12-24T18:01:09.360+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-24T18:01:09.380+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform_save_to_bigquery> on 2024-12-24 18:00:20.076596+00:00
+[2024-12-24T18:01:09.388+0000] {standard_task_runner.py:63} INFO - Started process 770 to run task
+[2024-12-24T18:01:09.390+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'pipeline_batch_visualize', 'transform_save_to_bigquery', 'manual__2024-12-24T18:00:20.076596+00:00', '--job-id', '317', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_batch_visualize.py', '--cfg-path', '/tmp/tmp76jki9n0']
+[2024-12-24T18:01:09.393+0000] {standard_task_runner.py:91} INFO - Job 317: Subtask transform_save_to_bigquery
+[2024-12-24T18:01:09.446+0000] {task_command.py:426} INFO - Running <TaskInstance: pipeline_batch_visualize.transform_save_to_bigquery manual__2024-12-24T18:00:20.076596+00:00 [running]> on host 0b4a5bf62610
+[2024-12-24T18:01:09.550+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='pipeline_batch_visualize' AIRFLOW_CTX_TASK_ID='transform_save_to_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2024-12-24T18:00:20.076596+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-24T18:00:20.076596+00:00'
+[2024-12-24T18:01:09.552+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-24T18:01:22.313+0000] {upload_to_bigquery.py:157} INFO - Spark session successfully created!
+[2024-12-24T18:01:22.329+0000] {upload_to_bigquery.py:211} INFO - Google BigQuery configuration is created successfully
+[2024-12-24T18:01:22.341+0000] {upload_to_bigquery.py:188} INFO - MinIO configuration is created successfully
+[2024-12-24T18:01:31.542+0000] {load_and_transform.py:385} INFO - Done load taxi lookup
+[2024-12-24T18:01:33.056+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-24T18:01:33.057+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/batch_processing/load_and_transform.py", line 386, in load_transform_save
+    df_day_yellow = calculate_per_day(spark, args.date, "yellow", args.bucket_name)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/batch_processing/load_and_transform.py", line 31, in calculate_per_day
+    df_data = load_data_from_minio_for_visualize(spark, bucket_name, date, taxi_type)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/batch_processing/upload_to_bigquery.py", line 125, in load_data_from_minio_for_visualize
+    df = spark.read.parquet(path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/sql/readwriter.py", line 544, in parquet
+    return self._df(self._jreader.parquet(_to_seq(self._spark._sc, paths)))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/errors/exceptions/captured.py", line 185, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.AnalysisException: [PATH_NOT_FOUND] Path does not exist: s3a://processed/data/yellow/2024/01/03.
+[2024-12-24T18:01:33.083+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=pipeline_batch_visualize, task_id=transform_save_to_bigquery, run_id=manual__2024-12-24T18:00:20.076596+00:00, execution_date=20241224T180020, start_date=20241224T180109, end_date=20241224T180133
+[2024-12-24T18:01:33.104+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 317 for task transform_save_to_bigquery ([PATH_NOT_FOUND] Path does not exist: s3a://processed/data/yellow/2024/01/03.; 770)
+[2024-12-24T18:01:33.152+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-24T18:01:33.171+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-24T18:01:33.175+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

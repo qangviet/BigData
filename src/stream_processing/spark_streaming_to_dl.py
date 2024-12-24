@@ -16,6 +16,7 @@ from pyspark.sql.types import (
     StringType,
     FloatType,
     DoubleType,
+    BooleanType,
 )
 from dataclasses import dataclass
 
@@ -41,6 +42,8 @@ MINIO_SECRET_KEY = datalake_cfg["secret_key"]
 BUCKET_NAME = datalake_cfg["bucket_name_1"]
 YEAR = os.getenv("YEAR_TEST")
 MONTH = os.getenv("MONTH_TEST")
+DAY = os.getenv("DAY_TEST")
+
 JARS_DIR = os.path.join(PROJECT_ROOT, "jars")
 
 BOOTSTRAP_SERVERS = ["localhost:9092"]
@@ -61,12 +64,15 @@ def check_jars(jars):
 @dataclass
 class Args:
     jars_dir: str = JARS_DIR
-    topic_cdc_db: str = "streaming.public.green_trip_raw"
     bootstrap_servers: str = ".".join(BOOTSTRAP_SERVERS)
     bucket_name: str = BUCKET_NAME
     year: str = YEAR
     month: str = MONTH
-    topic_cdc_db: str = "streaming.public.green_trip_raw"
+    day: str = DAY
+    topic_cdc_db: str = "streaming.public.green_trip_raw" + f"_{YEAR}_{MONTH}_{DAY}"
+    minio_access_key: str = MINIO_ACCESS_KEY
+    minio_secret_key: str = MINIO_SECRET_KEY
+    minio_endpoint: str = MINIO_ENDPOINT
 
 
 ###############################################
@@ -80,10 +86,7 @@ def create_spark_session(jars_dir):
 
     spark_jars = [
         jars_dir + "/hadoop-aws-3.3.4.jar",
-        # JARS_DIR + "/spark-sql-kafka-0-10_2.12-3.5.3.jar",
-        # JARS_DIR + "/kafka-clients-3.4.0.jar",
         jars_dir + "/aws-java-sdk-bundle-1.12.262.jar",
-        # JARS_DIR + "/spark-streaming-kafka-0-10_2.12-3.5.3.jar",
     ]
     print("Checking JAR files...: ", check_jars(spark_jars))
     spark = None
@@ -91,7 +94,7 @@ def create_spark_session(jars_dir):
         from delta import configure_spark_with_delta_pip
 
         builder = (
-            SparkSession.builder.config("spark.executor.memory", "4g")
+            SparkSession.builder.config("spark.executor.memory", "2g")
             .config("spark.jars", ",".join(spark_jars))
             .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
             .config(
@@ -126,18 +129,20 @@ def create_spark_session(jars_dir):
     return spark
 
 
-def load_minio_config(spark_context: SparkContext):
+def load_minio_config(
+    spark_context: SparkContext, minio_access_key, minio_secret_key, minio_endpoint
+):
     """
     Establist the necessary connection to MinIO
     """
     try:
         spark_context._jsc.hadoopConfiguration().set(
-            "fs.s3a.access.key", MINIO_ACCESS_KEY
+            "fs.s3a.access.key", minio_access_key
         )
         spark_context._jsc.hadoopConfiguration().set(
-            "fs.s3a.secret.key", MINIO_SECRET_KEY
+            "fs.s3a.secret.key", minio_secret_key
         )
-        spark_context._jsc.hadoopConfiguration().set("fs.s3a.endpoint", MINIO_ENDPOINT)
+        spark_context._jsc.hadoopConfiguration().set("fs.s3a.endpoint", minio_endpoint)
         spark_context._jsc.hadoopConfiguration().set(
             "fs.s3a.aws.credentials.provider",
             "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider",
@@ -164,7 +169,7 @@ def create_initial_dataframe(spark_session, topic_cdc, bootstrap_servers):
             spark_session.readStream.format("kafka")
             .option("kafka.bootstrap.servers", bootstrap_servers)
             .option("subscribe", topic_cdc)
-            .option("startingOffsets", "latest")
+            .option("startingOffsets", "earliest")
             .option("failOnDataLoss", "false")
             .load()
         )
@@ -175,61 +180,141 @@ def create_initial_dataframe(spark_session, topic_cdc, bootstrap_servers):
     return df
 
 
-schema = StructType(
+after_schema = StructType(
     [
         StructField("vendorid", IntegerType(), True),
-        StructField("lpep_pickup_datetime", LongType(), True),
-        StructField("lpep_dropoff_datetime", LongType(), True),
+        StructField(
+            "lpep_pickup_datetime", LongType(), True
+        ),  # Use LongType for timestamps as microseconds
+        StructField(
+            "lpep_dropoff_datetime", LongType(), True
+        ),  # Use LongType for timestamps as microseconds
         StructField("store_and_fwd_flag", StringType(), True),
-        StructField("ratecodeid", FloatType(), True),
+        StructField("ratecodeid", DoubleType(), True),
         StructField("pulocationid", IntegerType(), True),
         StructField("dolocationid", IntegerType(), True),
-        StructField("passenger_count", FloatType(), True),
+        StructField("passenger_count", DoubleType(), True),
         StructField("trip_distance", DoubleType(), True),
         StructField("fare_amount", DoubleType(), True),
         StructField("extra", DoubleType(), True),
         StructField("mta_tax", DoubleType(), True),
         StructField("tip_amount", DoubleType(), True),
         StructField("tolls_amount", DoubleType(), True),
-        StructField("ehail_fee", StringType(), True),
         StructField("improvement_surcharge", DoubleType(), True),
         StructField("total_amount", DoubleType(), True),
-        StructField("payment_type", FloatType(), True),
-        StructField("trip_type", FloatType(), True),
+        StructField("payment_type", DoubleType(), True),
+        StructField("trip_type", DoubleType(), True),
         StructField("congestion_surcharge", DoubleType(), True),
         StructField("id", StringType(), True),
-        StructField("id_customer", StringType(), True),
+        StructField(
+            "id_customer", LongType(), True
+        ),  # Use LongType as id_customer is long
+        StructField("rate", DoubleType(), True),
     ]
 )
 
 
 def create_final_dataframe(kafka_df, spark_session):
 
-    json_df = kafka_df.selectExpr("CAST(value AS STRING)").select(
-        from_json(col("value"), schema).alias("data")
-    )
-    parsed_df = json_df.withColumn(
-        "lpep_pickup_datetime",
-        (col("data.lpep_pickup_datetime") / 1000000).cast("timestamp"),
-    ).withColumn(
-        "lpep_dropoff_datetime",
-        (col("data.lpep_dropoff_datetime") / 1000000).cast("timestamp"),
-    )
-    parsed_df.createOrReplaceTempView("nyc_taxi_view")
+    kafka_df = kafka_df.selectExpr("CAST(value AS STRING)")
+    # Giải mã JSON và áp dụng schema
+    parsed_df = kafka_df.select(
+        from_json(
+            col("value"),
+            StructType(
+                [
+                    StructField(
+                        "schema",
+                        StructType(
+                            [
+                                StructField("type", StringType(), True),
+                                StructField(
+                                    "fields",
+                                    ArrayType(
+                                        StructType(
+                                            [
+                                                StructField("type", StringType(), True),
+                                                StructField(
+                                                    "optional", BooleanType(), True
+                                                ),
+                                                StructField(
+                                                    "field", StringType(), True
+                                                ),
+                                                StructField("name", StringType(), True),
+                                            ]
+                                        )
+                                    ),
+                                    True,
+                                ),
+                            ]
+                        ),
+                        True,
+                    ),
+                    StructField(
+                        "payload",
+                        StructType(
+                            [
+                                StructField("before", StructType(), True),
+                                StructField("after", after_schema, True),
+                                StructField("source", StructType(), True),
+                                StructField("transaction", StructType(), True),
+                                StructField("op", StringType(), True),
+                                StructField("ts_ms", LongType(), True),
+                                StructField("ts_us", LongType(), True),
+                                StructField("ts_ns", LongType(), True),
+                            ]
+                        ),
+                        True,
+                    ),
+                ]
+            ),
+        ).alias("data")
+    ).select("data.payload.after.*")
 
-    # df_final = spark.sql(
-    #     """
-    #     SELECT
-    #         *
-    #     FROM nyc_taxi_view
-    # """
+    # Bây giờ bạn có thể xử lý parsed_df như một DataFrame thông thường
+    # parsed_df = parsed_df.withColumn(
+    #     "lpep_pickup_datetime",
+    #     (col("data.lpep_pickup_datetime") / 1000000).cast("timestamp"),
+    # ).withColumn(
+    #     "lpep_dropoff_datetime",
+    #     (col("data.lpep_dropoff_datetime") / 1000000).cast("timestamp"),
     # )
+    parsed_df = parsed_df.select(
+        "vendorid",
+        (col("lpep_pickup_datetime") / 1000000)
+        .cast("timestamp")
+        .alias("lpep_pickup_datetime"),
+        (col("lpep_dropoff_datetime") / 1000000)
+        .cast("timestamp")
+        .alias("lpep_dropoff_datetime"),
+        "store_and_fwd_flag",
+        "ratecodeid",
+        "pulocationid",
+        "dolocationid",
+        "passenger_count",
+        "trip_distance",
+        "fare_amount",
+        "extra",
+        "mta_tax",
+        "tip_amount",
+        "tolls_amount",
+        "improvement_surcharge",
+        "total_amount",
+        "payment_type",
+        "trip_type",
+        "congestion_surcharge",
+        "id",
+        "id_customer",
+        "rate",
+    )
+    parsed_df.printSchema()
+    count_df = parsed_df.groupBy("id_customer").count().alias("customer_count")
 
     logging.info("Final dataframe created successfully!")
-    return parsed_df
+    return parsed_df, count_df
 
 
-def start_steaming(df, bucket_name, year, month):
+def start_steaming(df, count_df, bucket_name, year, month, day):
     """
     Store data into Datalake (MinIO) with parquet format
     """
@@ -237,24 +322,45 @@ def start_steaming(df, bucket_name, year, month):
     stream_query = (
         df.writeStream.format("delta")
         .outputMode("append")
-        .option("path", f"s3a://{bucket_name}/cdc_db/data/{year}/{month}")
+        .option("path", f"s3a://{bucket_name}/cdc_db/{year}/{month}/{day}/data")
         .option(
             "checkpointLocation",
-            f"s3a://{bucket_name}/cdc_db/checkpoint/{year}/{month}",
+            f"s3a://{bucket_name}/cdc_db/{year}/{month}/{day}/checkpoint",
         )
         .start()
     )
-    return stream_query.awaitTermination()
+    count_stream_query = (
+        count_df.writeStream.format("delta")
+        .outputMode("complete")  # Complete vì bạn muốn ghi toàn bộ bảng đếm
+        .option(
+            "path", f"s3a://{bucket_name}/cdc_db/{year}/{month}/{day}/count_customer"
+        )
+        .option(
+            "checkpointLocation",
+            f"s3a://{bucket_name}/cdc_db/{year}/{month}/{day}/count_checkpoint",
+        )
+        .start()
+    )
+
+    return stream_query.awaitTermination(), count_stream_query.awaitTermination()
 
 
 def run_all(args: Args):
     spark = create_spark_session(args.jars_dir)
-    load_minio_config(spark.sparkContext)
+
+    load_minio_config(
+        spark.sparkContext,
+        args.minio_access_key,
+        args.minio_secret_key,
+        args.minio_endpoint,
+    )
     kafka_df = create_initial_dataframe(
         spark, args.topic_cdc_db, args.bootstrap_servers
     )
-    df_final = create_final_dataframe(kafka_df, spark)
-    start_steaming(df_final, args.bucket_name, args.year, args.month)
+    df_final, df_count = create_final_dataframe(kafka_df, spark)
+    start_steaming(
+        df_final, df_count, args.bucket_name, args.year, args.month, args.day
+    )
 
 
 if __name__ == "__main__":
@@ -262,3 +368,4 @@ if __name__ == "__main__":
     run_all(args)
 
 # py ./src/stream_processing/spark_streaming_to_dl.py
+#Apache Spark

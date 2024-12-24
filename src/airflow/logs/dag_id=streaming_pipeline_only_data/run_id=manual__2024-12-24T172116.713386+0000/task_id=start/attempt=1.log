@@ -1,0 +1,24 @@
+[2024-12-24T17:21:18.012+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-24T17:21:18.043+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_only_data.start manual__2024-12-24T17:21:16.713386+00:00 [queued]>
+[2024-12-24T17:21:18.053+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_only_data.start manual__2024-12-24T17:21:16.713386+00:00 [queued]>
+[2024-12-24T17:21:18.054+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-24T17:21:18.072+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): start> on 2024-12-24 17:21:16.713386+00:00
+[2024-12-24T17:21:18.080+0000] {standard_task_runner.py:63} INFO - Started process 16225 to run task
+[2024-12-24T17:21:18.082+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline_only_data', 'start', 'manual__2024-12-24T17:21:16.713386+00:00', '--job-id', '293', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_stream.py', '--cfg-path', '/tmp/tmpo1k7nwnj']
+[2024-12-24T17:21:18.085+0000] {standard_task_runner.py:91} INFO - Job 293: Subtask start
+[2024-12-24T17:21:18.143+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_only_data.start manual__2024-12-24T17:21:16.713386+00:00 [running]> on host 0b4a5bf62610
+[2024-12-24T17:21:18.236+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline_only_data' AIRFLOW_CTX_TASK_ID='start' AIRFLOW_CTX_EXECUTION_DATE='2024-12-24T17:21:16.713386+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-24T17:21:16.713386+00:00'
+[2024-12-24T17:21:18.238+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-24T17:21:18.250+0000] {logging_mixin.py:188} INFO - Hello from func_1
+[2024-12-24T17:21:18.251+0000] {logging_mixin.py:188} INFO - Root:  E:/BigData_2/MyProject
+[2024-12-24T17:21:18.252+0000] {logging_mixin.py:188} INFO - File test:  /opt/***/data/new_2/2024/Green/01/29.parquet
+[2024-12-24T17:21:18.253+0000] {logging_mixin.py:188} INFO - Args simulation:  Args(table_name='green_trip_raw_2024_01_29', time_sleep=2, file_path='/opt/***/data/new_2/2024/Green/01/29.parquet', bootstrap_servers='broker:29092', topic_image='raw_image_2024_01_29', topic_speech='raw_speech_2024_01_29', max_message_size=5242880, clear_table_first=False, signal_file=None, image_path='/opt/***/data/image/green_taxi_image.jpg', speech_path='/opt/***/data/speech/taxi_conversation.mp3')
+[2024-12-24T17:21:18.254+0000] {logging_mixin.py:188} INFO - Args spark streaming:  Args(jars_dir='/opt/***/jars', bootstrap_servers='broker:29092', bucket_name='raw', year='2024', month='01', day='29', topic_cdc_db='streaming.public.green_trip_raw_2024_01_29', minio_access_key='Xs27nx9M4HgPQ5PXZiUE', minio_secret_key='8iifKZlUZh1NRbepsISUMdg1CxlaIC6OSPQk5X59', minio_endpoint='192.168.1.12:9000')
+[2024-12-24T17:21:18.255+0000] {logging_mixin.py:188} INFO - Args image streaming:  Args(minio_endpoint='192.168.1.12:9000', minio_access_key='Xs27nx9M4HgPQ5PXZiUE', minio_secret_key='8iifKZlUZh1NRbepsISUMdg1CxlaIC6OSPQk5X59', bucket_name='raw', prefix='image', kafka_topic='raw_image_2024_01_29', bootstrap_servers='broker:29092')
+[2024-12-24T17:21:18.256+0000] {logging_mixin.py:188} INFO - Args speech streaming:  Args(minio_endpoint='192.168.1.12:9000', minio_access_key='Xs27nx9M4HgPQ5PXZiUE', minio_secret_key='8iifKZlUZh1NRbepsISUMdg1CxlaIC6OSPQk5X59', bucket_name='raw', prefix='speech', kafka_topic='raw_speech_2024_01_29', bootstrap_servers='broker:29092')
+[2024-12-24T17:21:18.257+0000] {python.py:237} INFO - Done. Returned value was: None
+[2024-12-24T17:21:18.258+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-24T17:21:18.270+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=streaming_pipeline_only_data, task_id=start, run_id=manual__2024-12-24T17:21:16.713386+00:00, execution_date=20241224T172116, start_date=20241224T172118, end_date=20241224T172118
+[2024-12-24T17:21:18.337+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2024-12-24T17:21:18.364+0000] {taskinstance.py:3503} INFO - 2 downstream tasks scheduled from follow-on schedule check
+[2024-12-24T17:21:18.368+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
