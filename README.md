@@ -9,6 +9,12 @@ Nhóm 9:
 - Vũ Đình Toản - 20215480
 
 
+## Link báo cáo bài tập lớn: [Link](https://docs.google.com/document/d/1wi25bE1VdXqGXZXwTzkoc0o8o1jEGUUjqB4PH4KO8Fs/edit?fbclid=IwZXh0bgNhZW0CMTAAAR2EpgJir8243x2x1ditwo11MMnvznjKb4m-daGhIUvN_X692NAibPP6Qss_aem_bEfaekpK_CHqDdTyz1ze8g&tab=t.0)
+
+
+
+## Link slide: [Link](https://docs.google.com/presentation/d/1kQfi-zL7AWUoAzZumrRavFNEbdyZmq2uRGFWOQkF0t0/edit?fbclid=IwZXh0bgNhZW0CMTAAAR0dJZz_xJIgMWbSseyfbSZH9ZBwL4ovsc-moEUyyJqFkr34BntleKs1rAM_aem_UHLtuVadod0wP7G6nZvyJQ#slide=id.g3177a44d7b8_2_57)
+
 ## Run
 ### Airflow:
 ```sh
