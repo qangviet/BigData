@@ -60,16 +60,37 @@ s3_fs = s3fs.S3FileSystem(
 
 
 
+def save_data(file_path, data):
+
+    dir_path = os.path.dirname(file_path)
+    os.makedirs(dir_path, exist_ok=True)
+
+    # 1. Gộp dữ liệu về 1 file và ghi vào thư mục tạm
+    data.coalesce(1).write.mode("append").parquet(dir_path)
+
+    # 2. Tìm file Parquet trong thư mục tạm
+    for file_name in os.listdir(dir_path):
+        if file_name.endswith(".parquet") and file_name != 'transform1.parquet':  
+            temp_file_path = os.path.join(dir_path, file_name)
+            os.rename(temp_file_path, file_path)
+            break
+
+    for file_name in os.listdir(dir_path):
+        file_path_to_remove = os.path.join(dir_path, file_name)
+        if not file_name.endswith(".parquet"): 
+            os.remove(file_path_to_remove)
+
+    print(f"File đã được lưu tại: {file_path}")
+
+
 
 
 def get_df_day(date):
-
     customer_path = f"s3a://{BUCKET_NAME_2}/data_customer.csv"
     df_customer = spark.read.csv(customer_path, header=True, inferSchema=True).select('id_customer')
 
     taxi_lookup_path = f"s3a://{BUCKET_NAME_2}/taxi_lookup.csv"
     df_taxi_lookup = spark.read.csv(customer_path, header=True, inferSchema=True).select('id_customer')
-
 
     df_customer = spark.read.csv(customer_path, header=True, inferSchema=True).select("id_customer")
 
@@ -110,8 +131,6 @@ def get_df_day(date):
     return df_joined
 
 
-
-
 def load_from_transfrom(date):
 
     year = date.split('-')[0]
@@ -123,8 +142,8 @@ def load_from_transfrom(date):
 
     return df
 
-from datetime import datetime, timedelta
 
+from datetime import datetime, timedelta
 
 def transform_dynamic(date):
 
@@ -138,8 +157,7 @@ def transform_dynamic(date):
     # Nếu là ngày 1 tháng 1, lưu ngay df_current
     if month == '01' and day == '01':
         file_path = f"data/transform_data/{year}/{month}/{day}/transform2.parquet"
-        df_current.coalesce(1).write.mode("overwrite").parquet(file_path)
-        print(f"File đã được lưu tại: {file_path}")
+        save_data(file_path, df_current)
         return df_current
 
     # Nếu là tháng 1 và không phải ngày 1
@@ -152,7 +170,7 @@ def transform_dynamic(date):
         combined = df_current.alias("current").join(
             df_previous.alias("previous"), 
             on = ["id_customer", "LocationID"],  
-            how="outer"
+            how="inner"
         ).select(
             F.col("id_customer"),
             F.col("LocationID"),
@@ -164,10 +182,8 @@ def transform_dynamic(date):
 
 
         file_path = f"data/transform_data/{year}/{month}/{day}/transform2.parquet"
-        combined.coalesce(1).write.mode("overwrite").parquet(file_path)
-        print(f"File đã được lưu tại: {file_path}")
+        save_data(file_path, combined)
         return combined
-
 
     # Nếu không phải tháng 1
     else:
@@ -181,7 +197,7 @@ def transform_dynamic(date):
         combined = df_current.alias("current").join(
             df_previous.alias("previous"), 
             on = ["id_customer", "LocationID"],  
-            how="outer"
+            how="inner"
         ).select(
             F.col("id_customer"),
             F.col("LocationID"),
@@ -196,7 +212,7 @@ def transform_dynamic(date):
         result = combined.alias("combined").join(
             df_30_day_ago.alias("thirty_days_ago"), 
             on= ["id_customer", "LocationID"],  
-            how="outer"
+            how="inner"
         ).select(
             F.col("id_customer"),
             F.col("LocationID"),
@@ -207,14 +223,27 @@ def transform_dynamic(date):
         )
 
         file_path = f"data/transform_data/{year}/{month}/{day}/transform2.parquet"
-        result.coalesce(1).write.mode("overwrite").parquet(file_path)
-        print(f"File đã được lưu tại: {file_path}")
+        save_data(file_path, result)
         return result
 
 
-
 if __name__ == "__main__":
-    test = transform_dynamic('2024-01-01')
-    test.where((test['num_pickups']>=2) | (test['num_drops']>=2)).show()
-    test.printSchema()
-    print(test.count())
+    def process_all_dates(start_date, end_date):
+
+
+        start_date = datetime.strptime(start_date, "%Y-%m-%d")
+        end_date = datetime.strptime(end_date, "%Y-%m-%d")
+
+        current_date = start_date
+        while current_date <= end_date:
+        
+            date_str = current_date.strftime("%Y-%m-%d")
+            
+            test = transform_dynamic(date_str)
+
+            current_date += timedelta(days=1)
+
+    start_date = "2024-09-11"
+    end_date = "2024-10-31"
+    process_all_dates(start_date, end_date)
+

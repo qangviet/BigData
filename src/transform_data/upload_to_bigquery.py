@@ -298,9 +298,48 @@ def load_data_from_minio(spark, BUCKET_NAME, DATE, TAXI_TYPE):
     DAY = DATE.split('-')[2]
 
     path = f"s3a://{BUCKET_NAME}/{YEAR}/{TAXI_TYPE}/{MONTH}/{DAY}.parquet"
+
     df = spark.read.parquet(path)
 
     return df
+def load_data_from_minio_for_visualize(spark, BUCKET_NAME, DATE, TAXI_TYPE):
+    """
+    params:
+    BUCKET_NAME: tên bucket
+    YEAR: năm
+    TAXI_TYPE: loại xe  Green, Yellow
+    return:
+    df_data: dữ liệu
+    """
+
+
+    YEAR = DATE.split('-')[0]
+    MONTH = DATE.split('-')[1]
+    DAY = DATE.split('-')[2]
+    path_list = []
+    combined_df = None
+
+    for i in range(1, int(DAY) + 1):
+
+        path = f"s3a://{BUCKET_NAME}/{YEAR}/{TAXI_TYPE}/{MONTH}/{i:02}.parquet"
+        path_list.append(path)
+    for path in path_list:
+    
+    
+        # Đọc dữ liệu Delta từ thư mục con
+        df = spark.read.parquet(path)        
+        # Kết hợp DataFrame vào combined_df (sử dụng union)
+        if combined_df is None:
+            combined_df = df
+        else:
+            combined_df = combined_df.union(df)
+
+
+    return combined_df
+
+
+
+
 
 
 if __name__ == "__main__":
