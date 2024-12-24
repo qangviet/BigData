@@ -16,4 +16,4 @@ services:
     command: server --console-address ":9090" /mnt/data
 
 volumes:
-  minio_storage:  # Định nghĩa volume
+  minio_storage: 

@@ -18,7 +18,7 @@ DATA_PATH = os.path.join(project_root, "data/new/2024")
 
 FILES = os.listdir(DATA_PATH)
 
-
+#Raw Process
 def drop_column(df, file):
     """
     Drop columns 'store_and_fwd_flag'

@@ -7,6 +7,7 @@
 # with the License.  You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
+#   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing,
 # software distributed under the License is distributed on an
@@ -50,6 +51,8 @@ x-airflow-common: &airflow-common
     # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
     image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.9.2}
     # build: .
+
+    #environment
     environment: &airflow-common-env
         AIRFLOW__CORE__EXECUTOR: CeleryExecutor
         AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
@@ -66,6 +69,8 @@ x-airflow-common: &airflow-common
         # The following line can be used to set a custom config file, stored in the local config folder
         # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
         # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+
+    #volumes:
     volumes:
         - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/dags:/opt/airflow/dags
         - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/logs:/opt/airflow/logs
@@ -84,7 +89,7 @@ x-airflow-common: &airflow-common
             condition: service_healthy
         postgres:
             condition: service_healthy
-
+#services:
 services:
     postgres:
         image: postgres:13
@@ -101,7 +106,7 @@ services:
             retries: 5
             start_period: 5s
         restart: always
-
+#redis:
     redis:
         # Redis is limited to 7.2-bookworm due to licencing change
         # https://redis.io/blog/redis-adopts-dual-source-available-licensing/
@@ -116,7 +121,7 @@ services:
             retries: 50
             start_period: 30s
         restart: always
-
+#air flow
     airflow-webserver:
         <<: *airflow-common
         container_name: airflow-webserver
@@ -274,6 +279,8 @@ services:
     # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
     # or by explicitly targeted on the command line e.g. docker-compose up flower.
     # See: https://docs.docker.com/compose/profiles/
+
+    #flower
     flower:
         <<: *airflow-common
         command: celery flower

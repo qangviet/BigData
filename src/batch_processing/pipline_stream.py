@@ -24,7 +24,7 @@ BOOTSTRAP_SERVERS = ["localhost:9092"]
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..", "..")
 )
-
+#Pipeline Streaming
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
 
 FILE_TEST = os.path.join(DATA_DIR, os.getenv("FILE_TEST_STREAMING"))
