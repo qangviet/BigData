@@ -19,8 +19,6 @@ from pyspark.sql.types import (
     DateType,
     TimestampNTZType
 )
-
-
 from minio import Minio
 from pyspark.sql import functions as F
 
@@ -300,8 +298,10 @@ def load_data_from_minio(spark, BUCKET_NAME, DATE, TAXI_TYPE):
     path = f"s3a://{BUCKET_NAME}/{YEAR}/{TAXI_TYPE}/{MONTH}/{DAY}.parquet"
 
     df = spark.read.parquet(path)
-
+    df = df.withColumn("pickup_date", F.to_date("pickup_datetime"))
+    
     return df
+
 def load_data_from_minio_for_visualize(spark, BUCKET_NAME, DATE, TAXI_TYPE):
     """
     params:
@@ -324,11 +324,11 @@ def load_data_from_minio_for_visualize(spark, BUCKET_NAME, DATE, TAXI_TYPE):
         path = f"s3a://{BUCKET_NAME}/{YEAR}/{TAXI_TYPE}/{MONTH}/{i:02}.parquet"
         path_list.append(path)
     for path in path_list:
-    
-    
+
         # Đọc dữ liệu Delta từ thư mục con
-        df = spark.read.parquet(path)        
-        # Kết hợp DataFrame vào combined_df (sử dụng union)
+        df = spark.read.parquet(path)  
+        df = df.withColumn("pickup_date", F.to_date("pickup_datetime"))      
+
         if combined_df is None:
             combined_df = df
         else:
@@ -340,15 +340,14 @@ def load_data_from_minio_for_visualize(spark, BUCKET_NAME, DATE, TAXI_TYPE):
 
 
 
-
-
 if __name__ == "__main__":
     start_time = time.time()
     spark = create_spark_session()
     load_minio_config(spark.sparkContext)
  
-    df_final = load_data_from_minio(spark, BUCKET_NAME_2, "2024-01-12", 'Green')
+    df_final = load_data_from_minio(spark, BUCKET_NAME_2, "2024-01-01", 'Yellow')
     df_final.show(10)
+
 
     # TEST_TABLE = 'TEST_TABLE4'
     # create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, TEST_TABLE , df_final, 10)

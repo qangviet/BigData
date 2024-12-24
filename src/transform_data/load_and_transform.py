@@ -12,17 +12,46 @@ from pyspark.sql import functions as F
 from pyspark.sql import functions as F
 from pyspark.sql.types import DateType
 from pyspark.sql.functions import col, row_number, max as spark_max, when
+from .upload_to_bigquery import load_data_from_minio
+from .upload_to_bigquery import create_table_bg
+from .upload_to_bigquery import create_spark_session
+from .upload_to_bigquery import load_minio_config
+from .upload_to_bigquery import load_cfg
+from .upload_to_bigquery import load_data_from_minio_for_visualize
+
+import os
+
+project_root  = 'D:/20241/Big_data'
+
+CFG_FILE = os.path.join(project_root, "MyProject/config", "datalake.yaml")
+cfg = load_cfg(CFG_FILE)
+datalake_cfg = cfg["datalake"]
+
+BUCKET_NAME_1 = datalake_cfg["bucket_name_1"]
+BUCKET_NAME_2 = datalake_cfg['bucket_name_2']
 
 
-def calculate_per_day(df_data, DAY):
-    # Chuyển đổi DAY sang định dạng DateType
-    day_date = F.lit(DAY).cast(DateType())
+CFG_FILE_BQ = os.path.join(project_root, "MyProject/config", "bigquery.yaml")
+bg_cfg = load_cfg(CFG_FILE_BQ)["bigquery"]
 
-    # Tính ngày đầu tháng
+BG_PROJECT_ID = bg_cfg["project_id"]
+BG_DATASET_ID = bg_cfg["dataset_id"]
+
+spark = create_spark_session()
+load_minio_config(spark.sparkContext)
+
+
+
+def calculate_per_day(DATE, TAXI_TYPE):
+
+    day_date = F.lit(DATE).cast(DateType())
     start_of_month = F.trunc(day_date, "MM")
-
-    # Lọc dữ liệu cho ngày hiện tại
-    df_filtered = df_data.filter(F.col("pickup_date").cast(DateType()) == day_date)
+    
+    # df_data là dữ liệu từ đầu tháng đến ngày hiện tại
+    df_data = load_data_from_minio_for_visualize(spark, BUCKET_NAME_2, DATE, TAXI_TYPE)
+    
+    # df_filtered là dữ liệu chỉ cho ngày hiện tại
+    df_filtered = load_data_from_minio(spark, BUCKET_NAME_2, DATE, TAXI_TYPE)
 
     # Tính tổng doanh thu theo ngày
     df_revenue = df_filtered.groupBy("pickup_date").agg(F.sum("total_amount").alias("revenue_of_day"))
@@ -47,47 +76,16 @@ def calculate_per_day(df_data, DAY):
         F.avg("trip_duration").alias("avg_trip_time")
     )
 
-    # Xử lý tên loại thanh toán
-    df_with_payment_name = df_filtered.withColumn(
-        "payment_type_name",
-        F.when(df_filtered["payment_type"] == 1, "Credit card")
-         .when(df_filtered["payment_type"] == 2, "Cash")
-         .when(df_filtered["payment_type"] == 3, "No charge")
-         .when(df_filtered["payment_type"] == 4, "Dispute")
-         .otherwise("Unknown")
-    )
-    
-    # Nhóm theo payment_type_name và tính tổng số lượng từng loại thanh toán
-    df_payment_type_count = df_with_payment_name.groupBy("payment_type_name").agg(
-        F.count("payment_type_name").alias("payment_count")
-    )
-    
-    # Tính tổng số lượng của tất cả các loại thanh toán
-    total_payment_count = df_payment_type_count.agg(
-        F.sum("payment_count").alias("total_count")
-    ).collect()[0]["total_count"]
-    
-    # Tính phần trăm cho từng loại thanh toán
-    df_payment_type_percentage = df_payment_type_count.withColumn(
-        "payment_percentage", 
-        (df_payment_type_count["payment_count"] / total_payment_count) * 100
-    )
 
-    # Tính doanh thu từ đầu tháng đến ngày hiện tại
-    df_revenue_from_start_of_month = df_data.filter(
-        (F.col("pickup_date").cast(DateType()) >= start_of_month) &
-        (F.col("pickup_date").cast(DateType()) <= day_date)
-    ).groupBy().agg(F.sum("total_amount").alias("revenue_of_month"))
+    # Tính doanh thu từ đầu tháng đến ngày hiện tại (sử dụng df_data)
+    df_revenue_from_start_of_month = df_data.agg(F.sum("total_amount").alias("revenue_of_month"))
 
-    # Pivot bảng df_payment_type_percentage để tạo các cột phần trăm riêng biệt cho từng loại thanh toán
-    df_payment_type_percentage_pivot = df_payment_type_percentage.groupBy().pivot("payment_type_name").agg(F.first("payment_percentage"))
 
     # Kết hợp tất cả các kết quả lại với nhau
     df_final = df_revenue.join(df_avg_amount, on="pickup_date", how="left") \
                         .join(df_total_fare, on="pickup_date", how="left") \
                         .join(df_total_distance, on="pickup_date", how="left") \
                         .join(df_avg_trip_time, on="pickup_date", how="left") \
-                        .join(df_payment_type_percentage_pivot, on=None, how="left") \
                         .join(df_revenue_from_start_of_month, on=None, how="left") \
                         .join(df_total_customer, on="pickup_date", how="left") \
                         .withColumn("date", day_date)
@@ -102,10 +100,6 @@ def calculate_per_day(df_data, DAY):
         "total_trip_distance", 
         "avg_trip_time",
         "total_customer",
-        "Cash", 
-        "Dispute", 
-        "No charge", 
-        "Credit card", 
     )
 
     # Chỉ lấy một hàng
@@ -115,12 +109,13 @@ def calculate_per_day(df_data, DAY):
 
 
 
-def calculate_per_day_for_location(df_data, df_taxi_lookup, DAY):
+
+def calculate_per_day_for_location(df_taxi_lookup, DATE, TAXI_TYPE):
     # Chuyển DAY sang DateType
-    day_date = F.lit(DAY).cast(DateType())
+    day_date = F.lit(DATE).cast(DateType())
     
     # Lọc dữ liệu theo ngày
-    df_filtered = df_data.filter(F.col("pickup_date").cast(DateType()) == day_date)
+    df_filtered = load_data_from_minio(spark, BUCKET_NAME_2, DATE, TAXI_TYPE)
     
     # Nhóm theo pulocationid và tính toán các thông số
     df_grouped = df_filtered.groupBy("pulocationid").agg(
@@ -321,65 +316,32 @@ def analyze_customer_info(df, customer_id, df_taxi_lookup, num_customer):
 
 
 
-
-
-
-
-from .upload_to_bigquery import load_data_from_minio
-from .upload_to_bigquery import create_table_bg
-from .upload_to_bigquery import create_spark_session
-from .upload_to_bigquery import load_minio_config
-from .upload_to_bigquery import load_cfg
-from .upload_to_bigquery import load_data_from_minio_for_visualize
-
-import os
-
-project_root  = 'D:/20241/Big_data'
-
-CFG_FILE = os.path.join(project_root, "MyProject/config", "datalake.yaml")
-cfg = load_cfg(CFG_FILE)
-datalake_cfg = cfg["datalake"]
-
-BUCKET_NAME_1 = datalake_cfg["bucket_name_1"]
-BUCKET_NAME_2 = datalake_cfg['bucket_name_2']
-
-
-CFG_FILE_BQ = os.path.join(project_root, "MyProject/config", "bigquery.yaml")
-bg_cfg = load_cfg(CFG_FILE_BQ)["bigquery"]
-
-BG_PROJECT_ID = bg_cfg["project_id"]
-BG_DATASET_ID = bg_cfg["dataset_id"]
-
 def load_transform_save(DATE):
     spark = create_spark_session()
     load_minio_config(spark.sparkContext)
     
     df_taxi_lookup = spark.read.csv("s3a://processed/taxi_lookup.csv", header=True, inferSchema=True)
 
-    df_raw_yellow = load_data_from_minio_for_visualize(spark, BUCKET_NAME_2, DATE, 'Yellow')
-    df_day_yellow = calculate_per_day(df_raw_yellow, DATE)
-
+    df_day_yellow = calculate_per_day(DATE, 'Yellow')
     create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'YELLOW_DAILY_TABLE' , df_day_yellow)
 
-    df_day_location_yellow = calculate_per_day_for_location(df_raw_yellow, df_taxi_lookup,  DATE)
+    df_day_location_yellow = calculate_per_day_for_location(df_taxi_lookup,  DATE, 'Yellow')
     create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'YELLOW_DAILY_TABLE_2' , df_day_location_yellow)
 
 
-    df_raw_green = load_data_from_minio_for_visualize(spark, BUCKET_NAME_2, DATE, 'Green')
-    df_day_green = calculate_per_day(df_raw_green, DATE)
+    df_day_green = calculate_per_day(DATE, 'Green')
 
     create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'GREEN_DAILY_TABLE' , df_day_green)
 
-    df_day_location_green = calculate_per_day_for_location(df_raw_green, df_taxi_lookup,  DATE)
+    df_day_location_green = calculate_per_day_for_location(df_taxi_lookup,  DATE, 'Green')
     create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'GREEN_DAILY_TABLE_2' , df_day_location_green)
 
     print("Quá trình xử lý hoàn tất!")
 
 
-
 if __name__ == "__main__":
 
-    DATE=   "2024-02-05"
+    DATE=   "2024-01-01"
     load_transform_save(DATE)
 
     

@@ -26,6 +26,7 @@ spark = create_spark_session()
 load_minio_config(spark.sparkContext)
 
 
+
 project_root  = 'D:/20241/Big_data'
 
 CFG_FILE = os.path.join(project_root, "MyProject/config", "datalake.yaml")
@@ -60,6 +61,8 @@ s3_fs = s3fs.S3FileSystem(
 
 
 
+
+
 def save_data(file_path, data):
 
     dir_path = os.path.dirname(file_path)
@@ -70,7 +73,7 @@ def save_data(file_path, data):
 
     # 2. Tìm file Parquet trong thư mục tạm
     for file_name in os.listdir(dir_path):
-        if file_name.endswith(".parquet") and file_name != 'transform1.parquet':  
+        if file_name.endswith(".parquet"):  
             temp_file_path = os.path.join(dir_path, file_name)
             os.rename(temp_file_path, file_path)
             break
@@ -84,51 +87,35 @@ def save_data(file_path, data):
 
 
 
-
 def get_df_day(date):
-    customer_path = f"s3a://{BUCKET_NAME_2}/data_customer.csv"
-    df_customer = spark.read.csv(customer_path, header=True, inferSchema=True).select('id_customer')
-
-    taxi_lookup_path = f"s3a://{BUCKET_NAME_2}/taxi_lookup.csv"
-    df_taxi_lookup = spark.read.csv(customer_path, header=True, inferSchema=True).select('id_customer')
-
-    df_customer = spark.read.csv(customer_path, header=True, inferSchema=True).select("id_customer")
-
-    # Đọc bảng taxi_lookup
-    df_taxi_lookup = spark.read.csv(taxi_lookup_path, header=True, inferSchema=True).select("LocationID")
-
-    # Thực hiện cross join
-    df_cross_join  = df_customer.crossJoin(df_taxi_lookup)
+ 
+       # Đọc dữ liệu khách hàng từ file CSV
+    path = f"s3a://{BUCKET_NAME_2}/data_customer.csv"
+    df_customer = spark.read.csv(path, header=True, inferSchema=True).select('id_customer')
 
 
     # Lấy dữ liệu chuyến đi từ MinIO
     filtered_data = load_data_from_minio(spark, BUCKET_NAME_2, date, 'Green')
 
-    
-    df_pickups = (
-    filtered_data
-    .groupBy("id_customer", "PULocationID")
-    .agg(F.count("*").alias("num_pickups"))
-    .withColumnRenamed("PULocationID", "LocationID")
+    # Tính số chuyến đi theo mỗi khách hàng
+    trip_counts = (
+        filtered_data.groupBy("id_customer")
+        .agg(count("*").alias("trip_count"))
     )
 
-    df_drops = (
-        filtered_data
-        .groupBy("id_customer", "DOLocationID")
-        .agg(F.count("*").alias("num_drops"))
-        .withColumnRenamed("DOLocationID", "LocationID")
+    # Tạo cột 'count_lager_2_trips' với giá trị 1 nếu số chuyến đi > 2, nếu không thì là 0
+    trip_counts = trip_counts.withColumn(
+        "count_lager_2_trips", when(col("trip_count") > 2, 1).otherwise(0)
     )
 
-    # Kết hợp cả pickups và drops vào bảng cross join
-    df_joined = (
-        df_cross_join
-        .join(df_pickups, ["id_customer", "LocationID"], "left")
-        .join(df_drops, ["id_customer", "LocationID"], "left")
-        .fillna(0, subset=["num_pickups", "num_drops"])  # Thay null bằng 0 nếu không có chuyến xe
-    )
+    # Left join với df_customer để đảm bảo tất cả khách hàng có trong kết quả
+    result = df_customer.join(trip_counts, on="id_customer", how="left")
 
+    # Nếu một khách hàng không có chuyến đi trong ngày (null trong 'trip_count'), gán 'count_lager_2_trips' là 0
+    result = result.fillna({"count_lager_2_trips": 0})
 
-    return df_joined
+    # Trả về kết quả với cột 'id_customer' và 'count_lager_2_trips'
+    return result.select("id_customer", "count_lager_2_trips")
 
 
 def load_from_transfrom(date):
@@ -137,16 +124,20 @@ def load_from_transfrom(date):
     month = date.split('-')[1]
     day = date.split('-')[2]
 
-    file_path = f'D:/20241/Big_data/MyProject/data/transform_data/{year}/{month}/{day}/transform2.parquet'
+    file_path = f'D:/20241/Big_data/MyProject/data/transform_data/{year}/{month}/{day}/transform1.parquet'
     df = spark.read.parquet(file_path)
 
     return df
 
-
 from datetime import datetime, timedelta
 
-def transform_dynamic(date):
 
+def transform_dynamic(date):
+    # Tạo SparkSession nếu chưa có
+    spark = SparkSession.builder.appName("GetCustomerTrips").getOrCreate()
+    load_minio_config(spark.sparkContext)
+
+    # Tách năm, tháng, ngày từ đầu vào
     year = date.split('-')[0]
     month = date.split('-')[1]
     day = date.split('-')[2]
@@ -156,8 +147,9 @@ def transform_dynamic(date):
 
     # Nếu là ngày 1 tháng 1, lưu ngay df_current
     if month == '01' and day == '01':
-        file_path = f"data/transform_data/{year}/{month}/{day}/transform2.parquet"
+        file_path = f"data/transform_data/{year}/{month}/{day}/transform1.parquet"
         save_data(file_path, df_current)
+        print(f"File đã được lưu tại: {file_path}")
         return df_current
 
     # Nếu là tháng 1 và không phải ngày 1
@@ -169,20 +161,17 @@ def transform_dynamic(date):
         # Thực hiện join và phép cộng
         combined = df_current.alias("current").join(
             df_previous.alias("previous"), 
-            on = ["id_customer", "LocationID"],  
-            how="inner"
+            on="id_customer", 
+            how="outer"
         ).select(
             F.col("id_customer"),
-            F.col("LocationID"),
-            (F.coalesce(F.col("current.num_pickups"), F.lit(0)) + 
-             F.coalesce(F.col("previous.num_pickups"), F.lit(0))).alias("num_pickups"),
-            (F.coalesce(F.col("current.num_drops"), F.lit(0)) + 
-             F.coalesce(F.col("previous.num_drops"), F.lit(0))).alias("num_drops"),
+            (F.coalesce(F.col("current.count_lager_2_trips"), F.lit(0)) + 
+             F.coalesce(F.col("previous.count_lager_2_trips"), F.lit(0))).alias("count_lager_2_trips")
         )
-
-
-        file_path = f"data/transform_data/{year}/{month}/{day}/transform2.parquet"
+        
+        file_path = f"data/transform_data/{year}/{month}/{day}/transform1.parquet"
         save_data(file_path, combined)
+        print(f"File đã được lưu tại: {file_path}")
         return combined
 
     # Nếu không phải tháng 1
@@ -196,61 +185,29 @@ def transform_dynamic(date):
         # Thực hiện join và phép cộng
         combined = df_current.alias("current").join(
             df_previous.alias("previous"), 
-            on = ["id_customer", "LocationID"],  
-            how="inner"
+            on="id_customer", 
+            how="outer"
         ).select(
             F.col("id_customer"),
-            F.col("LocationID"),
-            (F.coalesce(F.col("current.num_pickups"), F.lit(0)) + 
-             F.coalesce(F.col("previous.num_pickups"), F.lit(0))).alias("num_pickups"),
-            (F.coalesce(F.col("current.num_drops"), F.lit(0)) + 
-             F.coalesce(F.col("previous.num_drops"), F.lit(0))).alias("num_drops"),
+            (F.coalesce(F.col("current.count_lager_2_trips"), F.lit(0)) + 
+             F.coalesce(F.col("previous.count_lager_2_trips"), F.lit(0))).alias("count_lager_2_trips")
         )
-
 
         # Tiếp tục join với dữ liệu 30 ngày trước và thực hiện phép trừ
         result = combined.alias("combined").join(
             df_30_day_ago.alias("thirty_days_ago"), 
-            on= ["id_customer", "LocationID"],  
-            how="inner"
+            on="id_customer", 
+            how="left"
         ).select(
             F.col("id_customer"),
-            F.col("LocationID"),
-            (F.coalesce(F.col("combined.num_pickups"), F.lit(0)) - 
-             F.coalesce(F.col("thirty_days_ago.num_pickups"), F.lit(0))).alias("num_pickups"),
-            (F.coalesce(F.col("combined.num_drops"), F.lit(0)) - 
-             F.coalesce(F.col("thirty_days_ago.num_drops"), F.lit(0))).alias("num_drops"),
+            (F.coalesce(F.col("combined.count_lager_2_trips"), F.lit(0)) - 
+             F.coalesce(F.col("thirty_days_ago.count_lager_2_trips"), F.lit(0))).alias("count_lager_2_trips")
         )
 
-        file_path = f"data/transform_data/{year}/{month}/{day}/transform2.parquet"
+        file_path = f"data/transform_data/{year}/{month}/{day}/transform1.parquet"
         save_data(file_path, result)
+        print(f"File đã được lưu tại: {file_path}")
         return result
-    
-    
-
-def create_train_data(DATE):
-    YEAR = DATE.split('-')[0]
-    MONTH = DATE.split('-')[1]
-    DAY = DATE.split('-')[2]
-    month = int(MONTH) - 1
-    previous_month = f"data/transform_data/{YEAR}/{month:02}"
-
-    pre_df = spark.read.format("delta").load(previous_month)
-    path_list = []
-    combined_df = None
-
-    for i in range(1, int(DAY) + 1):
-
-        # path = f"s3a://{BUCKET_NAME}/{YEAR}/{TAXI_TYPE}/{MONTH}/{i:02}.parquet"
-        day = f"{YEAR}-{MONTH}-{i:02}"
-        df = load_from_transfrom(day)
-        if combined_df is None:
-            combined_df = df
-        else:
-            combined_df = combined_df.union(df)
-
-    combined_df = combined_df.union(df)
-      
 
 
 
@@ -268,9 +225,16 @@ if __name__ == "__main__":
             
             test = transform_dynamic(date_str)
 
+            test.show()
+
             current_date += timedelta(days=1)
 
-    start_date = "2024-09-11"
-    end_date = "2024-10-31"
+    start_date = "2024-01-01"
+    end_date = "2024-01-01"
     process_all_dates(start_date, end_date)
 
+    test_df = get_df_day( "2024-01-01")
+
+    test_df.show()
+
+    df = test_df.toPandas()
