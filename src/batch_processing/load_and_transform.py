@@ -160,6 +160,7 @@ def analyze_top_customers(df, k, df_taxi_lookup, num_customer):
     - Buổi trong ngày phổ biến nhất
     - Địa điểm đón phổ biến nhất
     - Địa điểm trả phổ biến nhất
+    that khong
 
     Args:
     - df (DataFrame): DataFrame dữ liệu taxi.
