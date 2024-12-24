@@ -330,6 +330,8 @@ from .upload_to_bigquery import create_table_bg
 from .upload_to_bigquery import create_spark_session
 from .upload_to_bigquery import load_minio_config
 from .upload_to_bigquery import load_cfg
+from .upload_to_bigquery import load_data_from_minio_for_visualize
+
 import os
 
 project_root  = 'D:/20241/Big_data'
@@ -354,7 +356,7 @@ def load_transform_save(DATE):
     
     df_taxi_lookup = spark.read.csv("s3a://processed/taxi_lookup.csv", header=True, inferSchema=True)
 
-    df_raw_yellow = load_data_from_minio(spark, BUCKET_NAME_2, DATE, 1)
+    df_raw_yellow = load_data_from_minio_for_visualize(spark, BUCKET_NAME_2, DATE, 'Yellow')
     df_day_yellow = calculate_per_day(df_raw_yellow, DATE)
 
     create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'YELLOW_DAILY_TABLE' , df_day_yellow)
@@ -363,7 +365,7 @@ def load_transform_save(DATE):
     create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'YELLOW_DAILY_TABLE_2' , df_day_location_yellow)
 
 
-    df_raw_green = load_data_from_minio(spark, BUCKET_NAME_2, DATE, 0)
+    df_raw_green = load_data_from_minio_for_visualize(spark, BUCKET_NAME_2, DATE, 'Green')
     df_day_green = calculate_per_day(df_raw_green, DATE)
 
     create_table_bg(BG_PROJECT_ID, BG_DATASET_ID, 'GREEN_DAILY_TABLE' , df_day_green)
