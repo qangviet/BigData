@@ -39,7 +39,7 @@ bash run.sh register_connector configs/taxi-nyc-cdc.json
 py ./src/batch_processing/upload_from_local.py
 ```
 
-### Set package - Rất quan trọng trước khi chạy:
+### Set package:
 ```sh
-set PYTHONPATH=path/to/file/src;%PYTHONPATH% 
+set_pythonpath.bat
 ```
