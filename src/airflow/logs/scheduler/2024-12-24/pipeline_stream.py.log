@@ -3805,3 +3805,99 @@ airflow.exceptions.AirflowException: Tried to set relationships between tasks in
 [2024-12-24T19:14:45.443+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:14:45.442+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
 [2024-12-24T19:14:45.450+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:14:45.449+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
 [2024-12-24T19:14:45.494+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.372 seconds
+[2024-12-24T19:15:16.515+0000] {processor.py:161} INFO - Started process (PID=11509) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:15:16.517+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:15:16.520+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:15:16.519+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:15:17.471+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline', 'streaming_pipeline_only_data' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:15:17.505+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:15:17.504+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:15:17.516+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:15:17.516+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:15:17.520+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:15:17.520+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:15:17.545+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.036 seconds
+[2024-12-24T19:15:47.848+0000] {processor.py:161} INFO - Started process (PID=11527) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:15:47.849+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:15:47.851+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:15:47.851+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:15:48.827+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline_only_data', 'streaming_pipeline' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:15:48.857+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:15:48.856+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:15:48.868+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:15:48.868+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:15:48.873+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:15:48.872+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:15:48.900+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.056 seconds
+[2024-12-24T19:16:19.251+0000] {processor.py:161} INFO - Started process (PID=11545) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:16:19.252+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:16:19.254+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:16:19.254+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:16:20.206+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline_only_data', 'streaming_pipeline' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:16:20.236+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:16:20.236+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:16:20.248+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:16:20.248+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:16:20.253+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:16:20.252+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:16:20.277+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.032 seconds
+[2024-12-24T19:16:50.584+0000] {processor.py:161} INFO - Started process (PID=11563) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:16:50.586+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:16:50.589+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:16:50.588+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:16:51.678+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline', 'streaming_pipeline_only_data' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:16:51.732+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:16:51.729+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:16:51.748+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:16:51.748+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:16:51.753+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:16:51.753+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:16:51.775+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.199 seconds
+[2024-12-24T19:17:21.877+0000] {processor.py:161} INFO - Started process (PID=11581) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:17:21.878+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:17:21.880+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:17:21.879+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:17:22.785+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline', 'streaming_pipeline_only_data' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:17:22.823+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:17:22.823+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:17:22.835+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:17:22.835+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:17:22.839+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:17:22.839+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:17:22.864+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 0.993 seconds
+[2024-12-24T19:17:53.153+0000] {processor.py:161} INFO - Started process (PID=11599) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:17:53.154+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:17:53.157+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:17:53.157+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:17:54.094+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline', 'streaming_pipeline_only_data' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:17:54.127+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:17:54.127+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:17:54.140+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:17:54.140+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:17:54.145+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:17:54.145+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:17:54.169+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.021 seconds
+[2024-12-24T19:18:24.518+0000] {processor.py:161} INFO - Started process (PID=11623) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:18:24.520+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:18:24.522+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:18:24.522+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:18:25.575+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline', 'streaming_pipeline_only_data' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:18:25.615+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:18:25.614+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:18:25.628+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:18:25.628+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:18:25.634+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:18:25.634+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:18:25.662+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.150 seconds
+[2024-12-24T19:18:55.958+0000] {processor.py:161} INFO - Started process (PID=11641) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:18:55.959+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:18:55.962+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:18:55.962+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:18:56.941+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline_only_data', 'streaming_pipeline' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:18:56.975+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:18:56.973+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:18:56.989+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:18:56.989+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:18:56.994+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:18:56.993+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:18:57.020+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.069 seconds
+[2024-12-24T19:19:27.697+0000] {processor.py:161} INFO - Started process (PID=11659) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:19:27.699+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:19:27.701+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:19:27.701+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:19:28.685+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline_only_data', 'streaming_pipeline' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:19:28.720+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:19:28.719+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:19:28.731+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:19:28.731+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:19:28.737+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:19:28.737+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:19:28.764+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.071 seconds
+[2024-12-24T19:19:58.993+0000] {processor.py:161} INFO - Started process (PID=11677) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:19:58.995+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:19:58.996+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:19:58.996+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:19:59.904+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline', 'streaming_pipeline_only_data' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:19:59.934+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:19:59.934+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:19:59.946+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:19:59.946+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:19:59.950+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:19:59.950+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:19:59.974+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 0.987 seconds
+[2024-12-24T19:20:30.286+0000] {processor.py:161} INFO - Started process (PID=11695) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:20:30.288+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:20:30.290+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:20:30.290+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:20:31.380+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline', 'streaming_pipeline_only_data' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:20:31.411+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:20:31.411+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:20:31.423+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:20:31.423+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:20:31.427+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:20:31.427+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:20:31.450+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 1.169 seconds
+[2024-12-24T19:21:01.742+0000] {processor.py:161} INFO - Started process (PID=11713) to work on /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:21:01.743+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/pipeline_stream.py for tasks to queue
+[2024-12-24T19:21:01.745+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:21:01.744+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:21:02.625+0000] {processor.py:840} INFO - DAG(s) 'streaming_pipeline', 'streaming_pipeline_only_data' retrieved from /opt/airflow/dags/pipeline_stream.py
+[2024-12-24T19:21:02.654+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:21:02.653+0000] {dag.py:3096} INFO - Sync 2 DAGs
+[2024-12-24T19:21:02.667+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:21:02.667+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline to None, run_after=None
+[2024-12-24T19:21:02.672+0000] {logging_mixin.py:188} INFO - [2024-12-24T19:21:02.672+0000] {dag.py:3954} INFO - Setting next_dagrun for streaming_pipeline_only_data to None, run_after=None
+[2024-12-24T19:21:02.696+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/pipeline_stream.py took 0.960 seconds
