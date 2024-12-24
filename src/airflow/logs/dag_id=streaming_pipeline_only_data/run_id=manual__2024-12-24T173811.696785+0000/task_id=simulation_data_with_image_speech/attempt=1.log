@@ -1,0 +1,24 @@
+[2024-12-24T17:38:15.897+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-24T17:38:15.943+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_only_data.simulation_data_with_image_speech manual__2024-12-24T17:38:11.696785+00:00 [queued]>
+[2024-12-24T17:38:15.956+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_only_data.simulation_data_with_image_speech manual__2024-12-24T17:38:11.696785+00:00 [queued]>
+[2024-12-24T17:38:15.957+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-24T17:38:15.979+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): simulation_data_with_image_speech> on 2024-12-24 17:38:11.696785+00:00
+[2024-12-24T17:38:15.987+0000] {standard_task_runner.py:63} INFO - Started process 20700 to run task
+[2024-12-24T17:38:15.990+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline_only_data', 'simulation_data_with_image_speech', 'manual__2024-12-24T17:38:11.696785+00:00', '--job-id', '312', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_stream.py', '--cfg-path', '/tmp/tmplhwv3qiv']
+[2024-12-24T17:38:15.992+0000] {standard_task_runner.py:91} INFO - Job 312: Subtask simulation_data_with_image_speech
+[2024-12-24T17:38:16.046+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_only_data.simulation_data_with_image_speech manual__2024-12-24T17:38:11.696785+00:00 [running]> on host 0b4a5bf62610
+[2024-12-24T17:38:16.135+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline_only_data' AIRFLOW_CTX_TASK_ID='simulation_data_with_image_speech' AIRFLOW_CTX_EXECUTION_DATE='2024-12-24T17:38:11.696785+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-24T17:38:11.696785+00:00'
+[2024-12-24T17:38:16.137+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-24T17:38:16.351+0000] {logging_mixin.py:188} INFO - Not exists table: green_trip_raw_2024_05_01
+[2024-12-24T17:38:16.367+0000] {logging_mixin.py:188} INFO - Created table: green_trip_raw_2024_05_01
+[2024-12-24T17:38:16.379+0000] {logging_mixin.py:188} INFO - Insert 2 rows to green_trip_raw_2024_05_01
+[2024-12-24T17:38:16.380+0000] {logging_mixin.py:188} INFO - Waiting for 4 seconds...
+[2024-12-24T17:38:17.381+0000] {logging_mixin.py:188} INFO - Waiting for 3 seconds...
+[2024-12-24T17:38:18.380+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-24T17:38:19.382+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-24T17:38:20.384+0000] {python.py:237} INFO - Done. Returned value was: None
+[2024-12-24T17:38:20.385+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-24T17:38:20.401+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=streaming_pipeline_only_data, task_id=simulation_data_with_image_speech, run_id=manual__2024-12-24T17:38:11.696785+00:00, execution_date=20241224T173811, start_date=20241224T173815, end_date=20241224T173820
+[2024-12-24T17:38:20.461+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2024-12-24T17:38:20.483+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-24T17:38:20.486+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

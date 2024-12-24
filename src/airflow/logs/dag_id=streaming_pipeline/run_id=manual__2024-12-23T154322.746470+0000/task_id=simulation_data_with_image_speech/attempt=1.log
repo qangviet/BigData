@@ -1,0 +1,45 @@
+[2024-12-23T15:43:27.104+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T15:43:27.134+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T15:43:22.746470+00:00 [queued]>
+[2024-12-23T15:43:27.144+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T15:43:22.746470+00:00 [queued]>
+[2024-12-23T15:43:27.145+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T15:43:27.161+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): simulation_data_with_image_speech> on 2024-12-23 15:43:22.746470+00:00
+[2024-12-23T15:43:27.168+0000] {standard_task_runner.py:63} INFO - Started process 223 to run task
+[2024-12-23T15:43:27.170+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'simulation_data_with_image_speech', 'manual__2024-12-23T15:43:22.746470+00:00', '--job-id', '124', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_stream.py', '--cfg-path', '/tmp/tmppb3f7zo0']
+[2024-12-23T15:43:27.172+0000] {standard_task_runner.py:91} INFO - Job 124: Subtask simulation_data_with_image_speech
+[2024-12-23T15:43:27.227+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T15:43:22.746470+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T15:43:27.317+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='simulation_data_with_image_speech' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T15:43:22.746470+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T15:43:22.746470+00:00'
+[2024-12-23T15:43:27.319+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T15:43:48.579+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T15:43:48.580+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 255, in simulate_data_with_image
+    conn = psycopg2.connect(**db_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "192.168.1.4", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+[2024-12-23T15:43:48.597+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=simulation_data_with_image_speech, run_id=manual__2024-12-23T15:43:22.746470+00:00, execution_date=20241223T154322, start_date=20241223T154327, end_date=20241223T154348
+[2024-12-23T15:43:48.615+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 124 for task simulation_data_with_image_speech (connection to server at "192.168.1.4", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+; 223)
+[2024-12-23T15:43:48.639+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-23T15:43:48.661+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T15:43:48.665+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

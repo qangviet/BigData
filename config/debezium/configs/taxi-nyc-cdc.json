@@ -10,6 +10,6 @@
 		"plugin.name": "pgoutput",
 		"topic.prefix": "streaming",
 		"database.server.name": "source",
-		"table.include.list": "public.yellow_trip_raw,public.green_trip_raw,public."
+		"table.include.list": "public\\.green_trip_raw_.*"
 	}
 }

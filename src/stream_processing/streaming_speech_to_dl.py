@@ -12,7 +12,6 @@ load_dotenv()
 from dataclasses import dataclass
 
 # Kafka configuration
-KAFKA_TOPIC = os.getenv("KAFKA_TOPIC_SPEECH")
 KAFKA_BOOTSTRAP_SERVERS = ["localhost:9092"]
 
 PROJECT_ROOT = os.path.dirname(
@@ -21,6 +20,12 @@ PROJECT_ROOT = os.path.dirname(
 
 CFG_DL_PATH = os.path.join(PROJECT_ROOT, "config", "datalake.yaml")
 datalake_cfg = load_cfg(CFG_DL_PATH)["datalake"]
+
+YEAR = os.getenv("YEAR_TEST")
+MONTH = os.getenv("MONTH_TEST")
+DAY = os.getenv("DAY_TEST")
+
+KAFKA_TOPIC = os.getenv("KAFKA_TOPIC_SPEECH") + f"_{YEAR}_{MONTH}_{DAY}"
 
 MINIO_ENDPOINT = datalake_cfg["endpoint"]
 MINIO_ACCESS_KEY = datalake_cfg["access_key"]
@@ -51,9 +56,9 @@ def speech_to_dl(args: Args):
     minio_client.create_bucket(args.bucket_name)
 
     consumer = KafkaConsumer(
-        KAFKA_TOPIC,
+        args.kafka_topic,
         bootstrap_servers=args.bootstrap_servers,
-        auto_offset_reset="latest",
+        auto_offset_reset="earliest",
         enable_auto_commit=True,
         value_deserializer=lambda x: json.loads(x.decode("utf-8")),
     )
@@ -64,11 +69,12 @@ def speech_to_dl(args: Args):
         metadata = message.value["metadata"]
         year = metadata["year"]
         month = metadata["month"]
+        day = metadata["day"]
         speech_data = base64.b64decode(message.value["speech_data"])
 
         # Generate a unique filename
         speech_filename = os.path.join(
-            f"{args.prefix}/{year}/{month}/" f"{metadata["id"]}.mp3"
+            f"{args.prefix}/{year}/{month}/{day}/" f"{metadata["id"]}.mp3"
         )
 
         try:
@@ -78,7 +84,7 @@ def speech_to_dl(args: Args):
 
             conn = minio_client.create_conn()
             conn.put_object(
-                bucket_name=f"{BUCKET_NAME}",
+                bucket_name=args.bucket_name,
                 object_name=speech_filename,
                 data=speech_data_io,
                 length=len(speech_data),

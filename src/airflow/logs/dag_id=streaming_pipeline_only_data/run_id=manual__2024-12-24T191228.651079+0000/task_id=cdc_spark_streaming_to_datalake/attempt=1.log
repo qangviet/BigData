@@ -1,0 +1,77 @@
+[2024-12-24T19:12:33.228+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-24T19:12:33.272+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_only_data.cdc_spark_streaming_to_datalake manual__2024-12-24T19:12:28.651079+00:00 [queued]>
+[2024-12-24T19:12:33.292+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_only_data.cdc_spark_streaming_to_datalake manual__2024-12-24T19:12:28.651079+00:00 [queued]>
+[2024-12-24T19:12:33.293+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-24T19:12:33.325+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): cdc_spark_streaming_to_datalake> on 2024-12-24 19:12:28.651079+00:00
+[2024-12-24T19:12:33.336+0000] {standard_task_runner.py:63} INFO - Started process 11131 to run task
+[2024-12-24T19:12:33.340+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline_only_data', 'cdc_spark_streaming_to_datalake', 'manual__2024-12-24T19:12:28.651079+00:00', '--job-id', '346', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_stream.py', '--cfg-path', '/tmp/tmpd67a9uw_']
+[2024-12-24T19:12:33.343+0000] {standard_task_runner.py:91} INFO - Job 346: Subtask cdc_spark_streaming_to_datalake
+[2024-12-24T19:12:33.461+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_only_data.cdc_spark_streaming_to_datalake manual__2024-12-24T19:12:28.651079+00:00 [running]> on host 0b4a5bf62610
+[2024-12-24T19:12:33.604+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline_only_data' AIRFLOW_CTX_TASK_ID='cdc_spark_streaming_to_datalake' AIRFLOW_CTX_EXECUTION_DATE='2024-12-24T19:12:28.651079+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-24T19:12:28.651079+00:00'
+[2024-12-24T19:12:33.607+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-24T19:12:33.627+0000] {logging_mixin.py:188} INFO - Checking JAR files...:  True
+[2024-12-24T19:12:47.110+0000] {spark_streaming_to_dl.py:123} INFO - Spark session successfully created!
+[2024-12-24T19:12:47.123+0000] {spark_streaming_to_dl.py:157} INFO - MinIO configuration is created successfully
+[2024-12-24T19:12:50.422+0000] {spark_streaming_to_dl.py:176} INFO - Initial dataframe created successfully!
+[2024-12-24T19:12:51.779+0000] {logging_mixin.py:188} INFO - root
+ |-- vendorid: integer (nullable = true)
+ |-- lpep_pickup_datetime: timestamp (nullable = true)
+ |-- lpep_dropoff_datetime: timestamp (nullable = true)
+ |-- store_and_fwd_flag: string (nullable = true)
+ |-- ratecodeid: double (nullable = true)
+ |-- pulocationid: integer (nullable = true)
+ |-- dolocationid: integer (nullable = true)
+ |-- passenger_count: double (nullable = true)
+ |-- trip_distance: double (nullable = true)
+ |-- fare_amount: double (nullable = true)
+ |-- extra: double (nullable = true)
+ |-- mta_tax: double (nullable = true)
+ |-- tip_amount: double (nullable = true)
+ |-- tolls_amount: double (nullable = true)
+ |-- improvement_surcharge: double (nullable = true)
+ |-- total_amount: double (nullable = true)
+ |-- payment_type: double (nullable = true)
+ |-- trip_type: double (nullable = true)
+ |-- congestion_surcharge: double (nullable = true)
+ |-- id: string (nullable = true)
+ |-- id_customer: long (nullable = true)
+ |-- rate: double (nullable = true)
+[2024-12-24T19:12:51.925+0000] {spark_streaming_to_dl.py:313} INFO - Final dataframe created successfully!
+[2024-12-24T19:12:51.926+0000] {spark_streaming_to_dl.py:321} INFO - Streaming is being started...
+[2024-12-24T19:13:06.849+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-24T19:13:06.851+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/spark_streaming_to_dl.py", line 361, in run_all
+    start_steaming(
+  File "/opt/airflow/dags/stream_processing/spark_streaming_to_dl.py", line 345, in start_steaming
+    return stream_query.awaitTermination(), count_stream_query.awaitTermination()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/sql/streaming/query.py", line 221, in awaitTermination
+    return self._jsq.awaitTermination()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/errors/exceptions/captured.py", line 185, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.StreamingQueryException: [STREAM_FAILED] Query [id = 5c0c431d-f926-4523-b0a0-0f6ca8bef3fa, runId = c5eccaaf-b64e-4de6-8cc3-7e358a2b4759] terminated with exception: Failed to create new KafkaAdminClient
+[2024-12-24T19:13:06.892+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline_only_data, task_id=cdc_spark_streaming_to_datalake, run_id=manual__2024-12-24T19:12:28.651079+00:00, execution_date=20241224T191228, start_date=20241224T191233, end_date=20241224T191306
+[2024-12-24T19:13:06.918+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 346 for task cdc_spark_streaming_to_datalake ([STREAM_FAILED] Query [id = 5c0c431d-f926-4523-b0a0-0f6ca8bef3fa, runId = c5eccaaf-b64e-4de6-8cc3-7e358a2b4759] terminated with exception: Failed to create new KafkaAdminClient; 11131)
+[2024-12-24T19:13:06.962+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-24T19:13:06.989+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-24T19:13:06.993+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

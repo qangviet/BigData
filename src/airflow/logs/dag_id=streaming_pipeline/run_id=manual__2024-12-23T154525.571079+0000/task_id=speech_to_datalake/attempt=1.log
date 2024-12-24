@@ -1,0 +1,153 @@
+[2024-12-23T15:45:30.160+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T15:45:30.198+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T15:45:25.571079+00:00 [queued]>
+[2024-12-23T15:45:30.212+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T15:45:25.571079+00:00 [queued]>
+[2024-12-23T15:45:30.213+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T15:45:30.234+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): speech_to_datalake> on 2024-12-23 15:45:25.571079+00:00
+[2024-12-23T15:45:30.244+0000] {standard_task_runner.py:63} INFO - Started process 542 to run task
+[2024-12-23T15:45:30.246+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'speech_to_datalake', 'manual__2024-12-23T15:45:25.571079+00:00', '--job-id', '132', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_stream.py', '--cfg-path', '/tmp/tmpwsaemnro']
+[2024-12-23T15:45:30.250+0000] {standard_task_runner.py:91} INFO - Job 132: Subtask speech_to_datalake
+[2024-12-23T15:45:30.315+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T15:45:25.571079+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T15:45:30.438+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='speech_to_datalake' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T15:45:25.571079+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T15:45:25.571079+00:00'
+[2024-12-23T15:45:30.440+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T15:45:30.476+0000] {logging_mixin.py:188} INFO - Bucket raw already exists, skip creating!
+[2024-12-23T15:45:30.481+0000] {conn.py:362} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.4', 29092)]>: connecting to broker:29092 [('172.19.0.4', 29092) IPv4]
+[2024-12-23T15:45:30.482+0000] {conn.py:957} INFO - Probing node bootstrap-0 broker version
+[2024-12-23T15:45:30.485+0000] {conn.py:393} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.4', 29092)]>: Connection complete.
+[2024-12-23T15:45:30.605+0000] {conn.py:1019} INFO - Broker version identified as 2.6.0
+[2024-12-23T15:45:30.606+0000] {conn.py:1020} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2024-12-23T15:45:30.609+0000] {consumer.py:122} WARNING - group_id is None: disabling auto-commit.
+[2024-12-23T15:45:30.612+0000] {subscription_state.py:167} INFO - Updating subscribed topics to: ('raw_speech_2024_3',)
+[2024-12-23T15:45:30.613+0000] {logging_mixin.py:188} INFO - Start consuming messages...
+[2024-12-23T15:45:30.892+0000] {subscription_state.py:253} INFO - Updated partition assignment: [('raw_speech_2024_3', 0)]
+[2024-12-23T15:45:30.893+0000] {conn.py:362} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.4', 29092)]>: connecting to broker:29092 [('172.19.0.4', 29092) IPv4]
+[2024-12-23T15:45:30.895+0000] {conn.py:393} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.4', 29092)]>: Connection complete.
+[2024-12-23T15:45:30.896+0000] {conn.py:673} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connected> [IPv4 ('172.19.0.4', 29092)]>: Closing connection. 
+[2024-12-23T15:45:31.773+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000001.mp3
+[2024-12-23T15:45:34.068+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000002.mp3
+[2024-12-23T15:45:36.374+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000003.mp3
+[2024-12-23T15:45:38.670+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000004.mp3
+[2024-12-23T15:45:41.004+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000005.mp3
+[2024-12-23T15:45:43.303+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000006.mp3
+[2024-12-23T15:45:45.603+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000007.mp3
+[2024-12-23T15:45:47.865+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000008.mp3
+[2024-12-23T15:45:50.168+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000009.mp3
+[2024-12-23T15:45:52.525+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000010.mp3
+[2024-12-23T15:45:54.844+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000011.mp3
+[2024-12-23T15:45:57.177+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000012.mp3
+[2024-12-23T15:45:59.487+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000013.mp3
+[2024-12-23T15:46:01.751+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000014.mp3
+[2024-12-23T15:46:04.057+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000015.mp3
+[2024-12-23T15:46:06.832+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000016.mp3
+[2024-12-23T15:46:09.095+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000017.mp3
+[2024-12-23T15:46:11.355+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000018.mp3
+[2024-12-23T15:46:13.669+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000019.mp3
+[2024-12-23T15:46:15.959+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000020.mp3
+[2024-12-23T15:46:18.710+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000021.mp3
+[2024-12-23T15:46:21.019+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000022.mp3
+[2024-12-23T15:46:23.500+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000023.mp3
+[2024-12-23T15:46:25.926+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000024.mp3
+[2024-12-23T15:46:28.182+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000025.mp3
+[2024-12-23T15:46:30.491+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000026.mp3
+[2024-12-23T15:46:32.839+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000027.mp3
+[2024-12-23T15:46:35.177+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000028.mp3
+[2024-12-23T15:46:37.501+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000029.mp3
+[2024-12-23T15:46:39.980+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000030.mp3
+[2024-12-23T15:46:42.303+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000031.mp3
+[2024-12-23T15:46:44.588+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000032.mp3
+[2024-12-23T15:46:46.865+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000033.mp3
+[2024-12-23T15:46:49.132+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000034.mp3
+[2024-12-23T15:46:51.518+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000035.mp3
+[2024-12-23T15:46:54.010+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000036.mp3
+[2024-12-23T15:46:56.575+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000037.mp3
+[2024-12-23T15:46:58.869+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000038.mp3
+[2024-12-23T15:47:01.158+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000039.mp3
+[2024-12-23T15:47:03.486+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000040.mp3
+[2024-12-23T15:47:05.834+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000041.mp3
+[2024-12-23T15:47:08.274+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000042.mp3
+[2024-12-23T15:47:10.681+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000043.mp3
+[2024-12-23T15:47:13.000+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000044.mp3
+[2024-12-23T15:47:15.252+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000045.mp3
+[2024-12-23T15:47:17.532+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000046.mp3
+[2024-12-23T15:47:19.825+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000047.mp3
+[2024-12-23T15:47:22.173+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000048.mp3
+[2024-12-23T15:47:24.476+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000049.mp3
+[2024-12-23T15:47:26.805+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000050.mp3
+[2024-12-23T15:47:29.118+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000051.mp3
+[2024-12-23T15:47:31.414+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000052.mp3
+[2024-12-23T15:47:33.801+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000053.mp3
+[2024-12-23T15:47:36.065+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000054.mp3
+[2024-12-23T15:47:38.340+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000055.mp3
+[2024-12-23T15:47:40.598+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000056.mp3
+[2024-12-23T15:47:42.916+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000057.mp3
+[2024-12-23T15:47:45.348+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000058.mp3
+[2024-12-23T15:47:47.530+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000059.mp3
+[2024-12-23T15:47:49.797+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000060.mp3
+[2024-12-23T15:47:52.095+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000061.mp3
+[2024-12-23T15:47:54.414+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000062.mp3
+[2024-12-23T15:47:56.722+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000063.mp3
+[2024-12-23T15:47:59.016+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000064.mp3
+[2024-12-23T15:48:01.374+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000065.mp3
+[2024-12-23T15:48:03.680+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000066.mp3
+[2024-12-23T15:48:06.021+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000067.mp3
+[2024-12-23T15:48:08.564+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000068.mp3
+[2024-12-23T15:48:10.875+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000069.mp3
+[2024-12-23T15:48:13.102+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000070.mp3
+[2024-12-23T15:48:15.403+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000071.mp3
+[2024-12-23T15:48:17.703+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000072.mp3
+[2024-12-23T15:48:20.017+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000073.mp3
+[2024-12-23T15:48:22.305+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000074.mp3
+[2024-12-23T15:48:24.557+0000] {logging_mixin.py:188} INFO - File đã được lưu thành công vào MinIO: speech/2024/3/20240300000075.mp3
+[2024-12-23T15:48:26.822+0000] {local_task_job_runner.py:124} ERROR - Received SIGTERM. Terminating subprocesses
+[2024-12-23T15:48:26.833+0000] {process_utils.py:132} INFO - Sending 15 to group 542. PIDs of all processes in the group: [542]
+[2024-12-23T15:48:26.837+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 542
+[2024-12-23T15:48:26.839+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-12-23T15:48:26.841+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T15:48:26.860+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/streaming_speech_to_dl.py", line 61, in speech_to_dl
+    for message in consumer:
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1203, in __next__
+    return self.next_v2()
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1211, in next_v2
+    return next(self._iterator)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1126, in _message_generator_v2
+    record_map = self.poll(timeout_ms=timeout_ms, update_offsets=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 663, in poll
+    records = self._poll_once(remaining, max_records, update_offsets=update_offsets)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 712, in _poll_once
+    self._client.poll(timeout_ms=timeout_ms)
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/client_async.py", line 601, in poll
+    self._poll(timeout / 1000)
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/client_async.py", line 633, in _poll
+    ready = self._selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2024-12-23T15:48:26.917+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=speech_to_datalake, run_id=manual__2024-12-23T15:45:25.571079+00:00, execution_date=20241223T154525, start_date=20241223T154530, end_date=20241223T154826
+[2024-12-23T15:48:27.078+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=542, status='terminated', exitcode=2, started='15:45:29') (542) terminated with exit code 2
+[2024-12-23T15:48:27.082+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 143
+[2024-12-23T15:48:27.109+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T15:48:27.140+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

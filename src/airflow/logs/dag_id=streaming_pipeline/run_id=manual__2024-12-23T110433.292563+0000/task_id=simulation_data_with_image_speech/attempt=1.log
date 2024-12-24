@@ -1,0 +1,358 @@
+[2024-12-23T11:04:37.168+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T11:04:37.211+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T11:04:33.292563+00:00 [queued]>
+[2024-12-23T11:04:37.225+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T11:04:33.292563+00:00 [queued]>
+[2024-12-23T11:04:37.226+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T11:04:37.242+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): simulation_data_with_image_speech> on 2024-12-23 11:04:33.292563+00:00
+[2024-12-23T11:04:37.250+0000] {standard_task_runner.py:63} INFO - Started process 3819 to run task
+[2024-12-23T11:04:37.252+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'simulation_data_with_image_speech', 'manual__2024-12-23T11:04:33.292563+00:00', '--job-id', '105', '--raw', '--subdir', 'DAGS_FOLDER/pipline_stream.py', '--cfg-path', '/tmp/tmpz5h5dywv']
+[2024-12-23T11:04:37.255+0000] {standard_task_runner.py:91} INFO - Job 105: Subtask simulation_data_with_image_speech
+[2024-12-23T11:04:37.321+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T11:04:33.292563+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T11:04:37.434+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='simulation_data_with_image_speech' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T11:04:33.292563+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T11:04:33.292563+00:00'
+[2024-12-23T11:04:37.436+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T11:04:37.702+0000] {logging_mixin.py:188} INFO - Exists table: green_trip_raw_2024_2
+[2024-12-23T11:04:37.705+0000] {conn.py:362} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: connecting to broker:29092 [('172.19.0.9', 29092) IPv4]
+[2024-12-23T11:04:37.706+0000] {conn.py:957} INFO - Probing node bootstrap-0 broker version
+[2024-12-23T11:04:37.708+0000] {conn.py:393} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: Connection complete.
+[2024-12-23T11:04:37.812+0000] {conn.py:1019} INFO - Broker version identified as 2.6.0
+[2024-12-23T11:04:37.813+0000] {conn.py:1020} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2024-12-23T11:04:37.891+0000] {conn.py:362} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: connecting to broker:29092 [('172.19.0.9', 29092) IPv4]
+[2024-12-23T11:04:37.892+0000] {conn.py:957} INFO - Probing node bootstrap-0 broker version
+[2024-12-23T11:04:37.894+0000] {conn.py:393} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: Connection complete.
+[2024-12-23T11:04:37.998+0000] {conn.py:1019} INFO - Broker version identified as 2.6.0
+[2024-12-23T11:04:37.999+0000] {conn.py:1020} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2024-12-23T11:04:38.000+0000] {conn.py:957} INFO - Probing node bootstrap-0 broker version
+[2024-12-23T11:04:38.104+0000] {conn.py:1019} INFO - Broker version identified as 2.6.0
+[2024-12-23T11:04:38.104+0000] {conn.py:1020} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2024-12-23T11:04:38.113+0000] {conn.py:362} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: connecting to broker:29092 [('172.19.0.9', 29092) IPv4]
+[2024-12-23T11:04:38.114+0000] {conn.py:957} INFO - Probing node 1 broker version
+[2024-12-23T11:04:38.116+0000] {conn.py:393} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: Connection complete.
+[2024-12-23T11:04:38.116+0000] {conn.py:673} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connected> [IPv4 ('172.19.0.9', 29092)]>: Closing connection. 
+[2024-12-23T11:04:38.221+0000] {conn.py:1019} INFO - Broker version identified as 2.6.0
+[2024-12-23T11:04:38.222+0000] {conn.py:1020} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2024-12-23T11:04:38.223+0000] {logging_mixin.py:188} INFO - Connected to Kafka
+[2024-12-23T11:04:38.224+0000] {insert_data_to_db.py:121} INFO - Topic raw_image_2024_2 already exists. Skipping creation!
+[2024-12-23T11:04:38.224+0000] {insert_data_to_db.py:121} INFO - Topic raw_speech_2024_2 already exists. Skipping creation!
+[2024-12-23T11:04:38.241+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000001 to topic: raw_image_2024_2
+[2024-12-23T11:04:38.243+0000] {conn.py:362} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: connecting to broker:29092 [('172.19.0.9', 29092) IPv4]
+[2024-12-23T11:04:38.244+0000] {conn.py:393} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.9', 29092)]>: Connection complete.
+[2024-12-23T11:04:38.245+0000] {conn.py:673} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connected> [IPv4 ('172.19.0.9', 29092)]>: Closing connection. 
+[2024-12-23T11:04:38.352+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000001 to topic: raw_speech_2024_2
+[2024-12-23T11:04:38.364+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:38.649+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:39.650+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:40.665+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000002 to topic: raw_image_2024_2
+[2024-12-23T11:04:40.695+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000002 to topic: raw_speech_2024_2
+[2024-12-23T11:04:40.711+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:40.960+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:41.961+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:42.980+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000003 to topic: raw_image_2024_2
+[2024-12-23T11:04:43.023+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000003 to topic: raw_speech_2024_2
+[2024-12-23T11:04:43.030+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:43.384+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:44.385+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:45.396+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000004 to topic: raw_image_2024_2
+[2024-12-23T11:04:45.422+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000004 to topic: raw_speech_2024_2
+[2024-12-23T11:04:45.434+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:45.688+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:46.690+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:47.701+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000005 to topic: raw_image_2024_2
+[2024-12-23T11:04:47.745+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000005 to topic: raw_speech_2024_2
+[2024-12-23T11:04:47.751+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:47.987+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:48.988+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:49.999+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000006 to topic: raw_image_2024_2
+[2024-12-23T11:04:50.028+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000006 to topic: raw_speech_2024_2
+[2024-12-23T11:04:50.034+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:50.292+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:51.293+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:52.304+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000007 to topic: raw_image_2024_2
+[2024-12-23T11:04:52.330+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000007 to topic: raw_speech_2024_2
+[2024-12-23T11:04:52.342+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:52.581+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:53.582+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:54.594+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000008 to topic: raw_image_2024_2
+[2024-12-23T11:04:54.625+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000008 to topic: raw_speech_2024_2
+[2024-12-23T11:04:54.631+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:54.891+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:55.892+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:56.904+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000009 to topic: raw_image_2024_2
+[2024-12-23T11:04:56.937+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000009 to topic: raw_speech_2024_2
+[2024-12-23T11:04:56.943+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:57.233+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:04:58.234+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:04:59.244+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000010 to topic: raw_image_2024_2
+[2024-12-23T11:04:59.270+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000010 to topic: raw_speech_2024_2
+[2024-12-23T11:04:59.276+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:04:59.549+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:00.550+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:01.563+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000011 to topic: raw_image_2024_2
+[2024-12-23T11:05:01.595+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000011 to topic: raw_speech_2024_2
+[2024-12-23T11:05:01.607+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:01.906+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:02.907+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:03.914+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000012 to topic: raw_image_2024_2
+[2024-12-23T11:05:03.941+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000012 to topic: raw_speech_2024_2
+[2024-12-23T11:05:03.947+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:04.208+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:05.209+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:06.227+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000013 to topic: raw_image_2024_2
+[2024-12-23T11:05:06.291+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000013 to topic: raw_speech_2024_2
+[2024-12-23T11:05:06.299+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:06.821+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:07.822+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:08.847+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000014 to topic: raw_image_2024_2
+[2024-12-23T11:05:08.907+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000014 to topic: raw_speech_2024_2
+[2024-12-23T11:05:08.913+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:09.272+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:10.274+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:11.286+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000015 to topic: raw_image_2024_2
+[2024-12-23T11:05:11.315+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000015 to topic: raw_speech_2024_2
+[2024-12-23T11:05:11.327+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:11.565+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:12.566+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:13.580+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000016 to topic: raw_image_2024_2
+[2024-12-23T11:05:13.613+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000016 to topic: raw_speech_2024_2
+[2024-12-23T11:05:13.635+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:13.893+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:14.895+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:15.912+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000017 to topic: raw_image_2024_2
+[2024-12-23T11:05:15.950+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000017 to topic: raw_speech_2024_2
+[2024-12-23T11:05:15.962+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:16.458+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:17.460+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:18.471+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000018 to topic: raw_image_2024_2
+[2024-12-23T11:05:18.503+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000018 to topic: raw_speech_2024_2
+[2024-12-23T11:05:18.509+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:18.842+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:19.844+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:20.892+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000019 to topic: raw_image_2024_2
+[2024-12-23T11:05:20.988+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000019 to topic: raw_speech_2024_2
+[2024-12-23T11:05:21.031+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:21.379+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:22.380+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:23.410+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000020 to topic: raw_image_2024_2
+[2024-12-23T11:05:23.467+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000020 to topic: raw_speech_2024_2
+[2024-12-23T11:05:23.505+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:23.853+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:24.854+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:25.865+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000021 to topic: raw_image_2024_2
+[2024-12-23T11:05:25.912+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000021 to topic: raw_speech_2024_2
+[2024-12-23T11:05:25.918+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:26.207+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:27.208+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:28.220+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000022 to topic: raw_image_2024_2
+[2024-12-23T11:05:28.248+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000022 to topic: raw_speech_2024_2
+[2024-12-23T11:05:28.260+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:28.548+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:29.549+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:30.561+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000023 to topic: raw_image_2024_2
+[2024-12-23T11:05:30.589+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000023 to topic: raw_speech_2024_2
+[2024-12-23T11:05:30.595+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:30.872+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:31.873+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:32.883+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000024 to topic: raw_image_2024_2
+[2024-12-23T11:05:32.910+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000024 to topic: raw_speech_2024_2
+[2024-12-23T11:05:32.922+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:33.220+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:34.219+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:35.236+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000025 to topic: raw_image_2024_2
+[2024-12-23T11:05:35.310+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000025 to topic: raw_speech_2024_2
+[2024-12-23T11:05:35.321+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:35.767+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:36.768+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:37.782+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000026 to topic: raw_image_2024_2
+[2024-12-23T11:05:37.814+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000026 to topic: raw_speech_2024_2
+[2024-12-23T11:05:37.820+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:38.255+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:39.257+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:40.271+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000027 to topic: raw_image_2024_2
+[2024-12-23T11:05:40.328+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000027 to topic: raw_speech_2024_2
+[2024-12-23T11:05:40.331+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:40.678+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:41.680+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:42.691+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000028 to topic: raw_image_2024_2
+[2024-12-23T11:05:42.727+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000028 to topic: raw_speech_2024_2
+[2024-12-23T11:05:42.739+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:42.986+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:43.987+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:45.003+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000029 to topic: raw_image_2024_2
+[2024-12-23T11:05:45.051+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000029 to topic: raw_speech_2024_2
+[2024-12-23T11:05:45.065+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:45.409+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:46.410+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:47.420+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000030 to topic: raw_image_2024_2
+[2024-12-23T11:05:47.447+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000030 to topic: raw_speech_2024_2
+[2024-12-23T11:05:47.458+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:47.749+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:48.750+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:49.761+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000031 to topic: raw_image_2024_2
+[2024-12-23T11:05:49.785+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000031 to topic: raw_speech_2024_2
+[2024-12-23T11:05:49.797+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:50.038+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:51.039+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:52.050+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000032 to topic: raw_image_2024_2
+[2024-12-23T11:05:52.080+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000032 to topic: raw_speech_2024_2
+[2024-12-23T11:05:52.087+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:52.366+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:53.367+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:54.377+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000033 to topic: raw_image_2024_2
+[2024-12-23T11:05:54.402+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000033 to topic: raw_speech_2024_2
+[2024-12-23T11:05:54.408+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:54.635+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:55.636+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:56.648+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000034 to topic: raw_image_2024_2
+[2024-12-23T11:05:56.671+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000034 to topic: raw_speech_2024_2
+[2024-12-23T11:05:56.678+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:56.901+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:05:57.902+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:05:58.913+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000035 to topic: raw_image_2024_2
+[2024-12-23T11:05:58.941+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000035 to topic: raw_speech_2024_2
+[2024-12-23T11:05:58.947+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:05:59.191+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:06:00.192+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:06:01.203+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000036 to topic: raw_image_2024_2
+[2024-12-23T11:06:01.229+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000036 to topic: raw_speech_2024_2
+[2024-12-23T11:06:01.236+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:06:01.458+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:06:02.459+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:06:03.476+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000037 to topic: raw_image_2024_2
+[2024-12-23T11:06:03.551+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000037 to topic: raw_speech_2024_2
+[2024-12-23T11:06:03.569+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:06:03.856+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:06:04.857+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:06:05.867+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000038 to topic: raw_image_2024_2
+[2024-12-23T11:06:05.892+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000038 to topic: raw_speech_2024_2
+[2024-12-23T11:06:05.904+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:06:06.169+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:06:07.170+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:06:08.181+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000039 to topic: raw_image_2024_2
+[2024-12-23T11:06:08.211+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000039 to topic: raw_speech_2024_2
+[2024-12-23T11:06:08.223+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:06:08.557+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:06:09.558+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:06:10.575+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000040 to topic: raw_image_2024_2
+[2024-12-23T11:06:10.620+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000040 to topic: raw_speech_2024_2
+[2024-12-23T11:06:10.627+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:06:10.892+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:06:11.893+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:06:12.903+0000] {insert_data_to_db.py:173} INFO - 
+Sent image file /opt/***/data/image/green_taxi_image.jpg with ID: 20240200000041 to topic: raw_image_2024_2
+[2024-12-23T11:06:12.926+0000] {insert_data_to_db.py:212} INFO - 
+Sent mp3 file /opt/***/data/speech/taxi_conversation.mp3 with ID: 20240200000041 to topic: raw_speech_2024_2
+[2024-12-23T11:06:12.938+0000] {logging_mixin.py:188} INFO - Insert 1 rows file /opt/***/data/new/2024/green_tripdata_2024-02.parquet to green_trip_raw_2024_2
+[2024-12-23T11:06:13.157+0000] {logging_mixin.py:188} INFO - Waiting for 2 seconds...
+[2024-12-23T11:06:14.158+0000] {logging_mixin.py:188} INFO - Waiting for 1 seconds...
+[2024-12-23T11:06:15.167+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T11:06:15.169+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 271, in simulate_data_with_image
+    insert_to_db(conn, args.table_name, row)
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 105, in insert_to_db
+    cur.execute(f"INSERT INTO {table_name} ({columns}) VALUES ({values})")
+psycopg2.errors.UndefinedTable: relation "green_trip_raw_2024_2" does not exist
+LINE 1: INSERT INTO green_trip_raw_2024_2 (VendorID, lpep_pickup_dat...
+                    ^
+
+[2024-12-23T11:06:15.188+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=simulation_data_with_image_speech, run_id=manual__2024-12-23T11:04:33.292563+00:00, execution_date=20241223T110433, start_date=20241223T110437, end_date=20241223T110615
+[2024-12-23T11:06:15.202+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 105 for task simulation_data_with_image_speech (relation "green_trip_raw_2024_2" does not exist
+LINE 1: INSERT INTO green_trip_raw_2024_2 (VendorID, lpep_pickup_dat...
+                    ^
+; 3819)
+[2024-12-23T11:06:15.253+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-23T11:06:15.269+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T11:06:15.272+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

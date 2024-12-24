@@ -1,0 +1,50 @@
+[2024-12-23T08:04:22.932+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T08:04:22.970+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T08:04:19.378619+00:00 [queued]>
+[2024-12-23T08:04:22.981+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T08:04:19.378619+00:00 [queued]>
+[2024-12-23T08:04:22.981+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T08:04:22.997+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): simulation_data_with_image_speech> on 2024-12-23 08:04:19.378619+00:00
+[2024-12-23T08:04:23.003+0000] {standard_task_runner.py:63} INFO - Started process 1516 to run task
+[2024-12-23T08:04:23.005+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'simulation_data_with_image_speech', 'manual__2024-12-23T08:04:19.378619+00:00', '--job-id', '42', '--raw', '--subdir', 'DAGS_FOLDER/pipline_stream.py', '--cfg-path', '/tmp/tmpmwrei9ue']
+[2024-12-23T08:04:23.007+0000] {standard_task_runner.py:91} INFO - Job 42: Subtask simulation_data_with_image_speech
+[2024-12-23T08:04:23.060+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.simulation_data_with_image_speech manual__2024-12-23T08:04:19.378619+00:00 [running]> on host 45ad5a543c58
+[2024-12-23T08:04:23.153+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='simulation_data_with_image_speech' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T08:04:19.378619+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T08:04:19.378619+00:00'
+[2024-12-23T08:04:23.155+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T08:04:23.186+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T08:04:23.187+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/insert_data_to_db.py", line 239, in simulate_data_with_image
+    df = pd.read_parquet(args.file_path, engine="pyarrow")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parquet.py", line 670, in read_parquet
+    return impl.read(
+           ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parquet.py", line 265, in read
+    path_or_handle, handles, filesystem = _get_path_or_handle(
+                                          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parquet.py", line 139, in _get_path_or_handle
+    handles = get_handle(
+              ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/common.py", line 872, in get_handle
+    handle = open(handle, ioargs.mode)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:/BigData_2/MyProject/data/new/2024/green_tripdata_2024-02.parquet'
+[2024-12-23T08:04:23.203+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=simulation_data_with_image_speech, run_id=manual__2024-12-23T08:04:19.378619+00:00, execution_date=20241223T080419, start_date=20241223T080422, end_date=20241223T080423
+[2024-12-23T08:04:23.217+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 42 for task simulation_data_with_image_speech ([Errno 2] No such file or directory: 'E:/BigData_2/MyProject/data/new/2024/green_tripdata_2024-02.parquet'; 1516)
+[2024-12-23T08:04:23.259+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-23T08:04:23.288+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T08:04:23.295+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

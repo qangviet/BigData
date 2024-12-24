@@ -48,13 +48,15 @@ x-airflow-common: &airflow-common
     # In order to add custom dependencies or upgrade provider packages you can use your extended image.
     # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
     # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
-    image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.9.2}
-    # build: .
+    # image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.9.2}
+    build:
+        context: ./src/airflow
+        dockerfile: Dockerfile
     environment: &airflow-common-env
-        AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+        AIRFLOW__CORE__EXECUTOR: LocalExecutor
         AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-        AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
-        AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+        # AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+        # AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
         AIRFLOW__CORE__FERNET_KEY: ""
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
         AIRFLOW__CORE__LOAD_EXAMPLES: "false"
@@ -80,8 +82,8 @@ x-airflow-common: &airflow-common
 
     user: "${AIRFLOW_UID:-50000}:0"
     depends_on: &airflow-common-depends-on
-        redis:
-            condition: service_healthy
+        # redis:
+        #     condition: service_healthy
         postgres:
             condition: service_healthy
 
@@ -101,21 +103,23 @@ services:
             retries: 5
             start_period: 5s
         restart: always
-
-    redis:
-        # Redis is limited to 7.2-bookworm due to licencing change
-        # https://redis.io/blog/redis-adopts-dual-source-available-licensing/
-        image: redis:7.2
-        container_name: airflow-redis
-        expose:
-            - 6379
-        healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
-            interval: 10s
-            timeout: 30s
-            retries: 50
-            start_period: 30s
-        restart: always
+        networks:
+            - mynet
+    # Use for CeleryExecutor
+    # redis:
+    #     # Redis is limited to 7.2-bookworm due to licencing change
+    #     # https://redis.io/blog/redis-adopts-dual-source-available-licensing/
+    #     image: redis:7.2
+    #     container_name: airflow-redis
+    #     expose:
+    #         - 6379
+    #     healthcheck:
+    #         test: ["CMD", "redis-cli", "ping"]
+    #         interval: 10s
+    #         timeout: 30s
+    #         retries: 50
+    #         start_period: 30s
+    #     restart: always
 
     airflow-webserver:
         <<: *airflow-common
@@ -134,7 +138,8 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
-
+        networks:
+            - mynet
     airflow-scheduler:
         <<: *airflow-common
         container_name: airflow-scheduler
@@ -150,7 +155,8 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
-
+        networks:
+            - mynet
     airflow-worker:
         <<: *airflow-common
         tmpfs:
@@ -176,6 +182,8 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
+        networks:
+            - mynet
 
     airflow-triggerer:
         <<: *airflow-common
@@ -192,6 +200,8 @@ services:
             <<: *airflow-common-depends-on
             airflow-init:
                 condition: service_completed_successfully
+        networks:
+            - mynet
 
     airflow-init:
         <<: *airflow-common
@@ -257,9 +267,14 @@ services:
         user: "0:0"
         volumes:
             - ${AIRFLOW_PROJ_DIR:-.}:/sources
+        networks:
+            - mynet
 
     airflow-cli:
         <<: *airflow-common
+        build:
+            context: ./src/airflow
+            dockerfile: Dockerfile
         profiles:
             - debug
         environment:
@@ -270,28 +285,37 @@ services:
             - bash
             - -c
             - airflow
+        networks:
+            - mynet
 
     # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
     # or by explicitly targeted on the command line e.g. docker-compose up flower.
     # See: https://docs.docker.com/compose/profiles/
-    flower:
-        <<: *airflow-common
-        command: celery flower
-        profiles:
-            - flower
-        ports:
-            - "5555:5555"
-        healthcheck:
-            test: ["CMD", "curl", "--fail", "http://localhost:5555/"]
-            interval: 30s
-            timeout: 10s
-            retries: 5
-            start_period: 30s
-        restart: always
-        depends_on:
-            <<: *airflow-common-depends-on
-            airflow-init:
-                condition: service_completed_successfully
+    # Use for CeleryExecutor monitoring
+    # flower:
+    #     <<: *airflow-common
+    #     build:
+    #         context: ./src/airflow
+    #         dockerfile: Dockerfile
+    #     command: celery flower
+    #     profiles:
+    #         - flower
+    #     ports:
+    #         - "5555:5555"
+    #     healthcheck:
+    #         test: ["CMD", "curl", "--fail", "http://localhost:5555/"]
+    #         interval: 30s
+    #         timeout: 10s
+    #         retries: 5
+    #         start_period: 30s
+    #     restart: always
+    #     depends_on:
+    #         <<: *airflow-common-depends-on
+    #         airflow-init:
+    #             condition: service_completed_successfully
 
 volumes:
     postgres-db-volume:
+networks:
+    mynet:
+        external: true

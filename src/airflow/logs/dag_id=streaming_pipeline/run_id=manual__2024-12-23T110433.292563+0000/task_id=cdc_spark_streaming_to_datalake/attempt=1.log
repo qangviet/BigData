@@ -1,0 +1,106 @@
+[2024-12-23T11:04:37.217+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T11:04:37.253+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T11:04:33.292563+00:00 [queued]>
+[2024-12-23T11:04:37.266+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T11:04:33.292563+00:00 [queued]>
+[2024-12-23T11:04:37.267+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T11:04:37.291+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): cdc_spark_streaming_to_datalake> on 2024-12-23 11:04:33.292563+00:00
+[2024-12-23T11:04:37.299+0000] {standard_task_runner.py:63} INFO - Started process 3822 to run task
+[2024-12-23T11:04:37.302+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'cdc_spark_streaming_to_datalake', 'manual__2024-12-23T11:04:33.292563+00:00', '--job-id', '108', '--raw', '--subdir', 'DAGS_FOLDER/pipline_stream.py', '--cfg-path', '/tmp/tmpy7vs7v6v']
+[2024-12-23T11:04:37.305+0000] {standard_task_runner.py:91} INFO - Job 108: Subtask cdc_spark_streaming_to_datalake
+[2024-12-23T11:04:37.365+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.cdc_spark_streaming_to_datalake manual__2024-12-23T11:04:33.292563+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T11:04:37.470+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='cdc_spark_streaming_to_datalake' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T11:04:33.292563+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T11:04:33.292563+00:00'
+[2024-12-23T11:04:37.473+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T11:04:37.495+0000] {logging_mixin.py:188} INFO - Checking JAR files...:  True
+[2024-12-23T11:04:51.130+0000] {spark_streaming_to_dl.py:123} INFO - Spark session successfully created!
+[2024-12-23T11:04:51.141+0000] {spark_streaming_to_dl.py:157} INFO - MinIO configuration is created successfully
+[2024-12-23T11:04:53.572+0000] {spark_streaming_to_dl.py:176} INFO - Initial dataframe created successfully!
+[2024-12-23T11:04:54.596+0000] {spark_streaming_to_dl.py:234} INFO - Final dataframe created successfully!
+[2024-12-23T11:04:54.597+0000] {spark_streaming_to_dl.py:242} INFO - Streaming is being started...
+[2024-12-23T11:05:48.063+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T11:05:48.064+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/spark_streaming_to_dl.py", line 269, in run_all
+    start_steaming(df_final, args.bucket_name, args.year, args.month)
+  File "/opt/airflow/dags/stream_processing/spark_streaming_to_dl.py", line 253, in start_steaming
+    return stream_query.awaitTermination()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/sql/streaming/query.py", line 221, in awaitTermination
+    return self._jsq.awaitTermination()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/errors/exceptions/captured.py", line 185, in deco
+    raise converted from None
+pyspark.errors.exceptions.captured.StreamingQueryException: [STREAM_FAILED] Query [id = 3f7f2445-d490-495d-9664-e398067c3513, runId = 9325c416-c582-4eff-8ecd-ed8024d4f182] terminated with exception: Job aborted due to stage failure: Task 8 in stage 75.0 failed 1 times, most recent failure: Lost task 8.0 in stage 75.0 (TID 904) (0b4a5bf62610 executor driver): org.apache.spark.SparkFileNotFoundException: No such file or directory: s3a://raw/cdc_db/data/2024/2/_delta_log/00000000000000000122.json
+It is possible the underlying files have been updated. You can explicitly invalidate the cache in Spark by running 'REFRESH TABLE tableName' command in SQL or by recreating the Dataset/DataFrame involved.
+	at org.apache.spark.sql.errors.QueryExecutionErrors$.readCurrentFileNotFoundError(QueryExecutionErrors.scala:781)
+	at org.apache.spark.sql.execution.datasources.FileScanRDD$$anon$1.org$apache$spark$sql$execution$datasources$FileScanRDD$$anon$$readCurrentFile(FileScanRDD.scala:220)
+	at org.apache.spark.sql.execution.datasources.FileScanRDD$$anon$1.nextIterator(FileScanRDD.scala:279)
+	at org.apache.spark.sql.execution.datasources.FileScanRDD$$anon$1.hasNext(FileScanRDD.scala:129)
+	at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage2.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+	at org.apache.spark.shuffle.sort.BypassMergeSortShuffleWriter.write(BypassMergeSortShuffleWriter.java:140)
+	at org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:59)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:104)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:54)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+Driver stacktrace:
+[2024-12-23T11:05:48.089+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=cdc_spark_streaming_to_datalake, run_id=manual__2024-12-23T11:04:33.292563+00:00, execution_date=20241223T110433, start_date=20241223T110437, end_date=20241223T110548
+[2024-12-23T11:05:48.114+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 108 for task cdc_spark_streaming_to_datalake ([STREAM_FAILED] Query [id = 3f7f2445-d490-495d-9664-e398067c3513, runId = 9325c416-c582-4eff-8ecd-ed8024d4f182] terminated with exception: Job aborted due to stage failure: Task 8 in stage 75.0 failed 1 times, most recent failure: Lost task 8.0 in stage 75.0 (TID 904) (0b4a5bf62610 executor driver): org.apache.spark.SparkFileNotFoundException: No such file or directory: s3a://raw/cdc_db/data/2024/2/_delta_log/00000000000000000122.json
+It is possible the underlying files have been updated. You can explicitly invalidate the cache in Spark by running 'REFRESH TABLE tableName' command in SQL or by recreating the Dataset/DataFrame involved.
+	at org.apache.spark.sql.errors.QueryExecutionErrors$.readCurrentFileNotFoundError(QueryExecutionErrors.scala:781)
+	at org.apache.spark.sql.execution.datasources.FileScanRDD$$anon$1.org$apache$spark$sql$execution$datasources$FileScanRDD$$anon$$readCurrentFile(FileScanRDD.scala:220)
+	at org.apache.spark.sql.execution.datasources.FileScanRDD$$anon$1.nextIterator(FileScanRDD.scala:279)
+	at org.apache.spark.sql.execution.datasources.FileScanRDD$$anon$1.hasNext(FileScanRDD.scala:129)
+	at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage2.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at scala.collection.Iterator$$anon$10.hasNext(Iterator.scala:460)
+	at org.apache.spark.shuffle.sort.BypassMergeSortShuffleWriter.write(BypassMergeSortShuffleWriter.java:140)
+	at org.apache.spark.shuffle.ShuffleWriteProcessor.write(ShuffleWriteProcessor.scala:59)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:104)
+	at org.apache.spark.scheduler.ShuffleMapTask.runTask(ShuffleMapTask.scala:54)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+Driver stacktrace:; 3822)
+[2024-12-23T11:05:48.146+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-23T11:05:48.167+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-23T11:05:48.170+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

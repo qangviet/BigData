@@ -1,0 +1,82 @@
+[2024-12-23T18:23:41.791+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-23T18:23:41.833+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T18:23:37.243746+00:00 [queued]>
+[2024-12-23T18:23:41.845+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T18:23:37.243746+00:00 [queued]>
+[2024-12-23T18:23:41.846+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-23T18:23:41.863+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): speech_to_datalake> on 2024-12-23 18:23:37.243746+00:00
+[2024-12-23T18:23:41.879+0000] {standard_task_runner.py:63} INFO - Started process 218 to run task
+[2024-12-23T18:23:41.882+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_pipeline', 'speech_to_datalake', 'manual__2024-12-23T18:23:37.243746+00:00', '--job-id', '143', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_stream.py', '--cfg-path', '/tmp/tmp63bbl9np']
+[2024-12-23T18:23:41.886+0000] {standard_task_runner.py:91} INFO - Job 143: Subtask speech_to_datalake
+[2024-12-23T18:23:41.957+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline.speech_to_datalake manual__2024-12-23T18:23:37.243746+00:00 [running]> on host 0b4a5bf62610
+[2024-12-23T18:23:42.077+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='streaming_pipeline' AIRFLOW_CTX_TASK_ID='speech_to_datalake' AIRFLOW_CTX_EXECUTION_DATE='2024-12-23T18:23:37.243746+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-23T18:23:37.243746+00:00'
+[2024-12-23T18:23:42.080+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-23T18:23:42.117+0000] {logging_mixin.py:188} INFO - Bucket raw already exists, skip creating!
+[2024-12-23T18:23:42.121+0000] {conn.py:362} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.4', 29092)]>: connecting to broker:29092 [('172.19.0.4', 29092) IPv4]
+[2024-12-23T18:23:42.122+0000] {conn.py:957} INFO - Probing node bootstrap-0 broker version
+[2024-12-23T18:23:42.124+0000] {conn.py:393} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connecting> [IPv4 ('172.19.0.4', 29092)]>: Connection complete.
+[2024-12-23T18:23:42.233+0000] {conn.py:1019} INFO - Broker version identified as 2.6.0
+[2024-12-23T18:23:42.234+0000] {conn.py:1020} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2024-12-23T18:23:42.237+0000] {consumer.py:122} WARNING - group_id is None: disabling auto-commit.
+[2024-12-23T18:23:42.238+0000] {subscription_state.py:167} INFO - Updating subscribed topics to: ('raw_speech_2024_04_02',)
+[2024-12-23T18:23:42.239+0000] {logging_mixin.py:188} INFO - Start consuming messages...
+[2024-12-23T18:23:42.387+0000] {subscription_state.py:253} INFO - Updated partition assignment: [('raw_speech_2024_04_02', 0)]
+[2024-12-23T18:23:42.389+0000] {conn.py:362} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.4', 29092)]>: connecting to broker:29092 [('172.19.0.4', 29092) IPv4]
+[2024-12-23T18:23:42.390+0000] {conn.py:393} INFO - <BrokerConnection node_id=1 host=broker:29092 <connecting> [IPv4 ('172.19.0.4', 29092)]>: Connection complete.
+[2024-12-23T18:23:42.392+0000] {conn.py:673} INFO - <BrokerConnection node_id=bootstrap-0 host=broker:29092 <connected> [IPv4 ('172.19.0.4', 29092)]>: Closing connection. 
+[2024-12-23T18:25:43.533+0000] {local_task_job_runner.py:310} WARNING - State of this instance has been externally set to None. Terminating instance.
+[2024-12-23T18:25:43.537+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2024-12-23T18:25:43.541+0000] {process_utils.py:132} INFO - Sending 15 to group 218. PIDs of all processes in the group: [218]
+[2024-12-23T18:25:43.542+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 218
+[2024-12-23T18:25:43.543+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-12-23T18:25:43.545+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-23T18:25:43.562+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/stream_processing/streaming_speech_to_dl.py", line 66, in speech_to_dl
+    for message in consumer:
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1203, in __next__
+    return self.next_v2()
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1211, in next_v2
+    return next(self._iterator)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 1126, in _message_generator_v2
+    record_map = self.poll(timeout_ms=timeout_ms, update_offsets=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 663, in poll
+    records = self._poll_once(remaining, max_records, update_offsets=update_offsets)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 712, in _poll_once
+    self._client.poll(timeout_ms=timeout_ms)
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/client_async.py", line 601, in poll
+    self._poll(timeout / 1000)
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/client_async.py", line 633, in _poll
+    ready = self._selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2024-12-23T18:25:43.581+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline, task_id=speech_to_datalake, run_id=manual__2024-12-23T18:23:37.243746+00:00, execution_date=20241223T182337, start_date=20241223T182341, end_date=20241223T182543
+[2024-12-23T18:25:43.608+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 143 for task speech_to_datalake ((psycopg2.errors.ForeignKeyViolation) insert or update on table "task_fail" violates foreign key constraint "task_fail_ti_fkey"
+DETAIL:  Key (dag_id, task_id, run_id, map_index)=(streaming_pipeline, speech_to_datalake, manual__2024-12-23T18:23:37.243746+00:00, -1) is not present in table "task_instance".
+
+[SQL: INSERT INTO task_fail (task_id, dag_id, run_id, map_index, start_date, end_date, duration) VALUES (%(task_id)s, %(dag_id)s, %(run_id)s, %(map_index)s, %(start_date)s, %(end_date)s, %(duration)s) RETURNING task_fail.id]
+[parameters: {'task_id': 'speech_to_datalake', 'dag_id': 'streaming_pipeline', 'run_id': 'manual__2024-12-23T18:23:37.243746+00:00', 'map_index': -1, 'start_date': datetime.datetime(2024, 12, 23, 18, 23, 41, 833766, tzinfo=Timezone('UTC')), 'end_date': datetime.datetime(2024, 12, 23, 18, 25, 43, 580438, tzinfo=Timezone('UTC')), 'duration': 121}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 218)
+[2024-12-23T18:25:43.636+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=218, status='terminated', exitcode=1, started='18:23:41') (218) terminated with exit code 1

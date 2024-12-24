@@ -1,0 +1,43 @@
+[2024-12-24T12:44:49.776+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-12-24T12:44:49.813+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_batch_visualize.start manual__2024-12-24T12:44:47.968502+00:00 [queued]>
+[2024-12-24T12:44:49.825+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_batch_visualize.start manual__2024-12-24T12:44:47.968502+00:00 [queued]>
+[2024-12-24T12:44:49.826+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-12-24T12:44:49.846+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): start> on 2024-12-24 12:44:47.968502+00:00
+[2024-12-24T12:44:49.852+0000] {standard_task_runner.py:63} INFO - Started process 244 to run task
+[2024-12-24T12:44:49.856+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'pipeline_batch_visualize', 'start', 'manual__2024-12-24T12:44:47.968502+00:00', '--job-id', '194', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_batch_visualize.py', '--cfg-path', '/tmp/tmpildeeldq']
+[2024-12-24T12:44:49.859+0000] {standard_task_runner.py:91} INFO - Job 194: Subtask start
+[2024-12-24T12:44:49.911+0000] {task_command.py:426} INFO - Running <TaskInstance: pipeline_batch_visualize.start manual__2024-12-24T12:44:47.968502+00:00 [running]> on host 0b4a5bf62610
+[2024-12-24T12:44:50.013+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='pipeline_batch_visualize' AIRFLOW_CTX_TASK_ID='start' AIRFLOW_CTX_EXECUTION_DATE='2024-12-24T12:44:47.968502+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-24T12:44:47.968502+00:00'
+[2024-12-24T12:44:50.015+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-12-24T12:44:50.059+0000] {pipeline_batch_visualize.py:54} INFO - Starting the pipeline
+[2024-12-24T12:44:50.060+0000] {pipeline_batch_visualize.py:55} INFO - Creating the spark session ...
+[2024-12-24T12:47:46.340+0000] {load_and_transform.py:454} INFO - Spark session created
+[2024-12-24T12:47:46.349+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-12-24T12:47:46.354+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/pipeline_batch_visualize.py", line 62, in start
+    key="spark_session", value=pickle.dumps(spark_ss)
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyspark/context.py", line 466, in __getnewargs__
+    raise PySparkRuntimeError(
+pyspark.errors.exceptions.base.PySparkRuntimeError: [CONTEXT_ONLY_VALID_ON_DRIVER] It appears that you are attempting to reference SparkContext from a broadcast variable, action, or transformation. SparkContext can only be used on the driver, not in code that it run on workers. For more information, see SPARK-5063.
+[2024-12-24T12:47:46.384+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=pipeline_batch_visualize, task_id=start, run_id=manual__2024-12-24T12:44:47.968502+00:00, execution_date=20241224T124447, start_date=20241224T124449, end_date=20241224T124746
+[2024-12-24T12:47:46.427+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 194 for task start ([CONTEXT_ONLY_VALID_ON_DRIVER] It appears that you are attempting to reference SparkContext from a broadcast variable, action, or transformation. SparkContext can only be used on the driver, not in code that it run on workers. For more information, see SPARK-5063.; 244)
+[2024-12-24T12:47:46.477+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2024-12-24T12:47:46.528+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-24T12:47:46.536+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
