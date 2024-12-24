@@ -1,10 +1,11 @@
+#MAPPING
 DTYPE_MAPPING = {
-    "int32": "INTEGER",  # ánh xạ từ int32 sang INTEGER
-    "int64": "BIGINT",  # ánh xạ từ int64 sang BIGINT
-    "float64": "DOUBLE PRECISION",  # ánh xạ từ float64 sang DOUBLE PRECISION
-    "object": "TEXT",  # ánh xạ từ object sang TEXT
+    "int32": "INTEGER",  # ánh xạ từ int32 sang integer
+    "int64": "BIGINT",  # ánh xạ từ int64 sang bigint
+    "float64": "DOUBLE PRECISION",  # ánh xạ từ float64 sang double precision
+    "object": "TEXT",  # ánh xạ từ object sang text
     "datetime64[us]": "TIMESTAMP",
-    "datetime64[ns]": "TIMESTAMP",  # ánh xạ từ datetime64 sang TIMESTAMP
+    "datetime64[ns]": "TIMESTAMP",  # ánh xạ từ datetime64 sang timestamp
 }
 
 

@@ -7,6 +7,7 @@
 # with the License.  You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
+#   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing,
 # software distributed under the License is distributed on an
@@ -68,6 +69,8 @@ x-airflow-common: &airflow-common
         # The following line can be used to set a custom config file, stored in the local config folder
         # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
         # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
+
+    #volumes:
     volumes:
         - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/dags:/opt/airflow/dags
         - ${AIRFLOW_PROJ_DIR:-.}/src/airflow/logs:/opt/airflow/logs
@@ -86,7 +89,7 @@ x-airflow-common: &airflow-common
         #     condition: service_healthy
         postgres:
             condition: service_healthy
-
+#services:
 services:
     postgres:
         image: postgres:13

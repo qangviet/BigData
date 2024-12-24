@@ -107,7 +107,7 @@ services:
             SCHEMA_REGISTRY_HOST_NAME: schema-registry
             SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9093,kafka-3:9094"
             SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
-
+    #Debezium
     debezium:
         image: debezium/connect:2.7.3.Final
         container_name: streaming-debezium
@@ -131,7 +131,7 @@ services:
                     "--fail",
                     "-X",
                     "GET",
-                    "http://localhost:8083/connectors",
+                    "http://localhost:8083/connectors", #host
                 ]
             start_period: 10s
             interval: 10s
