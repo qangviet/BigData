@@ -298,7 +298,7 @@ def load_data_from_minio(spark, BUCKET_NAME, DATE, TAXI_TYPE):
     path = f"s3a://{BUCKET_NAME}/{YEAR}/{TAXI_TYPE}/{MONTH}/{DAY}.parquet"
 
     df = spark.read.parquet(path)
-    df = df.withColumn("pickup_date", F.to_date("pickup_datetime"))
+    # df = df.withColumn("pickup_date", F.to_date("pickup_datetime"))
     
     return df
 
@@ -327,7 +327,7 @@ def load_data_from_minio_for_visualize(spark, BUCKET_NAME, DATE, TAXI_TYPE):
 
         # Đọc dữ liệu Delta từ thư mục con
         df = spark.read.parquet(path)  
-        df = df.withColumn("pickup_date", F.to_date("pickup_datetime"))      
+        # df = df.withColumn("pickup_date", F.to_date("pickup_datetime"))      
 
         if combined_df is None:
             combined_df = df

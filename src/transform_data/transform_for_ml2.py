@@ -226,7 +226,7 @@ def transform_dynamic(date):
         save_data(file_path, result)
         return result
     
-    
+
 
 def create_train_data(DATE):
     YEAR = DATE.split('-')[0]

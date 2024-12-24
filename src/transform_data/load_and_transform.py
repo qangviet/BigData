@@ -339,10 +339,15 @@ def load_transform_save(DATE):
     print("Quá trình xử lý hoàn tất!")
 
 
+
+
 if __name__ == "__main__":
 
     DATE=   "2024-01-01"
     load_transform_save(DATE)
+
+
+    
 
     
 

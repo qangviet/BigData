@@ -16,9 +16,12 @@ import sys
 from pyspark.sql.functions import col, to_date,  count, when
 from pyspark.sql import functions as F
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, when, count
+from pyspark.sql.functions import col
 from datetime import datetime, timedelta
 from pyspark.sql.functions import col, row_number, first
+from pyspark.sql.functions import hour, col
+from pyspark.sql import DataFrame
+
 
 
 os.environ['PYSPARK_PYTHON'] = sys.executable
@@ -81,7 +84,7 @@ def add_trip_columns(df_current):
 
 
 
-def get_train_data(date):
+def get_daily_dataset(date):
     # Lấy ngày trước đó
     previous_day = datetime.strptime(date, "%Y-%m-%d") - timedelta(days=1)    
     previous_day_str = previous_day.strftime("%Y-%m-%d")
@@ -100,10 +103,11 @@ def get_train_data(date):
     df_transform2 = spark.read.parquet(file_path_2)
 
     # Chọn các cột cần thiết từ df_current
+    
     df_selected = df_current.select(
         col("id").alias("trip_id"),
         col("id_customer"),
-        col("lpep_pickup_datetime").alias("pickup_time"),
+        hour(col("lpep_pickup_datetime")).alias("pickup_time"),
         col("PULocationID").alias("pickup_location"),
         col("DOLocationID").alias("drop_location")
     )
@@ -148,44 +152,65 @@ def get_train_data(date):
         .join(top_pickups_pivot, on="id_customer", how="left") \
         .join(top_drops_pivot, on="id_customer", how="left")
 
-
-    result_with_top_locations.show(5)
-    result_with_top_locations.printSchema()
     df_with_last_trip = add_trip_columns(df_current)
     result = result_with_top_locations.join(df_with_last_trip, on="id_customer", how="inner")
 
-
-    result.printSchema()
-    result.show(30)
     return result
 
 
+from functools import reduce
 
-def aggregate_results_from_date(date: str):
-   
+def aggregate_results_from_date(date: str) -> DataFrame:
     current_date = datetime.strptime(date, "%Y-%m-%d")
-
+    
+    # Tính ngày đầu tháng trước
     first_day_of_last_month = (current_date.replace(day=1) - timedelta(days=1)).replace(day=1)
+    
+    # Lấy danh sách các ngày cần xử lý
+    dates_to_process = [
+        (first_day_of_last_month + timedelta(days=i)).strftime("%Y-%m-%d") 
+        for i in range((current_date - first_day_of_last_month).days + 1)
+    ]
+    
+    # Danh sách để lưu các DataFrame
+    dataframes = []
 
-    dates_to_process = [(first_day_of_last_month + timedelta(days=i)).strftime("%Y-%m-%d") 
-                        for i in range((current_date - first_day_of_last_month).days + 1)]
-
-    aggregated_result = None
-
-    # Lặp qua từng ngày
+    # Lặp qua từng ngày và xử lý
     for process_date in dates_to_process:
         print(f"Processing date: {process_date}")
-        daily_result = get_train_data(process_date)  # Gọi hàm get_train_data cho từng ngày
-
-        # Nối các kết quả
-        if aggregated_result is None:
-            aggregated_result = daily_result
-        else:
-            aggregated_result = aggregated_result.union(daily_result)
-
-    # Trả về DataFrame tổng hợp
+        
+        # Lấy dữ liệu hàng ngày
+        daily_result = get_daily_dataset(process_date)
+        
+        # Tùy chỉnh số lượng partition nếu cần
+        daily_result = daily_result.repartition(10)  # Điều chỉnh theo kích thước dữ liệu
+        
+        # Thêm DataFrame vào danh sách
+        dataframes.append(daily_result)
+    
+    # Kết hợp tất cả các DataFrame trong danh sách
+    if dataframes:
+        # Sử dụng reduce để hợp nhất tuần tự tất cả DataFrame
+        aggregated_result = reduce(lambda df1, df2: df1.union(df2), dataframes)
+    else:
+        # Trường hợp không có dữ liệu
+        aggregated_result = None
+    
+    # Cache nếu cần sử dụng lại sau khi tổng hợp
+    if aggregated_result:
+        aggregated_result.cache()
+    
     return aggregated_result
 
 
 if __name__ == "__main__":
-    get_train_data('2024-01-02')
+    # result = get_daily_dataset('2024-09-30')
+    # print(result.count())
+
+    result = aggregate_results_from_date( "2024-10-01")
+
+    label_0 = result.select('is_last_trip').where(result['is_last_trip']== 0).count()
+    label_1 = result.select('is_last_trip').where(result['is_last_trip']== 1).count()
+
+    print(label_0)
+    print(label_1)
